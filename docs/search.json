@@ -12,5 +12,47 @@
     "title": "about",
     "section": "",
     "text": "About this site"
+  },
+  {
+    "objectID": "w01/First_Quarto_File.html",
+    "href": "w01/First_Quarto_File.html",
+    "title": "First_Quarto_File",
+    "section": "",
+    "text": "Code\n## Sourced Articles\n\n### Article 1: Top 10 Movies on Netflix Right Now(https://www.netflix.com/tudum/top10)\n\n### First we have Netflix showing the top viewed movies on their streaming service. It looks visually nice when you get to see the movie and the ranking on the top left corner. It is clean, however, when you scroll down to look at why the data looks very strange. We have Kpop Demon Hunters sitting at first followed by the rest of the movies. Next to the titles is a column of weeks and views. All the weeks shown are different most at 1 which is unknown if it is current or of all time. The visual isn't very pleasing either. Just straight forward with no interesting or stand out visuals. Just basic, almost like an excel sheet. It looks clean but maybe something a little more fun to look at could go a long way.\n\nplot(1:20)\nFirst we have Netflix showing the top viewed movies on their streaming service. At first it looks visually nice when you get to see the movie and the ranking on the top left corner. However, when you scroll down to look at why the data looks very strange. We have Kpop Demon Hunters sitting at first followed by the rest of the movies. Next to the titles is a column of weeks and views. All the weeks shown are different most at 1 which is unknown if it is current or of all time. The visual isn’t very pleasing either. Just straight forward with no interesting or stand out visuals. Just basic, almost like an excel sheet. It looks clean but maybe something a little more fun to look at could go a long way."
+  },
+  {
+    "objectID": "w01/First_Quarto_File.html#article-1-top-10-movies-on-netflix-right-nowhttpswww.netflix.comtudumtop10",
+    "href": "w01/First_Quarto_File.html#article-1-top-10-movies-on-netflix-right-nowhttpswww.netflix.comtudumtop10",
+    "title": "First_Quarto_File",
+    "section": "Article 1: Top 10 Movies on Netflix Right Now(https://www.netflix.com/tudum/top10)",
+    "text": "Article 1: Top 10 Movies on Netflix Right Now(https://www.netflix.com/tudum/top10)\nNext we have Anychart. Any chart looks like a place just to post what the best looking data visualizations there are. It’s a great website but it uses none of them itself, maybe to avoid bias. Many of the graphs created are very unique but some are a little too busy to look at."
+  },
+  {
+    "objectID": "w01/First_Quarto_File.html#article-2-top-data-visualizations-on-travel-burgers-shootings-and-light",
+    "href": "w01/First_Quarto_File.html#article-2-top-data-visualizations-on-travel-burgers-shootings-and-light",
+    "title": "First_Quarto_File",
+    "section": "Article 2: Top Data Visualizations on Travel, Burgers, Shootings, and Light",
+    "text": "Article 2: Top Data Visualizations on Travel, Burgers, Shootings, and Light"
+  },
+  {
+    "objectID": "w01/First_Quarto_File.html#httpswww.anychart.comblog20190809top-data-visualizations-dataviz-weekly",
+    "href": "w01/First_Quarto_File.html#httpswww.anychart.comblog20190809top-data-visualizations-dataviz-weekly",
+    "title": "First_Quarto_File",
+    "section": "(https://www.anychart.com/blog/2019/08/09/top-data-visualizations-dataviz-weekly/)",
+    "text": "(https://www.anychart.com/blog/2019/08/09/top-data-visualizations-dataviz-weekly/)\nLastly we have Tastewise which is a website looking at the popularity of a culture’s food. Showing trends somewhere, maybe globally, ingredients and flavors, and some links that don’t work… They used a variety of different graphs and visuals but some look like completely different designs almost as if they don’t go together. Most of the data is not fully understandable because the labels aren’t very strong to explain what it’s showing."
+  },
+  {
+    "objectID": "w01/First_Quarto_File.html#article-3-korean-food-trend-overview",
+    "href": "w01/First_Quarto_File.html#article-3-korean-food-trend-overview",
+    "title": "First_Quarto_File",
+    "section": "Article 3: Korean Food trend overview",
+    "text": "Article 3: Korean Food trend overview"
+  },
+  {
+    "objectID": "w01/First_Quarto_File.html#httpstastewise.iofoodtrendskoreandishes",
+    "href": "w01/First_Quarto_File.html#httpstastewise.iofoodtrendskoreandishes",
+    "title": "First_Quarto_File",
+    "section": "(https://tastewise.io/foodtrends/korean#dishes)",
+    "text": "(https://tastewise.io/foodtrends/korean#dishes)"
   }
 ]
