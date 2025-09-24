@@ -1,0 +1,37 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "DS350_website_template"
+  sidebar: 
+    style: floating
+    contents: 
+      - index.qmd
+      - text: "Week 1"
+        href: w01/First_Quarto_File.qmd
+      - about.q
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+    right:
+      - text: "Contact"
+        href: contact.qmd
+      - icon: github
+        href: https://www.linkedin.com/in/jayton-crockett-ab585326a
+
+
+format:
+  html:
+    theme:
+      - minty
+      - brand
+    css: styles.css
+    toc: true
+    code-fold: true
+    code-line-numbers: true
+
+editor: visual
+

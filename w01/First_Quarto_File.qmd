@@ -1,0 +1,33 @@
+---
+title: "First_Quarto_File"
+format:
+  html:
+    code-fold: true
+    code-line-numbers: true
+---
+
+```{r}
+## Sourced Articles
+
+### Article 1: Top 10 Movies on Netflix Right Now(https://www.netflix.com/tudum/top10)
+
+### First we have Netflix showing the top viewed movies on their streaming service. It looks visually nice when you get to see the movie and the ranking on the top left corner. It is clean, however, when you scroll down to look at why the data looks very strange. We have Kpop Demon Hunters sitting at first followed by the rest of the movies. Next to the titles is a column of weeks and views. All the weeks shown are different most at 1 which is unknown if it is current or of all time. The visual isn't very pleasing either. Just straight forward with no interesting or stand out visuals. Just basic, almost like an excel sheet. It looks clean but maybe something a little more fun to look at could go a long way.
+
+plot(1:20)
+```
+
+First we have Netflix showing the top viewed movies on their streaming service. At first it looks visually nice when you get to see the movie and the ranking on the top left corner. However, when you scroll down to look at why the data looks very strange. We have Kpop Demon Hunters sitting at first followed by the rest of the movies. Next to the titles is a column of weeks and views. All the weeks shown are different most at 1 which is unknown if it is current or of all time. The visual isn't very pleasing either. Just straight forward with no interesting or stand out visuals. Just basic, almost like an excel sheet. It looks clean but maybe something a little more fun to look at could go a long way.
+
+## Article 1: Top 10 Movies on Netflix Right Now(<https://www.netflix.com/tudum/top10)>
+
+Next we have Anychart. Any chart looks like a place just to post what the best looking data visualizations there are. It's a great website but it uses none of them itself, maybe to avoid bias. Many of the graphs created are very unique but some are a little too busy to look at.
+
+## Article 2: Top Data Visualizations on Travel, Burgers, Shootings, and Light
+
+## (<https://www.anychart.com/blog/2019/08/09/top-data-visualizations-dataviz-weekly/>)
+
+Lastly we have Tastewise which is a website looking at the popularity of a culture's food. Showing trends somewhere, maybe globally, ingredients and flavors, and some links that don't work… They used a variety of different graphs and visuals but some look like completely different designs almost as if they don't go together. Most of the data is not fully understandable because the labels aren't very strong to explain what it's showing.
+
+## Article 3: Korean Food trend overview
+
+## (<https://tastewise.io/foodtrends/korean#dishes>)
