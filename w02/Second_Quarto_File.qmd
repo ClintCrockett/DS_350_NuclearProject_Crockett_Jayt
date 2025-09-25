@@ -15,20 +15,20 @@ library(plotly)
 
 ```{r}
 # Working with the Flights Data Set
-#avg_delay <- flights %>%
-#  filter(arr_delay > 0) %>%
-#  group_by(origin) %>% 
-#  summarise(avg_delay_total = mean(arr_delay, na.rm = TRUE)) %>% 
-#  ungroup()
+avg_delay <- flights %>%
+  filter(arr_delay > 0) %>%
+  group_by(origin) %>% 
+  summarise(avg_delay_total = mean(arr_delay, na.rm = TRUE)) %>% 
+  ungroup()
 
-#plot_ly(avg_delay, type='barpolar', r=~avg_delay_total, theta=~origin, color=~origin) %>%  
-#  layout(
-#    title = "2013 NYC Flight Average Arrival Delays",
-#    polar = list(
-#      radialaxis = list(title = "Number of Delays"),
-#      angularaxis = list(categoryarray = flights$origin)
-#    )
-#  )
+plot_ly(avg_delay, type='barpolar', r=~avg_delay_total, theta=~origin, color=~origin) %>%  
+  layout(
+    title = "2013 NYC Flight Average Arrival Delays",
+    polar = list(
+      radialaxis = list(title = "Number of Delays"),
+      angularaxis = list(categoryarray = flights$origin)
+    )
+ )
 ```
 
 # Okay technically this isn't a pie chart so I should be good... right? Originally I wanted to to do a racial bar chart but I could not find anything on plotly and ggplot didn't work like I wanted it to. I'd love to learn if there is a way to create it if you have any tips.
