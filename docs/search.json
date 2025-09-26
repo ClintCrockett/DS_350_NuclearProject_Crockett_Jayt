@@ -54,5 +54,26 @@
     "title": "First_Quarto_File",
     "section": "(https://tastewise.io/foodtrends/korean#dishes)",
     "text": "(https://tastewise.io/foodtrends/korean#dishes)"
+  },
+  {
+    "objectID": "w03/readme.html",
+    "href": "w03/readme.html",
+    "title": "DS350_website_template",
+    "section": "",
+    "text": "What are the top 20 movies and what streaming service offers the most?\nWhat streaming service would be the best for a child?\nWhat streaming service should I buy for the next month that will have the most popular movies?"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "DS350 Nuclear Project",
+    "section": "",
+    "text": "To learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n\nCode\n1 + 1\n\n\n[1] 2"
+  },
+  {
+    "objectID": "project_page.html",
+    "href": "project_page.html",
+    "title": "project_page",
+    "section": "",
+    "text": "Here’s an overview …\n\n\n\nProject 1 Project 2 Project 3"
   }
 ]
