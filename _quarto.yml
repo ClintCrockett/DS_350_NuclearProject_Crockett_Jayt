@@ -15,7 +15,10 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: about.qmd
+        text: "About"
+      - href: project_page.qmd
+        text: "Projects"
     right:
       - text: "Contact"
         href: contact.qmd

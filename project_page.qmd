@@ -1,0 +1,15 @@
+---
+title: "project_page"
+format: html
+---
+# My Projects This Semester
+Here’s an overview …
+
+---
+::: {.project-buttons}
+<div class="project-buttons">
+<a class="btn btn-primary m-1" href="docs/w01/First_Quarto_file.html">Project 1</a>
+<a class="btn btn-primary m-1" href="docs/w01/Second_Quarto_file.html">Project 2</a>
+<a class="btn btn-primary m-1" href="docs/w01/Second_Quarto_file.qmd">Project 3</a>
+</div>
+:::
