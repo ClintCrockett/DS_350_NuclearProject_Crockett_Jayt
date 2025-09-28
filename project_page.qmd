@@ -9,8 +9,7 @@ Here’s an overview …
 
 ------------------------------------------------------------------------
 
-:::: project-buttons
 ::: project-buttons
 <a class="btn btn-primary m-1" href="./w01/First_Quarto_File.qmd">Project 1</a> <a class="btn btn-primary m-1" href="./w02/Second_Quarto_File.qmd">Project 2</a> <a class="btn btn-primary m-1" href="./w03/Third_Quarto_File.qmd">Project 3</a>
 :::
-::::
+
