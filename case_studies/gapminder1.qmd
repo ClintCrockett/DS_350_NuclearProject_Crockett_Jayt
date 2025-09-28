@@ -8,6 +8,8 @@ format: html
 library(gapminder)
 library(tidyverse)
 library(dplyr)
+library(patchwork)
+
 gapminder2 <- gapminder %>% 
   filter(country != "Kuwait")
 ```
@@ -15,9 +17,10 @@ gapminder2 <- gapminder %>%
 ```{r}
 ggplot(gapminder2, aes(x = lifeExp, y = gdpPercap, size = pop, color = continent)) + 
   geom_point(alpha = 0.7) +
+  scale_x_continuous(breaks = seq(40, 80, by = 20)) +
   scale_size_continuous(range = c(1,12), breaks = c(2.5e5, 5e5, 7.5e5, 1e6, 1.25e6)/100) +
   scale_y_continuous(trans = "sqrt", breaks = seq(0, 50000, by = 10000)) +
-  facet_wrap(~ year) +
+  facet_wrap(~ year, nrow=1) +
   labs(
     x = "Life Expectancy",
     y = "GDP per Capita",
@@ -26,6 +29,7 @@ ggplot(gapminder2, aes(x = lifeExp, y = gdpPercap, size = pop, color = continent
   theme_bw() +
   theme(
     legend.position = "right",
+#    panel.spacing.x = unit(10, "cm")
   )
 
 
