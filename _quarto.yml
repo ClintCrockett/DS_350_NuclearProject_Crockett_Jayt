@@ -13,13 +13,13 @@ website:
       - about.q
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-      - href: about.qmd
+      - href: docs/index.qmd
+        text: "Home""
+      - href: docs/about.qmd
         text: "About"
-      - href: project_page.qmd
+      - href: docs/project_page.qmd
         text: "Projects"
-      - href: case_studies/gapminder1.qmd
+      - href: docs/case_studies/gapminder1.qmd
         text: "Case Study"
     right:
       - text: "Contact"
