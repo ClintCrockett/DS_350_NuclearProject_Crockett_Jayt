@@ -1,0 +1,32 @@
+---
+title: "gapminder1"
+format: html
+---
+
+```{r message=FALSE}
+# gapminder
+library(gapminder)
+library(tidyverse)
+library(dplyr)
+gapminder2 <- gapminder %>% 
+  filter(country != "Kuwait")
+```
+
+```{r}
+ggplot(gapminder2, aes(x = lifeExp, y = gdpPercap, size = pop, color = continent)) + 
+  geom_point(alpha = 0.7) +
+  scale_size_continuous(range = c(1,12), breaks = c(2.5e5, 5e5, 7.5e5, 1e6, 1.25e6)/100) +
+  scale_y_continuous(trans = "sqrt", breaks = seq(0, 50000, by = 10000)) +
+  facet_wrap(~ year) +
+  labs(
+    x = "Life Expectancy",
+    y = "GDP per Capita",
+    size = "Population (×100k)",
+    color = "Continent") +
+  theme_bw() +
+  theme(
+    legend.position = "right",
+  )
+
+
+```
