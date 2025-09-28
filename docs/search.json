@@ -75,5 +75,12 @@
     "title": "project_page",
     "section": "",
     "text": "Here’s an overview …\n\n\n\nProject 1 Project 2 Project 3"
+  },
+  {
+    "objectID": "case_studies/gapminder1.html",
+    "href": "case_studies/gapminder1.html",
+    "title": "gapminder1",
+    "section": "",
+    "text": "Code\nggplot(gapminder2, aes(x = lifeExp, y = gdpPercap, size = pop, color = continent)) + \n  geom_point(alpha = 0.7) +\n  scale_size_continuous(range = c(1,12), breaks = c(2.5e5, 5e5, 7.5e5, 1e6, 1.25e6)/100) +\n  scale_y_continuous(trans = \"sqrt\", breaks = seq(0, 50000, by = 10000)) +\n  facet_wrap(~ year, nrow=1) +\n  labs(\n    x = \"Life Expectancy\",\n    y = \"GDP per Capita\",\n    size = \"Population (×100k)\",\n    color = \"Continent\") +\n  theme_bw() +\n  theme(\n    legend.position = \"right\",\n  )"
   }
 ]

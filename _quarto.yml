@@ -20,7 +20,7 @@ website:
       - href: project_page.qmd
         text: "Projects"
       - href: case_studies/gapminder1.qmd
-        text: "case_study"
+        text: "Case Study"
     right:
       - text: "Contact"
         href: contact.qmd
