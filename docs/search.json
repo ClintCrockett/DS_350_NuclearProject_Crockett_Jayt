@@ -74,7 +74,7 @@
     "href": "project_page.html",
     "title": "project_page",
     "section": "",
-    "text": "Here’s an overview …\n\n\n\nProject 1 Project 2 Project 3"
+    "text": "Here’s an overview …\n\n\nProject 1 Project 2 Project 3"
   },
   {
     "objectID": "case_studies/gapminder1.html",
@@ -82,5 +82,19 @@
     "title": "gapminder1",
     "section": "",
     "text": "Code\nggplot(gapminder2, aes(x = lifeExp, y = gdpPercap, size = pop, color = continent)) + \n  geom_point(alpha = 0.7) +\n  scale_x_continuous(breaks = seq(40, 80, by = 20)) +\n  scale_size_continuous(range = c(1,12), breaks = c(2.5e5, 5e5, 7.5e5, 1e6, 1.25e6)/100) +\n  scale_y_continuous(trans = \"sqrt\", breaks = seq(0, 50000, by = 10000)) +\n  facet_wrap(~ year, nrow=1) +\n  labs(\n    x = \"Life Expectancy\",\n    y = \"GDP per Capita\",\n    size = \"Population (×100k)\",\n    color = \"Continent\") +\n  theme_bw() +\n  theme(\n    legend.position = \"right\",\n#    panel.spacing.x = unit(10, \"cm\")\n  )"
+  },
+  {
+    "objectID": "case_studies.html",
+    "href": "case_studies.html",
+    "title": "project_page",
+    "section": "",
+    "text": "Here’s an overview …\n\n\nCase Study 1 Case Study 2"
+  },
+  {
+    "objectID": "case_studies/gapminder2.html",
+    "href": "case_studies/gapminder2.html",
+    "title": "gapminder2",
+    "section": "",
+    "text": "Code\nggplot(gapminder2, aes(x = year, y = gdpPercap, color = continent)) +\n  geom_line(aes(group = country), alpha = 0.3) +\n    geom_point(aes(size = pop / 100000), alpha = 0.5) + \n  geom_line(data = gap_summary, \n            aes(x = year, y = weighted_gdp),\n            linewidth = 0.7,\n            color = \"black\") +\n  geom_point(data = gap_summary,\n             aes(x = year, y = weighted_gdp, size = total_pop / 100000), color = \"black\") +\n  \n#  geom_point(data = gapminder2,\n#             aes(x = year, y = weighted_gdp, size = total_pop / 100000)) +  # dots sized by continent population\n  facet_wrap(~ continent, nrow = 1) +\n  scale_size_continuous(range = c(.5, 3)) +  # adjust range as needed\n  labs(\n    y = \"GDP per Capita\",\n    size = \"Population (100k)\",\n    color = \"Continent\"\n  ) +\n  theme_minimal()+\n  theme(strip.background = element_rect(fill = \"gray90\", color = \"gray50\"),\n        panel.border = element_rect(color = \"black\", fill = NA, linewidth = 0.5)\n)"
   }
 ]
