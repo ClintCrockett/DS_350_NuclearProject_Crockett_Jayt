@@ -1,0 +1,55 @@
+---
+title: "gapminder2"
+format: html
+---
+
+```{r message=FALSE}
+library(gapminder)
+library(gapminder)
+library(tidyverse)
+library(dplyr)
+library(patchwork)
+
+gapminder2 <- gapminder %>% 
+  filter(country != "Kuwait") 
+
+gap_summary <- gapminder2 %>%
+  group_by(continent, year) %>%
+  summarise(
+    weighted_gdp = weighted.mean(gdpPercap, w = pop),
+    total_pop = sum(pop),
+    .groups = "drop"
+  )
+
+```
+
+
+
+
+
+```{r}
+ggplot(gapminder2, aes(x = year, y = gdpPercap, color = continent)) +
+  geom_line(aes(group = country), alpha = 0.3) +
+    geom_point(aes(size = pop / 100000), alpha = 0.5) + 
+  geom_line(data = gap_summary, 
+            aes(x = year, y = weighted_gdp),
+            linewidth = 0.7,
+            color = "black") +
+  geom_point(data = gap_summary,
+             aes(x = year, y = weighted_gdp, size = total_pop / 100000), color = "black") +
+  
+#  geom_point(data = gapminder2,
+#             aes(x = year, y = weighted_gdp, size = total_pop / 100000)) +  # dots sized by continent population
+  facet_wrap(~ continent, nrow = 1) +
+  scale_size_continuous(range = c(.5, 3)) +  # adjust range as needed
+  labs(
+    y = "GDP per Capita",
+    size = "Population (100k)",
+    color = "Continent"
+  ) +
+  theme_minimal()+
+  theme(strip.background = element_rect(fill = "gray90", color = "gray50"),
+        panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5)
+) 
+
+```
