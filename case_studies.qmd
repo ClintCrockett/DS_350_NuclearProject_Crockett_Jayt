@@ -10,5 +10,5 @@ Here’s an overview …
 ------------------------------------------------------------------------
 
 ::: project-buttons
-<a class="btn btn-primary m-1" href="./case_studies/gapminder1.qmd">Case Study 1</a> <a class="btn btn-primary m-1" href="./case_studies/gapminder2.qmd">Project 2</a> ::: project-buttons
+<a class="btn btn-primary m-1" href="./case_studies/gapminder1.qmd">Case Study 1</a> <a class="btn btn-primary m-1" href="./case_studies/gapminder2.qmd">Case Study 2</a>
 :::
