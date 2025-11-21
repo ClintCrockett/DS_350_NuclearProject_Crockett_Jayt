@@ -1,0 +1,24 @@
+---
+title: "counting_words_task"
+format: html
+---
+
+# Scripture data
+
+```{r}
+pacman::p_load(readr, tidyverse, dyplr, stringr, stringi, rio)
+
+scriptures <- read_csv("https://github.com/beandog/lds-scriptures/raw/master/csv/lds-scriptures.csv")
+
+
+```
+
+```{r}
+bom_nt <- scriptures %>% 
+  filter(volume_title %in% c("New Testament", "Book of Mormon")) %>% 
+  mutate(
+    num_words = str_count(scripture_text, " ") + 1
+  )
+
+glimpse(bom_nt)
+```

@@ -23,10 +23,6 @@ gap_summary <- gapminder2 %>%
 
 ```
 
-
-
-
-
 ```{r}
 ggplot(gapminder2, aes(x = year, y = gdpPercap, color = continent)) +
   geom_line(aes(group = country), alpha = 0.3) +
