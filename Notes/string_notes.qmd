@@ -1,0 +1,36 @@
+---
+title: "string_notes"
+format: html
+---
+
+```{r}
+library(pacman)
+pacman::p_load(tidyverse, stringr, stringi, rio)
+
+tibble(sentence = sentences[1:4]) %>% 
+  mutate(
+    n_the = str_count(sentence, pattern = "the |The"),
+    n_theB = str_count(tolower(sentence), pattern = "the"),
+    n_lowercase = str_count(sentence, pattern = "[:lower:]")
+  )
+```
+
+```{r}
+chars <- readr::read_lines('https://byuistats.github.io/M335/data/randomletters.txt')
+
+chars_num <- readr::read_lines("https://byuistats.github.io/M335/data/randomletters_wnumbers.txt")
+```
+
+Task 1:
+
+1.  What is the length of the randomletters string? ﻿﻿
+2.  Remove all the 'e' and 'a' letters and then tell me how long the string is. and 'a' letters ﻿﻿
+3.  How many times is the name 'jim' in the string?
+4.  ﻿﻿Tell me which character locations have three "a"'s in a row. ﻿﻿
+5.  Show all the sequences with 3 of the same letter in a row. (hardest one?) ﻿﻿
+6.  Split the string so that instead of a stzing of length 70000, it is a vector of character strings that eacl have length 1.{r} str_length(chars)
+
+```{r}
+str_extract_all(chars, "(.)\\1{2}")[[1]]
+
+```

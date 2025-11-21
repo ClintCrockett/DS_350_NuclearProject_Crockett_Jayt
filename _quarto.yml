@@ -21,6 +21,8 @@ website:
         text: "Projects"
       - href: ./case_studies/gapminder1.qmd
         text: "Case Study"
+      - href: ./task_manager.qmd
+        text: "Tasks"
     right:
       - text: "Contact"
         href: contact.qmd

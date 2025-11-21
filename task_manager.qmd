@@ -1,0 +1,17 @@
+---
+title: "project_page"
+format: html
+---
+
+## These are the tasks we have done
+
+
+
+<a class="btn btn-primary m-1" href="./w01/First_Quarto_File.qmd">Project 1</a> 
+
+### Week 10 
+
+<a class="btn btn-primary m-1" href="./w10/counting_words_task.qmd">Counting Words</a> 
+
+<a class="btn btn-primary m-1" href="./w10/string_task.gmd">Strings and Regex</a>
+

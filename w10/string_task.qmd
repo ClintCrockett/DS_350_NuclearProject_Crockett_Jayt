@@ -1,0 +1,53 @@
+---
+title: "string_task"
+format: html
+---
+
+Question 1 (Use the `readr::read_lines()` function to read in each: [string—randomletters.txt](https://byuistats.github.io/M335/data/randomletters.txt) and [randomletters_wnumbers.txt.](https://byuistats.github.io/M335/data/randomletters_wnumbers.txt))
+
+```{r}
+pacman::p_load(tidyverse, stringr, stringi, rio)
+
+
+
+
+```
+
+Question 2 (With the `randomletters.txt` file, pull out every 1700 letter (for example, 1, 1700, 3400, 5100, …) and find the quote that is hidden—the quote ends with a period.)
+
+```{r}
+chars <- readr::read_file('https://byuistats.github.io/M335/data/randomletters.txt')
+inculde_all <- paste(chars, collapse = "")
+break_string <- str_split(inculde_all, "")[[1]]
+
+position <- c(1,seq(0, length(break_string), by = 1700))
+
+break_string[position]
+
+
+```
+
+Question 3 (With the `randomletters_wnumbers.txt` file, find all the numbers hidden, and convert those numbers to letters using the letters order in the alphabet to decipher the message. For example, a 1=a, 2=b,…, 26=z (Hint: the message starts with “experts”).)
+
+```{r}
+chars_num <- readr::read_lines("https://byuistats.github.io/M335/data/randomletters_wnumbers.txt")
+
+num_words <- str_extract_all(chars_num, "[:digit:]+")[[1]]
+num_words <- as.integer(num_words)
+nums <- letters[num_words]
+paste(nums, collapse = "")
+```
+
+Question 4\
+With the `randomletters.txt` file, remove all the spaces and periods from the string then find the longest sequence of vowels.
+
+```{r}
+cleaned <- str_remove_all(chars, "[ \\.]")
+vowel_sequences <- str_extract_all(cleaned, "[aeiouy]+")[[1]]
+longest_vowel_sequence <- vowel_sequences[which.max(nchar(vowel_sequences))]
+longest_vowel_sequence
+```
+
+```{r}
+
+```
