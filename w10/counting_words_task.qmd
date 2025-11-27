@@ -6,9 +6,10 @@ format: html
 # Scripture data
 
 ```{r}
-pacman::p_load(readr, tidyverse, dyplr, stringr, stringi, rio)
+pacman::p_load(readr, tidyverse, stringr, stringi, rio, pander, ggplot2)
 
 scriptures <- read_csv("https://github.com/beandog/lds-scriptures/raw/master/csv/lds-scriptures.csv")
+
 
 
 ```
@@ -22,3 +23,57 @@ bom_nt <- scriptures %>%
 
 glimpse(bom_nt)
 ```
+
+### Average Verse Length
+
+```{r}
+# Average verse length
+avg_verse_length <- bom_nt %>%
+  group_by(volume_title) %>%
+  summarise(avg_words = mean(num_words, na.rm = TRUE))
+
+pander(avg_verse_length) 
+
+```
+
+### Counting Jesus
+
+```{r}
+# Count "Jesus" mentions per volume
+jesus_count <- bom_nt %>%
+  mutate(jesus_mentions = str_count(scripture_text, regex("Jesus", ignore_case = TRUE))) %>%
+  group_by(volume_title) %>%
+  summarise(total_mentions = sum(jesus_mentions, na.rm = TRUE))
+
+jesus_count
+
+```
+
+### Count Words
+
+```{r}
+bom <- bom_nt %>%
+  filter(volume_title == "Book of Mormon")
+
+# Optional glimpse of word counts per verse
+bom %>% select(book_title, num_words) %>% glimpse()
+
+```
+
+### Visualize
+
+```{r}
+# Visualize
+ggplot(bom, aes(x = fct_reorder(book_title, num_words, .fun = median), y = num_words)) +
+  geom_boxplot(fill = "skyblue") +
+  labs(
+    title = "Distribution of Verse Lengths in the Book of Mormon",
+    x = "Book",
+    y = "Number of Words per Verse"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+\

@@ -4,28 +4,30 @@ project:
 
 website:
   title: "DS350_website_template"
-  sidebar: 
+  sidebar:
     style: floating
-    contents: 
+    contents:
       - index.qmd
       - text: "Week 1"
         href: w01/First_Quarto_File.qmd
-      - about.q
+      - about.qmd
+  
+  
   navbar:
     left:
-      - href: ./index.qmd
+      - href: index.qmd
         text: "Home"
-      - href: ./about.qmd
+      - href: about.qmd
         text: "About"
-      - href: ./project_page.qmd
+      - href: project_page.qmd
         text: "Projects"
-      - href: ./case_studies/gapminder1.qmd
+      - href: case_studies/gapminder1.qmd
         text: "Case Study"
-      - href: ./task_manager.qmd
+      - href: task_manager.qmd
         text: "Tasks"
     right:
-      - text: "Contact"
-        href: contact.qmd
+      - href: contact.qmd
+        text: "Contact"
       - icon: github
         href: https://www.linkedin.com/in/jayton-crockett-ab585326a
 
