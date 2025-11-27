@@ -1,0 +1,65 @@
+---
+title: "savior_names"
+format: html
+---
+
+```{r message=FALSE, warning=FALSE}
+pacman::p_load(readr, tidyverse, stringr, stringi, rio, pander, ggplot2, dplyr)
+
+savior_names <- read_rds("https://byuistats.github.io/M335/data/BoM_SaviorNames.rds")
+glimpse(savior_names)
+scriptures <- read_csv("https://github.com/beandog/lds-scriptures/raw/master/csv/lds-scriptures.csv")
+
+bom_nt <- scriptures %>% 
+  filter(volume_title %in% c("New Testament", "Book of Mormon")) %>% 
+  mutate(num_words = str_count(scripture_text, " ") + 1)
+
+# Only Book of Mormon verses
+bom_text <- bom_nt %>% filter(volume_title == "Book of Mormon")
+
+```
+
+```{r}
+# Combine Savior names into one regex pattern
+savior_pattern <- paste0("\\b(", paste(savior_names$name, collapse = "|"), ")\\b")
+
+```
+
+```{r}
+# Function to count words between Savior names in a single verse
+words_between_savior <- function(text) {
+  pieces <- str_split(text, savior_pattern, simplify = TRUE)
+  sapply(pieces, function(x) str_count(x, "\\S+"))  # count words in each piece
+}
+
+# Apply to all verses
+bom_words_between <- bom_text %>%
+  mutate(words_between = lapply(scripture_text, words_between_savior)) %>%
+  select(book_title, words_between) %>%
+  unnest(words_between)
+
+```
+
+```{r}
+avg_words_between <- mean(bom_words_between$words_between, na.rm = TRUE)
+avg_words_between
+
+```
+
+```{r}
+library(ggplot2)
+
+ggplot(bom_words_between, aes(x = words_between)) +
+  geom_histogram(binwidth = 5, fill = "lightgreen", color = "black") +
+  labs(
+    title = "Distribution of Words Between Savior Names in the Book of Mormon",
+    x = "Number of Words Between Savior Names",
+    y = "Frequency"
+  ) +
+  theme_minimal()
+
+```
+
+## Analysis of Words Between Savior Names
+
+The histogram above shows the distribution of the number of words between mentions of Savior names in the Book of Mormon. Most Savior names occur fairly close together, indicating clusters of references in key chapters. There are occasional long stretches without a Savior name, which contribute to the long tail of the distribution. On average, there are `r avg_words_between` words between mentions, suggesting that readers encounter references to the Savior regularly throughout the text.

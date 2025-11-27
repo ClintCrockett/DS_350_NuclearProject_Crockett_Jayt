@@ -1,5 +1,6 @@
 ---
 title: "DS350 Nuclear Project"
+format: html
 ---
 
 This is a Quarto website.
