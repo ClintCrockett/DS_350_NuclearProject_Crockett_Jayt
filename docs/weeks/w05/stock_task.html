@@ -1,0 +1,2769 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>DS350_website_template - stock_task</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">DS350_website_template</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../index.html" aria-current="page">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../project_page.html">Projects</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../case_studies/gapminder1.html">Case Study</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../task_manager.html">Tasks</a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../contact.html">Contact</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/jayton-crockett-ab585326a"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">stock_task</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">DS350 Nuclear Project</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_one.html" class="sidebar-item-text sidebar-link">Week 1</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_two.html" class="sidebar-item-text sidebar-link">Week 2</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_three.html" class="sidebar-item-text sidebar-link">Week 3</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_four.html" class="sidebar-item-text sidebar-link">Week 4</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_five.html" class="sidebar-item-text sidebar-link">Week 5</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_six.html" class="sidebar-item-text sidebar-link">Week 6</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_seven.html" class="sidebar-item-text sidebar-link">Week 7</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_eight.html" class="sidebar-item-text sidebar-link">Week 8</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_nine.html" class="sidebar-item-text sidebar-link">Week 9</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_ten.html" class="sidebar-item-text sidebar-link">Week 10</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_eleven.html" class="sidebar-item-text sidebar-link">Week 11</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_twelve.html" class="sidebar-item-text sidebar-link">Week 12</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_thirteen.html" class="sidebar-item-text sidebar-link">Week 13</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">stock_task</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse) </span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(readr) </span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(lubridate) </span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(pander)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>stock_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="st">"https://raw.githubusercontent.com/byuistats/data/master/Dart_Expert_Dow_6month_anova/Dart_Expert_Dow_6month_anova.csv"</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 300 Columns: 3
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): contest_period, variable
+dbl (1): value
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># pander(stock_raw)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>stock_tidy <span class="ot">&lt;-</span> stock_raw <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="at">month_end =</span> <span class="fu">str_extract</span>(contest_period, <span class="st">"^[A-Za-z]+"</span>),</span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="at">year_end =</span> <span class="fu">str_extract</span>(contest_period, <span class="st">"[0-9]{4}"</span>) <span class="sc">%&gt;%</span> <span class="fu">as.integer</span>()</span>
+<span id="cb5-6"><a href="#cb5-6"></a>  )</span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="fu">pander</span>(stock_tidy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 15%">
+<col style="width: 11%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">contest_period</th>
+<th style="text-align: center;">variable</th>
+<th style="text-align: center;">value</th>
+<th style="text-align: center;">month_end</th>
+<th style="text-align: center;">year_end</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">January-June1990</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">12.7</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1990</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">26.4</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1990</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">2.5</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1990</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-20</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1990</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-37.8</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1990</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-33.3</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July-December1990</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-10.2</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1990-January1991</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-20.3</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1990-February1991</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">38.9</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1990-March1991</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">20.2</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1990-April1991</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">50.6</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1990-May1991</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">66.9</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1991</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">7.5</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1991</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">17.5</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1991</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">39.6</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1991</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">15.6</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1991</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">12.4</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1991</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July-December1991</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">12.3</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1991-January1992</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">39.3</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1991-February1992</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">51.2</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1991-March1992</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">25.2</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1991-April1992</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-3.3</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1991-May1992</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">7.7</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1992</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-21</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1992</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-13</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1992</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-2.5</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1992</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-19.6</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1992</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">6.3</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1992</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-5.1</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July-December1992</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">14.1</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1992-January1993</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">15.6</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1992-February1993</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-26.7</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1992-March1993</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">25.2</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1992-April1993</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-13.9</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1992-May1993</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">27.9</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January1993-June1993</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-6.6</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February1993-July1993</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">29.1</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March1993-August1993</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">0.3</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April1993-September1993</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">2.6</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May1993-October1993</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June1993-November1993</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-7.4</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July1993-Dec.1993</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">2.2</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1993-January1994</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">27.8</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1993-February1994</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">3.7</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1993-March1994</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">4.7</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1993-April1994</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">5.4</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1993-May1994</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-9.5</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1994</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-13.1</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1994</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-10</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1994</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">28.4</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1994</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">10.6</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1994</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">27.2</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1994</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">37</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July-December1994</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-15.8</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1994-January1995</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">20.4</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1994-Febuary1995</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">5.4</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1994-March1995</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-14.8</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1994-April1995</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">12.1</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1994-May1995</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">10.8</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January1995-June1995</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">72.7</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Febuary-July1995</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">30.5</td>
+<td style="text-align: center;">Febuary</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1995</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">26.7</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April1995-September1995</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">75</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1995</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">12.6</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1995</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">31</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July1995-December1995</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-11</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1995-January1996</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">28.1</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1995-February1996</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">15.1</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1995-March1996</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">1.5</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1995-April1996</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">10.8</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1995-May1996</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1996</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-9.2</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1996</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-8.6</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1996</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">31.7</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1996</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">8.7</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1996</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1996</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">5.1</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July-December1996</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">41.2</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1996-January1997</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">7.7</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1996-February1997</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">47.6</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1996-March1997</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-10</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1996-April1997</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-13.6</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1996-May1997</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">10.5</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1997</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">20.2</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1997</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">29.3</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1997</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">20.7</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1997</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">50.3</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1997</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">38.4</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1997</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-3.5</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July-December1997</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-14.1</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1997-January1998</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">14.3</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1997-February1998</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">10.9</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1997-March1998</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">5.5</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1997-April1998</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">17.4</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1997-May1998</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1998</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">24.4</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1998</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1998</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">39.3</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1998</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1998</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-18.8</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1998</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1998</td>
+<td style="text-align: center;">PROS</td>
+<td style="text-align: center;">-20.1</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1998</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1990</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1990</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">1.8</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1990</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-14.3</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1990</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-7.2</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1990</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-16.3</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1990</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-27.4</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July-December1990</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-22.5</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1990-January1991</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-37.3</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1990-February1991</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-2.5</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1990-March1991</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">11.2</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1990-April1991</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">72.9</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1990-May1991</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">16.6</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1991</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">28.7</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1991</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">44.8</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1991</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">71.3</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1991</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">2.8</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1991</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">38</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1991</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-23.2</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July-December1991</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">4.1</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1991-January1992</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-14</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1991-February1992</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">11.7</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1991-March1992</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">1.1</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1991-April1992</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-3.1</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1991-May1992</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-1.4</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1992</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">7.7</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1992</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">15.4</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1992</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">3.6</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1992</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">5.7</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1992</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-5.7</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1992</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">6.9</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July-December1992</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">1.8</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1992-January1993</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-13.9</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1992-February1993</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">15.6</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1992-March1993</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">18.7</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1992-April1993</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-3.6</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1992-May1993</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">6.6</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January1993-June1993</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">4.7</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February1993-July1993</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-43</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March1993-August1993</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-5.6</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April1993-September1993</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-17.7</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May1993-October1993</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-4.9</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June1993-November1993</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-21.4</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July1993-Dec.1993</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">42.2</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1993-January1994</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">18.5</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1993-February1994</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">1.5</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1993-March1994</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-9.2</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1993-April1994</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-10.5</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1993-May1994</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">1.4</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1994</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-8.7</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1994</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">16.9</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1994</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-4.3</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1994</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">20.6</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1994</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">10.3</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1994</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-6.8</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July-December1994</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">5.3</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1994-January1995</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">2.8</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1994-Febuary1995</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">11.9</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1994-March1995</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">3.8</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1994-April1995</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">1.4</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1994-May1995</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January1995-June1995</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">11.8</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Febuary-July1995</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">16.5</td>
+<td style="text-align: center;">Febuary</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1995</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">11.4</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April1995-September1995</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">3.3</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1995</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">17.6</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1995</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">23.8</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July1995-December1995</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">18.7</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1995-January1996</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-2.4</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1995-February1996</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">25.4</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1995-March1996</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">50.5</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1995-April1996</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">24.4</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1995-May1996</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">11.5</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1996</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-5.3</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1996</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">2.6</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1996</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-5.7</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1996</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">7.8</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1996</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1996</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">6.2</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July-December1996</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">6.9</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1996-January1997</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">4.7</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1996-February1997</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">24.6</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1996-March1997</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-16.9</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1996-April1997</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-9.7</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1996-May1997</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-21.4</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1997</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1997</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-13.9</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1997</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1997</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">35.6</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1997</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">20.7</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1997</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">6.5</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July-December1997</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">6.5</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1997-January1998</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-9</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1997-February1998</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-3.3</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1997-March1998</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">13.3</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1997-April1998</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-10.5</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1997-May1998</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">28.5</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1998</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">3.2</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1998</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1998</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-10.1</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1998</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1998</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-20.4</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1998</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1998</td>
+<td style="text-align: center;">DARTS</td>
+<td style="text-align: center;">-34.2</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1998</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1990</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">2.5</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1990</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">11.5</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1990</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-2.3</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1990</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-9.2</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1990</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-8.5</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1990</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-12.8</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July-December1990</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-9.3</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1990-January1991</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-0.8</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1990-February1991</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1990-March1991</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">15.8</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1990-April1991</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">16.2</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1990-May1991</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">17.3</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1991</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">17.7</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1991</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">7.6</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1991</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">4.4</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1991</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">3.4</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1991</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">4.4</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1991</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-3.3</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July-December1991</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">6.6</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1991-January1992</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">6.5</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1991-February1992</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">8.6</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1991-March1992</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">7.2</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1991-April1992</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">10.6</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1991-May1992</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">17.6</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1992</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">3.6</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1992</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">4.2</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1992</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-0.3</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1992</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-0.1</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1992</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-5</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1992</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-2.8</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July-December1992</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">0.2</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1992-January1993</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-0.8</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1992-February1993</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">2.5</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1992-March1993</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1992-April1993</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">5.8</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1992-May1993</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">6.7</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January1993-June1993</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">7.7</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February1993-July1993</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">3.7</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March1993-August1993</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">7.3</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April1993-September1993</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">5.2</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May1993-October1993</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">5.7</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June1993-November1993</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">4.9</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July1993-Dec.1993</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1993-January1994</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">11.2</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1993-February1994</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">5.5</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1993-March1994</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">1.6</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1993-April1994</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1993-May1994</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">1.3</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1994</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-6.2</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1994</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-5.3</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1994</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">1.5</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1994</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">4.4</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1994</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">6.9</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1994</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-0.3</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July-December1994</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">3.6</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1994-January1995</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">1.8</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1994-Febuary1995</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">3.2</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1994-March1995</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">7.3</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1994-April1995</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">12.8</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1994-May1995</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">19.5</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January1995-June1995</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Febuary-July1995</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">19.6</td>
+<td style="text-align: center;">Febuary</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1995</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">15.3</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April1995-September1995</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1995</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">8.2</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1995</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">13.1</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July1995-December1995</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">9.3</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1995-January1996</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1995-February1996</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">15.6</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1995-March1996</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">18.4</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1995-April1996</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">14.8</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1995-May1996</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1995</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1996</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">10.2</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1996</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">1.3</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1996</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">0.6</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1996</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">5.8</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1996</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">7.2</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1996</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">15.1</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July-December1996</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">15.5</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1996-January1997</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">19.6</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1996-February1997</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">20.1</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1996-March1997</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">9.6</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1996-April1997</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">15.3</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1996-May1997</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">13.3</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1997</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">16.2</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1997</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">20.8</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1997</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">8.3</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1997</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">20.2</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May-October1997</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">June-November1997</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">3.8</td>
+<td style="text-align: center;">June</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">July-December1997</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-0.7</td>
+<td style="text-align: center;">July</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">August1997-January1998</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-0.3</td>
+<td style="text-align: center;">August</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">September1997-February1998</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">10.7</td>
+<td style="text-align: center;">September</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">October1997-March1998</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">7.6</td>
+<td style="text-align: center;">October</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">November1997-April1998</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">22.5</td>
+<td style="text-align: center;">November</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">December1997-May1998</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">10.6</td>
+<td style="text-align: center;">December</td>
+<td style="text-align: center;">1997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">January-June1998</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">January</td>
+<td style="text-align: center;">1998</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">February-July1998</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">7.1</td>
+<td style="text-align: center;">February</td>
+<td style="text-align: center;">1998</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">March-August1998</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-13.1</td>
+<td style="text-align: center;">March</td>
+<td style="text-align: center;">1998</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">April-September1998</td>
+<td style="text-align: center;">DJIA</td>
+<td style="text-align: center;">-11.8</td>
+<td style="text-align: center;">April</td>
+<td style="text-align: center;">1998</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>stock_tidy <span class="ot">&lt;-</span> stock_tidy <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="at">month_end =</span> <span class="fu">str_sub</span>(month_end, <span class="dv">1</span>, <span class="dv">3</span>),</span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="at">month_end =</span> <span class="fu">factor</span>(month_end,</span>
+<span id="cb6-5"><a href="#cb6-5"></a>         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Jan"</span>,<span class="st">"Feb"</span>,<span class="st">"Mar"</span>,<span class="st">"Apr"</span>,<span class="st">"May"</span>,<span class="st">"Jun"</span>,<span class="st">"Jul"</span>,<span class="st">"Aug"</span>,<span class="st">"Sep"</span>,<span class="st">"Oct"</span>,<span class="st">"Nov"</span>,<span class="st">"Dec"</span>)))</span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="fu">write_rds</span>(stock_tidy, <span class="st">"stock_tidy.rds"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a>test_read <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"stock_tidy.rds"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co"># glimpse(test_read)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>djia_table <span class="ot">&lt;-</span> stock_tidy <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">filter</span>(variable <span class="sc">==</span> <span class="st">"DJIA"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">select</span>(month_end, year_end, value) <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="at">names_from =</span> year_end,</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="at">values_from =</span> value</span>
+<span id="cb7-7"><a href="#cb7-7"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="fu">arrange</span>(month_end)   <span class="co"># ensures Jan → Dec in rows</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a></span>
+<span id="cb7-10"><a href="#cb7-10"></a></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="fu">pander</span>(djia_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 10%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">month_end</th>
+<th style="text-align: center;">1990</th>
+<th style="text-align: center;">1991</th>
+<th style="text-align: center;">1992</th>
+<th style="text-align: center;">1993</th>
+<th style="text-align: center;">1994</th>
+<th style="text-align: center;">1995</th>
+<th style="text-align: center;">1996</th>
+<th style="text-align: center;">1997</th>
+<th style="text-align: center;">1998</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Jan</td>
+<td style="text-align: center;">2.5</td>
+<td style="text-align: center;">17.7</td>
+<td style="text-align: center;">3.6</td>
+<td style="text-align: center;">7.7</td>
+<td style="text-align: center;">-6.2</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">10.2</td>
+<td style="text-align: center;">16.2</td>
+<td style="text-align: center;">15</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Feb</td>
+<td style="text-align: center;">11.5</td>
+<td style="text-align: center;">7.6</td>
+<td style="text-align: center;">4.2</td>
+<td style="text-align: center;">3.7</td>
+<td style="text-align: center;">-5.3</td>
+<td style="text-align: center;">19.6</td>
+<td style="text-align: center;">1.3</td>
+<td style="text-align: center;">20.8</td>
+<td style="text-align: center;">7.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Mar</td>
+<td style="text-align: center;">-2.3</td>
+<td style="text-align: center;">4.4</td>
+<td style="text-align: center;">-0.3</td>
+<td style="text-align: center;">7.3</td>
+<td style="text-align: center;">1.5</td>
+<td style="text-align: center;">15.3</td>
+<td style="text-align: center;">0.6</td>
+<td style="text-align: center;">8.3</td>
+<td style="text-align: center;">-13.1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Apr</td>
+<td style="text-align: center;">-9.2</td>
+<td style="text-align: center;">3.4</td>
+<td style="text-align: center;">-0.1</td>
+<td style="text-align: center;">5.2</td>
+<td style="text-align: center;">4.4</td>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">5.8</td>
+<td style="text-align: center;">20.2</td>
+<td style="text-align: center;">-11.8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">May</td>
+<td style="text-align: center;">-8.5</td>
+<td style="text-align: center;">4.4</td>
+<td style="text-align: center;">-5</td>
+<td style="text-align: center;">5.7</td>
+<td style="text-align: center;">6.9</td>
+<td style="text-align: center;">8.2</td>
+<td style="text-align: center;">7.2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Jun</td>
+<td style="text-align: center;">-12.8</td>
+<td style="text-align: center;">-3.3</td>
+<td style="text-align: center;">-2.8</td>
+<td style="text-align: center;">4.9</td>
+<td style="text-align: center;">-0.3</td>
+<td style="text-align: center;">13.1</td>
+<td style="text-align: center;">15.1</td>
+<td style="text-align: center;">3.8</td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Jul</td>
+<td style="text-align: center;">-9.3</td>
+<td style="text-align: center;">6.6</td>
+<td style="text-align: center;">0.2</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">3.6</td>
+<td style="text-align: center;">9.3</td>
+<td style="text-align: center;">15.5</td>
+<td style="text-align: center;">-0.7</td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Aug</td>
+<td style="text-align: center;">-0.8</td>
+<td style="text-align: center;">6.5</td>
+<td style="text-align: center;">-0.8</td>
+<td style="text-align: center;">11.2</td>
+<td style="text-align: center;">1.8</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">19.6</td>
+<td style="text-align: center;">-0.3</td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Sep</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">8.6</td>
+<td style="text-align: center;">2.5</td>
+<td style="text-align: center;">5.5</td>
+<td style="text-align: center;">3.2</td>
+<td style="text-align: center;">15.6</td>
+<td style="text-align: center;">20.1</td>
+<td style="text-align: center;">10.7</td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Oct</td>
+<td style="text-align: center;">15.8</td>
+<td style="text-align: center;">7.2</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">1.6</td>
+<td style="text-align: center;">7.3</td>
+<td style="text-align: center;">18.4</td>
+<td style="text-align: center;">9.6</td>
+<td style="text-align: center;">7.6</td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Nov</td>
+<td style="text-align: center;">16.2</td>
+<td style="text-align: center;">10.6</td>
+<td style="text-align: center;">5.8</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">12.8</td>
+<td style="text-align: center;">14.8</td>
+<td style="text-align: center;">15.3</td>
+<td style="text-align: center;">22.5</td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Dec</td>
+<td style="text-align: center;">17.3</td>
+<td style="text-align: center;">17.6</td>
+<td style="text-align: center;">6.7</td>
+<td style="text-align: center;">1.3</td>
+<td style="text-align: center;">19.5</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">13.3</td>
+<td style="text-align: center;">10.6</td>
+<td style="text-align: center;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -9,10 +9,33 @@ website:
     contents:
       - index.qmd
       - text: "Week 1"
-        href: w01/First_Quarto_File.qmd
-      - about.qmd
-  
-  
+        href: weeks/week_one.qmd
+      - text: "Week 2"
+        href: weeks/week_two.qmd
+      - text: "Week 3"
+        href: weeks/week_three.qmd
+      - text: "Week 4"
+        href: weeks/week_four.qmd
+      - text: "Week 5"
+        href: weeks/week_five.qmd
+      - text: "Week 6"
+        href: weeks/week_six.qmd
+      - text: "Week 7"
+        href: weeks/week_seven.qmd
+      - text: "Week 8"
+        href: weeks/week_eight.qmd
+      - text: "Week 9"
+        href: weeks/week_nine.qmd
+      - text: "Week 10"
+        href: weeks/week_ten.qmd
+      - text: "Week 11"
+        href: weeks/week_eleven.qmd
+      - text: "Week 12"
+        href: weeks/week_twelve.qmd
+      - text: "Week 13"
+        href: weeks/week_thirteen.qmd
+
+
   navbar:
     left:
       - href: index.qmd

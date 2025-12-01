@@ -1,0 +1,14 @@
+---
+title: "project_page"
+format: html
+---
+
+## Week Ten Assignments
+
+#### Completed assignments for that week
+
+<a class="btn btn-primary m-1" href="./w10/counting_words_tasks.qmd">Counting Words</a>
+
+<a class="btn btn-primary m-1" href="./w10/saviors_names.qmd">Savior Names</a>
+
+<a class="btn btn-primary m-1" href="./w10/string_tasks.qmd">String Task</a>
