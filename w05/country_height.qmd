@@ -1,0 +1,46 @@
+---
+title: "country_height"
+format: html
+---
+
+```{r}
+library(readxl)
+library(tidyverse)
+library(ggplot2)
+
+heights_raw <- read_excel("data/Height.xlsx", skip = 1)  # adjust skip as needed
+
+heights_raw <- heights_raw %>%
+  rename(code = 1, country = 2)
+
+heights <- heights_raw %>%
+  pivot_longer(
+    cols = -c(code, country),
+    names_to = "year_decade",
+    values_to = "height_cm"
+  ) %>%
+  filter(str_detect(year_decade, "^[0-9]+$")) %>%
+  mutate(
+    height_cm = as.numeric(height_cm),       # make sure values are numeric
+    year_decade = as.numeric(year_decade),
+    height_in = height_cm / 2.54
+  ) %>%
+  filter(!is.na(height_cm))                  # remove rows with missing height
+
+```
+
+```{r}
+ggplot(heights, aes(x = year_decade, y = height_in, group = country)) +
+  geom_line(data = heights %>% filter(country != "Germany"), color = "grey80") + # all other countries muted
+  geom_line(data = heights %>% filter(country == "Germany"), color = "red", size = 1.2) + # Germany bold
+  geom_point(data = heights %>% filter(country == "Germany"), color = "red", size = 2) +
+  labs(
+    title = "Average Heights Over Time by Country",
+    x = "Year / Decade",
+    y = "Height (inches)"
+  ) +
+  theme_minimal()
+
+```
+
+Based on this dataset, there is a pretty clear upward trend in average human height over time. Even though the countries start at different baseline heights, most of them show gradual increases across the decades. The pattern is very noticeable when you look at the highlighted Germany line, which steadily rises over the 19th and 20th centuries. So if someone argues that humans have gotten taller over the years, this data definitely supports that idea.

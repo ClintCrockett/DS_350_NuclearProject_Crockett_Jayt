@@ -1,0 +1,133 @@
+---
+title: "wings_to_fly"
+format: html
+---
+
+```{r message=FALSE, warning=FALSE}
+pacman::p_load(readr, tidyverse, stringr, stringi, rio, pander, ggplot2, scales, nycflights13)
+
+```
+
+```{r message=FALSE, warning=FALSE}
+# glimpse(flights)
+```
+
+```{r message=FALSE, warning=FALSE}
+fl_before_noon <- flights %>%
+  filter(!is.na(sched_dep_time), sched_dep_time < 1200)
+
+dep75 <- fl_before_noon %>%
+  filter(!is.na(dep_delay)) %>%
+  group_by(origin, carrier) %>%
+  summarise(
+    n = n(),
+    p75 = quantile(dep_delay, probs = 0.75, na.rm = TRUE),
+    median = median(dep_delay, na.rm = TRUE),
+    mean = mean(dep_delay, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  filter(n >= 50) %>%
+  left_join(airlines, by = "carrier") %>%
+  arrange(origin, p75)
+
+best_by_origin <- dep75 %>%
+  group_by(origin) %>%
+  slice_min(order_by = p75, n = 1, with_ties = FALSE) %>%
+  ungroup()
+
+
+# dep75 %>% print(n = 200)
+# best_by_origin
+
+top_carriers <- fl_before_noon %>%
+  count(origin, carrier) %>%
+  group_by(origin) %>%
+  slice_max(n, n = 8) %>%
+  ungroup() %>%
+  distinct(origin, carrier)
+
+plot_data <- fl_before_noon %>%
+  inner_join(top_carriers, by = c("origin", "carrier")) %>%
+  left_join(airlines, by = "carrier")
+
+```
+
+```{r message=FALSE, warning=FALSE}
+p1 <- ggplot(plot_data, aes(x = fct_reorder(name, dep_delay, .fun = median, .desc = FALSE),
+                            y = dep_delay)) +
+  geom_boxplot(outlier.shape = NA, alpha = 0.6) +
+  geom_jitter(width = 0.25, alpha = 0.12, size = 0.6) +
+  facet_wrap(~origin, scales = "free_x") +
+  labs(x = "Airline", y = "Departure delay (minutes)",
+       title = "Departure delays for flights scheduled before noon (jitter = individual flights)") +
+  coord_flip() +
+  theme_minimal()
+
+print(p1)
+```
+
+```{r message=FALSE, warning=FALSE}
+p2 <- ggplot(dep75, aes(x = reorder(name, p75), y = p75, fill = origin)) +
+  geom_col() +
+  facet_wrap(~origin, scales = "free") +
+  geom_text(aes(label = paste0("n=", n)), hjust = -0.05, size = 3) +
+  labs(x = "Airline", y = "75th percentile of departure delay (minutes)",
+       title = "75th percentile of departure delay for flights scheduled before noon") +
+  coord_flip() +
+  theme_minimal()
+
+print(p2)
+```
+
+```{r message=FALSE, warning=FALSE}
+delta_flights <- flights %>%
+  filter(carrier == "DL") %>%
+  filter(!is.na(arr_delay), !is.na(origin))
+
+delta_late_summary <- delta_flights %>%
+  group_by(origin) %>%
+  summarise(
+    n = n(),
+    prop_any_delay = mean(arr_delay > 0, na.rm = TRUE),
+    prop_15plus = mean(arr_delay > 15, na.rm = TRUE),
+    avg_delay = mean(arr_delay, na.rm = TRUE),
+    median_delay = median(arr_delay, na.rm = TRUE),
+    p75 = quantile(arr_delay, 0.75, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  arrange(prop_any_delay)
+
+pander(delta_late_summary)
+
+# Q2 plots: ECDF (shows individual-flight complexity with rugs) and bar chart of proportions
+p3 <- ggplot(delta_flights, aes(x = arr_delay, colour = origin)) +
+  stat_ecdf(size = 1) +
+  geom_jitter(aes(y = 0), height = 0.02, alpha = 0.2, show.legend = FALSE) +
+  labs(x = "Arrival delay (minutes)", y = "ECDF",
+       title = "Delta (DL) arrival delay ECDF by origin",
+       subtitle = "Rugs show individual flights") +
+  xlim(-60, 180) +
+  theme_minimal()
+
+
+print(p3)
+
+```
+
+```{r message=FALSE, warning=FALSE}
+
+p4 <- delta_late_summary %>%
+  pivot_longer(cols = c(prop_any_delay, prop_15plus),
+               names_to = "threshold", values_to = "proportion") %>%
+  mutate(threshold = recode(threshold,
+                            prop_any_delay = "Any delay (>0 min)",
+                            prop_15plus = "Significant delay (>15 min)")) %>%
+  ggplot(aes(x = origin, y = proportion, fill = origin)) +
+  geom_col() +
+  geom_text(aes(label = scales::percent(proportion, accuracy = 0.1)), vjust = -0.5) +
+  facet_wrap(~threshold) +
+  labs(y = "Proportion of flights late", title = "Proportion of Delta flights arriving late by origin") +
+  theme_minimal()
+print(p4)
+
+```

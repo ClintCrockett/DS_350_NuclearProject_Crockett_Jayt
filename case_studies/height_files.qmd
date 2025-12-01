@@ -1,0 +1,120 @@
+---
+title: "height_flies"
+format: html
+---
+
+```{r}
+pacman::p_load(readr, tidyverse, haven, foreign, pander)
+
+```
+
+```{r}
+bavaria_19th <- read_dta("data/germanconscr.dta")
+
+bls <- read_dta("data/germanprison.dta") %>%
+mutate(birth_year = 1950) # placeholder if needed
+
+soldiers <- read.dbf("data/temp/B6090.DBF", as.is = TRUE)
+
+bls_height <- read_csv("https://raw.githubusercontent.com/hadley/r4ds/main/data/heights.csv") %>%
+mutate(birth_year = 1950) # mid-20th century
+
+wisconsin <- read_sav("data/main05022005.sav")
+```
+
+```{r}
+head(soldiers)
+str(soldiers)
+```
+
+```{r}
+soldiers_clean <- soldiers %>%
+mutate(
+birth_year = GEBJZ, # Column with birth year
+height.cm = CMETER,
+height.in = CMETER / 2.54,
+study = "18th Century German Soldiers"
+) %>%
+select(birth_year, height.in, height.cm, study)
+
+```
+
+```{r}
+bavaria_clean <- bavaria_19th %>%
+mutate(
+birth_year = bdec,
+height.cm = height,
+height.in = height / 2.54,
+study = "Bavarian Conscripts 19th Century"
+) %>%
+select(birth_year, height.in, height.cm, study)
+
+```
+
+```{r}
+bls_clean <- bls_height %>%
+filter(sex == "M") %>% # Keep only males
+mutate(
+height.cm = height,
+height.in = height / 2.54,
+study = "Bureau of Labor Statistics"
+) %>%
+select(birth_year, height.in, height.cm, study)
+```
+
+```{r}
+#wisconsin_clean <- wisconsin %>%
+  #mutate(
+    #height.cm = CMETER,               # this is the actual column
+    #height.in = CMETER / 2.54,
+   # study = "Wisconsin Survey",
+    #birth_year = 1950                 # assume mid-20th century if unknown
+#  ) %>%
+#  select(birth_year, height.in, height.cm, study)
+
+
+library(dplyr)
+
+# wisconsin_clean <- wisconsin %>%
+#   rowwise() %>%
+#   mutate(height.cm = 
+# mean(c_across(RT1A1:RT1I3), na.rm = TRUE)) %>%
+#  ungroup()
+
+
+# Look at numeric columns and their ranges
+num_cols <- sapply(wisconsin, is.numeric)
+wisconsin_num <- wisconsin[, num_cols]
+
+# Check min and max for each numeric column
+ranges <- sapply(wisconsin_num, function(x) range(x, na.rm = TRUE))
+ranges_df <- as.data.frame(t(ranges))
+colnames(ranges_df) <- c("min", "max")
+ranges_df$variable <- rownames(ranges_df)
+ranges_df[order(ranges_df$min), ]
+
+```
+
+```{r}
+all_heights <- bind_rows(
+soldiers_clean,
+bavaria_clean,
+bls_clean,
+# wisconsin_clean
+)
+
+```
+
+```{r}
+ggplot(all_heights, aes(x = study, y = height.cm)) +
+geom_jitter(width = 0.2, alpha = 0.5) +
+geom_boxplot(alpha = 0.3, outlier.shape = NA) +
+labs(
+title = "Distribution of Heights Across Studies",
+x = "Study",
+y = "Height (cm)"
+) +
+theme_minimal() +
+theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
