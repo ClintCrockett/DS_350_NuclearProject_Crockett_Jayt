@@ -4,9 +4,57 @@ format: html
 ---
 
 ```{r message=FALSE, warning=FALSE}
-library(tidyverse) 
-library(readr) 
-library(janitor)
-library(pander)
+pacman::p_load(tidyverse, readr, janitor, pander)
+
+stock <- read_csv("../../weeks/w04/data/Dart_Expert_Dow_6month_anova.csv")
+
 
 ```
+
+The contestant_period column is not “tidy” we want to create a month_end and a year_end column from the information it contains.
+
+```{r}
+stock <- stock %>% 
+  separate(contest_period, into = c("month_start", "end_part"), sep = "-") %>% 
+  mutate(
+    month_end = str_sub(end_part, 1, -5),
+    year_end = str_sub(end_part, -4)
+)
+
+```
+
+Save your “tidy” data as an .rds object. (as an optional challenge, see if you can read in the saved file!)
+
+```{r}
+stock_rsd <- saveRDS(stock, "stock.rsd")
+stock_rsd <- readRDS("stock.rsd")
+
+head(stock_rsd)
+```
+
+Use code to create a table of the DJIA returns that matches the table shown below (apply pivot_wider() to the data). Pay attention to detail.
+
+```{r}
+stock_order <- stock_rsd %>%
+  mutate(
+    month_end = factor(
+      month_end,
+      levels = c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
+    )
+  ) %>% 
+  filter(variable == "DJIA") %>% 
+  select(month_end, year_end, value) %>%
+  pivot_wider(
+    names_from = year_end,
+    values_from = value
+  ) %>%
+  arrange(month_end) %>%
+  mutate(across(
+    .cols = -month_end,
+    .fns = ~ ifelse(is.na(.x), "-", .x)
+  ))
+
+pander(stock_order)
+
+```
+
