@@ -10,5 +10,21 @@ Here’s an overview …
 ------------------------------------------------------------------------
 
 ::: project-buttons
-<a class="btn btn-primary m-1" href="./case_studies/gapminder1.qmd">Case Study 1</a> <a class="btn btn-primary m-1" href="./case_studies/gapminder2.qmd">Case Study 2</a>
+<a class="btn btn-primary m-1" href="./case_studies/gapminder1.qmd">Gapminder Part 1</a>
+
+<a class="btn btn-primary m-1" href="./case_studies/gapminder2.qmd">Gapminder Part 2</a>
+
+<a class="btn btn-primary m-1" href="./case_studies/wings_to_fly.qmd">Wings to Fly</a>
+
+<a class="btn btn-primary m-1" href="./case_studies/height_files.qmd">Combining Height Files</a>
+
+<a class="btn btn-primary m-1" href="./case_studies/world_data.qmd">World Data Investigations</a>
+
+<a class="btn btn-primary m-1" href="./case_studies/ballgame.qmd">Take Me Out to the Ballgame</a>
+
+<a class="btn btn-primary m-1" href="./case_studies/leaflet_layers.qmd">Leaflet Layers</a>
+
+<a class="btn btn-primary m-1" href="./case_studies/savior_names.qmd">Distance Between Savior Names, Part 1</a>
+
+<a class="btn btn-primary m-1" href="./case_studies/savior_name_2.qmd">Distance Between Savior Names, Part 1</a>
 :::

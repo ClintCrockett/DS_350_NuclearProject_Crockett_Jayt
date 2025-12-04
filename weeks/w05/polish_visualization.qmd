@@ -3,3 +3,149 @@ title: "polish_visualization"
 format: html
 ---
 
+## Background
+
+Periscopic created a moving interactive visualization of U.S. gun deaths where each ribbon represents a life that ended early. My original analysis summarized the same data, and my client now wants a version that looks a little cleaner for a beginner-level presentation. I kept the structure from the first draft but nudged the plots with a consistent theme and clearer labels.
+
+## Research Question
+
+Which combinations of intent, age, month, and gender experienced the most gun deaths in the data? The answer helps schedule different prevention messages during the year.
+
+## Data Loading
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+
+# Download FiveThirtyEight gun data
+gun_data <- read_csv(
+  "https://raw.githubusercontent.com/fivethirtyeight/guns-data/master/full_data.csv",
+  show_col_types = FALSE
+)
+
+new_theme <- theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    panel.grid.minor = element_blank(),
+    axis.text.x = element_text(angle = 25, hjust = 1)
+  )
+```
+
+The dataset has more than 33,000 rows with age, gender, race, month, intent, and location fields. That gives us many options to filter or group the statistics.
+
+## Visualization 1 — Gun Deaths by Intent
+
+```{r}
+gun_data %>%
+  count(intent) %>%
+  ggplot(aes(x = reorder(intent, -n), y = n, fill = intent)) +
+  geom_col(show.legend = FALSE) +
+  labs(
+    title = "Gun Deaths by Intent",
+    x = "Intent",
+    y = "Number of Deaths"
+  ) +
+  new_theme
+```
+
+Suicides clearly make up the majority of deaths. The theme simply bolds the title and angles the axis labels so that the bar names are easier to read on a slide.
+
+## Visualization 2 — Gun Deaths by Month
+
+```{r}
+gun_data %>%
+  mutate(month = factor(month, levels = month.abb)) %>%
+  count(month) %>%
+  drop_na(month) %>%
+  ggplot(aes(x = month, y = n, group = 1)) +
+  geom_line(color = "steelblue") +
+  geom_point(color = "steelblue", size = 2) +
+  labs(
+    title = "Seasonal Pattern of Gun Deaths",
+    x = "Month",
+    y = "Number of Deaths"
+  ) +
+  new_theme
+```
+
+Counts creep up during the summer months. That small bump is a natural place to schedule awareness campaigns that focus on conflict resolution and safe storage.
+
+## Visualization 3 — Gun Deaths by Age Group
+
+```{r}
+gun_data %>%
+  mutate(
+    age_group = cut(
+      age,
+      breaks = c(0, 20, 40, 60, 80, 100),
+      labels = c("0–19", "20–39", "40–59", "60–79", "80+"),
+      right = FALSE
+    )
+  ) %>%
+  count(age_group) %>%
+  drop_na(age_group) %>%
+  ggplot(aes(x = age_group, y = n, fill = age_group)) +
+  geom_col(show.legend = FALSE) +
+  labs(
+    title = "Gun Deaths by Age Group",
+    x = "Age Group",
+    y = "Number of Deaths"
+  ) +
+  new_theme
+```
+
+People between 20 and 59 years old account for most deaths. Highlighting this range makes it simple to describe a priority audience.
+
+## Visualization 4 — Gun Deaths by Gender and Intent
+
+```{r}
+gun_data %>%
+  count(sex, intent) %>%
+  drop_na(sex) %>%
+  ggplot(aes(x = sex, y = n, fill = intent)) +
+  geom_col(position = "dodge") +
+  labs(
+    title = "Gender Differences by Intent",
+    x = "Gender",
+    y = "Number of Deaths",
+    fill = "Intent"
+  ) +
+  new_theme
+```
+
+Males account for most deaths overall, especially suicides. Females have fewer total deaths but a relatively higher share of homicides. That information helps the client tailor messages for each audience.
+
+## Conclusion
+
+The refreshed graphics stay close to the original assignment but use a consistent minimalist theme to support conference slides. They show that suicides dominate the data, summer months are slightly higher, adults aged 20–59 face the greatest risk, and male suicide prevention should be a major talking point.
+
+## Book Exercises 28.3.1
+
+I completed two short annotation exercises from the book section to practice labeling data.
+
+### Exercise 1
+
+```{r}
+best_car <- mpg %>% slice_max(hwy, n = 1, with_ties = FALSE)
+
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(alpha = 0.4) +
+  annotate(
+    "label",
+    x = best_car$displ,
+    y = best_car$hwy,
+    label = paste(best_car$manufacturer, best_car$model)
+  ) +
+  labs(title = "Highlighting the Best Highway MPG") +
+  new_theme
+```
+
+### Exercise 2
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(alpha = 0.4) +
+  annotate("rect", xmin = 5, xmax = 7, ymin = 10, ymax = 20, alpha = 0.1, fill = "red") +
+  annotate("text", x = 6, y = 22, label = "Large engines\nlow MPG") +
+  labs(title = "Marking a Low-Efficiency Zone") +
+  new_theme
+```
