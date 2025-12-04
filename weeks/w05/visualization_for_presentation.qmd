@@ -2,3 +2,109 @@
 title: "our_world_in_data"
 format: html
 ---
+
+```{r message=FALSE, warning=FALSE}
+pacman::p_load(readr, tidyverse, pander, ggrepel)
+
+fruit <- read_csv("../../weeks/w05/data/fruit.csv")
+fruit <- fruit %>% 
+  rename(
+    kilo = "Fruit | 00002919 || Food available for consumption | 0645pc || kilograms per year per capita",
+    gdp = "GDP per capita, PPP (constant 2021 international $)",
+    regions = "World regions according to OWID" 
+  )
+```
+
+### Fruit consumption vs. GDP per capita, 2022
+
+Average per capita fruit supply, measured in kilograms per year versus gross domestic product (GDP) per capita, adjusted for inflation and differences in living costs between countries.
+
+```{r}
+ggplot(fruit, aes(x = gdp, y = kilo, color = regions)) +
+  geom_point(size = 3, shape = 21, stroke = 1, fill = "white") +
+  geom_text_repel(aes(label = Entity), size = 3, max.overlaps = 20) +
+    scale_x_log10(labels = scales::dollar_format(prefix = "$", big.mark = ",")) +
+    scale_y_continuous(labels = function(x) paste0(x, " kg")) +
+  scale_color_manual(
+    values = c(
+      "North America" = "#a2559c",
+      "South America" = "#0b847e",
+      "Africa" = "#4c6a9d",
+      "Europe" = "#e56e5a",
+      "Asia" = "#38aabb",
+      "Oceania" = "#883039"
+    )
+  ) +
+    labs(
+    title = "Fruit Supply per Person vs. GDP per Capita",
+    x = "GDP per capita (log scale)",
+    y = "Fruit supply per person (kg per year)",
+    color = "Region"
+  ) +
+  theme_minimal(base_size = 13) 
+
+```
+
+```{r}
+countries_to_highlight <- c("United States", "Ecuador", "Poland")
+
+ggplot(fruit, aes(x = gdp, y = kilo)) +
+  geom_point(
+    aes(color = ifelse(Entity %in% countries_to_highlight, "highlight", "other")),
+    size = 3, shape = 21, stroke = 1, fill = "white", alpha = 0.6
+  ) +
+  geom_text_repel(
+    data = fruit %>% filter(Entity %in% countries_to_highlight),
+    aes(label = Entity),
+    size = 4,
+    color = "red"
+  ) +
+  scale_color_manual(
+    values = c("highlight" = "red", "other" = "gray70"),
+    guide = "none"
+  ) +
+  scale_x_log10(labels = scales::dollar_format()) +
+  scale_y_continuous(labels = ~paste0(.x, " kg")) +
+  labs(
+    title = "Highlighting Selected Countries: GDP vs Fruit Supply",
+    subtitle = "United States, Ecuador, and Poland shown in red",
+    x = "GDP per capita (log scale)",
+    y = "Fruit supply per person (kg/year)"
+  ) +
+  theme_minimal(base_size = 13)
+
+```
+
+In this task I learned how to use geom_text_repel() from the ggrepel package, which keeps labels from overlapping and makes scatterplots much cleaner. I used it to highlight three countries—United States, Ecuador, and Poland—while fading all the others into gray. This made the comparisons stand out clearly: the U.S. has high GDP but moderate fruit supply, Poland falls in the middle, and Ecuador has low GDP but surprisingly strong fruit supply. Highlighting these specific points helped the graph tell a clearer story than if all the countries were shown equally.
+
+```{r}
+continent_to_highlight <- "Europe"
+
+ggplot(fruit, aes(x = gdp, y = kilo)) +
+  geom_point(
+    aes(color = ifelse(regions == continent_to_highlight, "highlight", "other")),
+    size = 3, shape = 21, stroke = 1, fill = "white", alpha = 0.7
+  ) +
+  geom_text_repel(
+    data = fruit %>% filter(regions == continent_to_highlight),
+    aes(label = Entity),
+    size = 3.5,
+    color = "#e56e5a"
+  ) +
+  scale_color_manual(
+    values = c("highlight" = "#e56e5a", "other" = "gray80"),
+    guide = "none"
+  ) +
+  scale_x_log10(labels = scales::dollar_format()) +
+  scale_y_continuous(labels = ~paste0(.x, " kg")) +
+  labs(
+    title = "Countries in Europe Highlighted",
+    subtitle = "European countries shown in red-orange; others muted",
+    x = "GDP per capita (log scale)",
+    y = "Fruit supply per person (kg/year)"
+  ) +
+  theme_minimal(base_size = 13)
+
+```
+
+This plot highlights all the countries in Europe while muting the rest of the world. Doing this makes it easy to compare European nations to each other without the distraction of the hundreds of dots in the full dataset. Most European countries cluster together with relatively high GDP and moderately high fruit consumption. Highlighting a single continent helps reveal regional patterns that disappear when every country is shown at the same visual weight.

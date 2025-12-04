@@ -14,8 +14,6 @@ gun_data <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/guns-dat
 ## head(gun_data)
 ```
 
-
-
 ```{r}
 gun_data %>%
   count(intent) %>%
@@ -36,10 +34,9 @@ gun_data %>%
   theme(axis.text.x = element_text(angle = 20, hjust = 1))
 ```
 
-### Interpretation:
+### Intent Interpretation:
 
 This graph makes the story immediately clear: suicide is the leading cause of gun deaths in 2018 by a huge margin. The red bar for suicides dwarfs every other category, with more than 60,000 deaths. Homicide is the second largest category but is still far behind, while accidental and undetermined gun deaths are extremely small in comparison. If we are trying to understand the primary driver behind gun mortality in the U.S., this chart shows that the conversation has to include mental health, crisis intervention, and suicide prevention—not just violent crime.
-
 
 ```{r}
 suicides_monthly <- gun_data %>%
@@ -64,7 +61,7 @@ gun_data %>%
 
 ```
 
-### Interpretation:
+### Total vs Suicide Interpretation:
 
 The monthly trend reinforces the earlier finding. Total gun deaths move up and down slightly throughout the year, peaking in the summer, but suicides stay consistently high every single month. The red suicide line tracks closely underneath the blue total line, showing that suicides make up a massive portion of gun deaths no matter the season. This means suicide prevention should not be seasonal; it's a year-round issue. Even when total gun deaths drop, suicide deaths remain steady, demonstrating their large and persistent impact.
 
@@ -91,10 +88,9 @@ ggplot() +
   theme_minimal()
 ```
 
-### Interpretation:
+### Age Death Interpretation:
 
 The age group chart adds important context. The gray bars represent total gun deaths within each age group, while the red sections show how many of those deaths were suicides. Suicide is a major contributor in every age range, especially for adults aged 20-39 and 40-59, where the red portion dominates the bar. Even in older groups, suicide represents a big chunk of deaths. This breakdown shows that suicide is not just a young-person issue or an old-person issue—it affects a wide range of adults and is a major source of gun mortality across most of the lifespan.
-
 
 ```{r}
 
@@ -117,10 +113,9 @@ fill = "Intent") +
 theme_minimal()
 ```
 
-### Interpretation:
+### Gender Interpretation:
 
 Gender patterns reveal another important side of the story. Men experience far more gun deaths than women. Most of those deaths among men are suicides, shown here in red. Women experience fewer gun deaths overall, but the distribution of causes differs: homicides make up a larger share for females, while suicides dominate for males. This suggests that suicide prevention efforts need to be especially targeted toward men, who are at the highest risk of dying by suicide with a firearm.
-
 
 ### Suicide is the leading cause of gun deaths in the United States.
 
