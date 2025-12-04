@@ -152,9 +152,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="nav-link" href="../../project_page.html">Projects</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../case_studies/gapminder1.html">Case Study</a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="../../task_manager.html">Tasks</a>
   </li>  
 </ul>
@@ -189,7 +186,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../index.html" class="sidebar-item-text sidebar-link">DS350 Nuclear Project</a>
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">Home Page</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../case_studies.html" class="sidebar-item-text sidebar-link">Case Study</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -266,18 +268,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a></li>
-  <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question">Research Question</a></li>
-  <li><a href="#data-loading" id="toc-data-loading" class="nav-link" data-scroll-target="#data-loading">Data Loading</a></li>
-  <li><a href="#visualization-1-gun-deaths-by-intent" id="toc-visualization-1-gun-deaths-by-intent" class="nav-link" data-scroll-target="#visualization-1-gun-deaths-by-intent">Visualization 1 — Gun Deaths by Intent</a></li>
-  <li><a href="#visualization-2-gun-deaths-by-month" id="toc-visualization-2-gun-deaths-by-month" class="nav-link" data-scroll-target="#visualization-2-gun-deaths-by-month">Visualization 2 — Gun Deaths by Month</a></li>
-  <li><a href="#visualization-3-gun-deaths-by-age-group" id="toc-visualization-3-gun-deaths-by-age-group" class="nav-link" data-scroll-target="#visualization-3-gun-deaths-by-age-group">Visualization 3 — Gun Deaths by Age Group</a></li>
-  <li><a href="#visualization-4-gun-deaths-by-gender-and-intent" id="toc-visualization-4-gun-deaths-by-gender-and-intent" class="nav-link" data-scroll-target="#visualization-4-gun-deaths-by-gender-and-intent">Visualization 4 — Gun Deaths by Gender and Intent</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#book-exercises-28.3.1" id="toc-book-exercises-28.3.1" class="nav-link" data-scroll-target="#book-exercises-28.3.1">Book Exercises 28.3.1</a>
+  <li><a href="#suicide-is-the-leading-cause-of-gun-deaths-in-the-united-states." id="toc-suicide-is-the-leading-cause-of-gun-deaths-in-the-united-states." class="nav-link active" data-scroll-target="#suicide-is-the-leading-cause-of-gun-deaths-in-the-united-states.">Suicide is the leading cause of gun deaths in the United States.</a>
   <ul class="collapse">
-  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
-  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation:</a></li>
+  <li><a href="#interpretation-1" id="toc-interpretation-1" class="nav-link" data-scroll-target="#interpretation-1">Interpretation:</a></li>
+  <li><a href="#interpretation-2" id="toc-interpretation-2" class="nav-link" data-scroll-target="#interpretation-2">Interpretation:</a></li>
+  <li><a href="#interpretation-3" id="toc-interpretation-3" class="nav-link" data-scroll-target="#interpretation-3">Interpretation:</a></li>
+  <li><a href="#suicide-is-the-leading-cause-of-gun-deaths-in-the-united-states.-1" id="toc-suicide-is-the-leading-cause-of-gun-deaths-in-the-united-states.-1" class="nav-link" data-scroll-target="#suicide-is-the-leading-cause-of-gun-deaths-in-the-united-states.-1">Suicide is the leading cause of gun deaths in the United States.</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -301,185 +298,143 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="background" class="level2">
-<h2 class="anchored" data-anchor-id="background">Background</h2>
-<p>Periscopic created a moving interactive visualization of U.S. gun deaths where each ribbon represents a life that ended early. My original analysis summarized the same data, and my client now wants a version that looks a little cleaner for a beginner-level presentation. I kept the structure from the first draft but nudged the plots with a consistent theme and clearer labels.</p>
-</section>
-<section id="research-question" class="level2">
-<h2 class="anchored" data-anchor-id="research-question">Research Question</h2>
-<p>Which combinations of intent, age, month, and gender experienced the most gun deaths in the data? The answer helps schedule different prevention messages during the year.</p>
-</section>
-<section id="data-loading" class="level2">
-<h2 class="anchored" data-anchor-id="data-loading">Data Loading</h2>
+<section id="suicide-is-the-leading-cause-of-gun-deaths-in-the-united-states." class="level2">
+<h2 class="anchored" data-anchor-id="suicide-is-the-leading-cause-of-gun-deaths-in-the-united-states.">Suicide is the leading cause of gun deaths in the United States.</h2>
 <div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># Download FiveThirtyEight gun data</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>gun_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="st">"https://raw.githubusercontent.com/fivethirtyeight/guns-data/master/full_data.csv"</span>,</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>)</span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a>new_theme <span class="ot">&lt;-</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>  <span class="fu">theme</span>(</span>
-<span id="cb1-11"><a href="#cb1-11"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb1-12"><a href="#cb1-12"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb1-13"><a href="#cb1-13"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">25</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
-<span id="cb1-14"><a href="#cb1-14"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a>gun_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/fivethirtyeight/guns-data/master/full_data.csv"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="do">## glimpse(gun_data)</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="do">## head(gun_data)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>The dataset has more than 33,000 rows with age, gender, race, month, intent, and location fields. That gives us many options to filter or group the statistics.</p>
-</section>
-<section id="visualization-1-gun-deaths-by-intent" class="level2">
-<h2 class="anchored" data-anchor-id="visualization-1-gun-deaths-by-intent">Visualization 1 — Gun Deaths by Intent</h2>
 <div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>gun_data <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">count</span>(intent) <span class="sc">%&gt;%</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(intent, <span class="sc">-</span>n), <span class="at">y =</span> n, <span class="at">fill =</span> intent)) <span class="sc">+</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>  <span class="fu">labs</span>(</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    <span class="at">title =</span> <span class="st">"Gun Deaths by Intent"</span>,</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="at">x =</span> <span class="st">"Intent"</span>,</span>
-<span id="cb2-8"><a href="#cb2-8"></a>    <span class="at">y =</span> <span class="st">"Number of Deaths"</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>  ) <span class="sc">+</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>  new_theme</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="st">"Suicide"</span> <span class="ot">=</span> <span class="st">"red"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="st">"Homicide"</span> <span class="ot">=</span> <span class="st">"gray80"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8"></a>    <span class="st">"Accidental"</span> <span class="ot">=</span> <span class="st">"gray80"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="st">"Undetermined"</span> <span class="ot">=</span> <span class="st">"gray80"</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>    )</span>
+<span id="cb2-11"><a href="#cb2-11"></a>  ) <span class="sc">+</span> </span>
+<span id="cb2-12"><a href="#cb2-12"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Gun Deaths by Intent (2018)"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14"></a>       <span class="at">x =</span> <span class="st">"Intent"</span>,</span>
+<span id="cb2-15"><a href="#cb2-15"></a>       <span class="at">y =</span> <span class="st">"Number of Deaths"</span>) <span class="sc">+</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">20</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="polish_visualization_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Suicides clearly make up the majority of deaths. The theme simply bolds the title and angles the axis labels so that the bar names are easier to read on a slide.</p>
-</section>
-<section id="visualization-2-gun-deaths-by-month" class="level2">
-<h2 class="anchored" data-anchor-id="visualization-2-gun-deaths-by-month">Visualization 2 — Gun Deaths by Month</h2>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">Interpretation:</h3>
+<p>This graph makes the story immediately clear: suicide is the leading cause of gun deaths in 2018 by a huge margin. The red bar for suicides dwarfs every other category, with more than 60,000 deaths. Homicide is the second largest category but is still far behind, while accidental and undetermined gun deaths are extremely small in comparison. If we are trying to understand the primary driver behind gun mortality in the U.S., this chart shows that the conversation has to include mental health, crisis intervention, and suicide prevention—not just violent crime.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>gun_data <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">factor</span>(month, <span class="at">levels =</span> month.abb)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">count</span>(month) <span class="sc">%&gt;%</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">drop_na</span>(month) <span class="sc">%&gt;%</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> n, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a>  <span class="fu">labs</span>(</span>
-<span id="cb3-9"><a href="#cb3-9"></a>    <span class="at">title =</span> <span class="st">"Seasonal Pattern of Gun Deaths"</span>,</span>
-<span id="cb3-10"><a href="#cb3-10"></a>    <span class="at">x =</span> <span class="st">"Month"</span>,</span>
-<span id="cb3-11"><a href="#cb3-11"></a>    <span class="at">y =</span> <span class="st">"Number of Deaths"</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a>  ) <span class="sc">+</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>  new_theme</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>suicides_monthly <span class="ot">&lt;-</span> gun_data <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">filter</span>(intent <span class="sc">==</span> <span class="st">"Suicide"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">count</span>(month)</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a>gun_data <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="fu">count</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(month, n, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> suicides_monthly, <span class="fu">aes</span>(month, n), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> suicides_monthly, <span class="fu">aes</span>(month, n), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-13"><a href="#cb3-13"></a>    <span class="at">title =</span> <span class="st">"Total Gun Deaths vs. Suicide Deaths by Month"</span>,</span>
+<span id="cb3-14"><a href="#cb3-14"></a>    <span class="at">subtitle =</span> <span class="st">"Red = suicides; Blue = total gun deaths"</span>,</span>
+<span id="cb3-15"><a href="#cb3-15"></a>    <span class="at">x =</span> <span class="st">"Month"</span>,</span>
+<span id="cb3-16"><a href="#cb3-16"></a>    <span class="at">y =</span> <span class="st">"Number of Deaths"</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="polish_visualization_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Counts creep up during the summer months. That small bump is a natural place to schedule awareness campaigns that focus on conflict resolution and safe storage.</p>
 </section>
-<section id="visualization-3-gun-deaths-by-age-group" class="level2">
-<h2 class="anchored" data-anchor-id="visualization-3-gun-deaths-by-age-group">Visualization 3 — Gun Deaths by Age Group</h2>
+<section id="interpretation-1" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-1">Interpretation:</h3>
+<p>The monthly trend reinforces the earlier finding. Total gun deaths move up and down slightly throughout the year, peaking in the summer, but suicides stay consistently high every single month. The red suicide line tracks closely underneath the blue total line, showing that suicides make up a massive portion of gun deaths no matter the season. This means suicide prevention should not be seasonal; it’s a year-round issue. Even when total gun deaths drop, suicide deaths remain steady, demonstrating their large and persistent impact.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>gun_data <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb4-3"><a href="#cb4-3"></a>    <span class="at">age_group =</span> <span class="fu">cut</span>(</span>
-<span id="cb4-4"><a href="#cb4-4"></a>      age,</span>
-<span id="cb4-5"><a href="#cb4-5"></a>      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">80</span>, <span class="dv">100</span>),</span>
-<span id="cb4-6"><a href="#cb4-6"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"0–19"</span>, <span class="st">"20–39"</span>, <span class="st">"40–59"</span>, <span class="st">"60–79"</span>, <span class="st">"80+"</span>),</span>
-<span id="cb4-7"><a href="#cb4-7"></a>      <span class="at">right =</span> <span class="cn">FALSE</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a>    )</span>
-<span id="cb4-9"><a href="#cb4-9"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a>  <span class="fu">count</span>(age_group) <span class="sc">%&gt;%</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a>  <span class="fu">drop_na</span>(age_group) <span class="sc">%&gt;%</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> n, <span class="at">fill =</span> age_group)) <span class="sc">+</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>age_data <span class="ot">&lt;-</span> gun_data <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">mutate</span>(<span class="at">age_group =</span> <span class="fu">cut</span>(age, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">80</span>, <span class="dv">100</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"0–19"</span>, <span class="st">"20–39"</span>, <span class="st">"40–59"</span>, <span class="st">"60–79"</span>, <span class="st">"80+"</span>)))</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a>total_by_age <span class="ot">&lt;-</span> age_data <span class="sc">%&gt;%</span> </span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="fu">count</span>(age_group)</span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a>suicides_by_age <span class="ot">&lt;-</span> age_data <span class="sc">%&gt;%</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>  <span class="fu">filter</span>(intent <span class="sc">==</span> <span class="st">"Suicide"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>  <span class="fu">count</span>(age_group)</span>
+<span id="cb4-10"><a href="#cb4-10"></a></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>  <span class="fu">geom_col</span>(<span class="at">data =</span> total_by_age, <span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> n), <span class="at">fill =</span> <span class="st">"gray80"</span>) <span class="sc">+</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a>  <span class="fu">geom_col</span>(<span class="at">data =</span> suicides_by_age, <span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> n), <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
 <span id="cb4-14"><a href="#cb4-14"></a>  <span class="fu">labs</span>(</span>
-<span id="cb4-15"><a href="#cb4-15"></a>    <span class="at">title =</span> <span class="st">"Gun Deaths by Age Group"</span>,</span>
-<span id="cb4-16"><a href="#cb4-16"></a>    <span class="at">x =</span> <span class="st">"Age Group"</span>,</span>
-<span id="cb4-17"><a href="#cb4-17"></a>    <span class="at">y =</span> <span class="st">"Number of Deaths"</span></span>
-<span id="cb4-18"><a href="#cb4-18"></a>  ) <span class="sc">+</span></span>
-<span id="cb4-19"><a href="#cb4-19"></a>  new_theme</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-15"><a href="#cb4-15"></a>    <span class="at">title =</span> <span class="st">"Gun Deaths by Age Group (2018)"</span>,</span>
+<span id="cb4-16"><a href="#cb4-16"></a>    <span class="at">subtitle =</span> <span class="st">"Red bars show suicide deaths within each age group"</span>,</span>
+<span id="cb4-17"><a href="#cb4-17"></a>    <span class="at">x =</span> <span class="st">"Age Group"</span>,</span>
+<span id="cb4-18"><a href="#cb4-18"></a>    <span class="at">y =</span> <span class="st">"Number of Deaths"</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="polish_visualization_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>People between 20 and 59 years old account for most deaths. Highlighting this range makes it simple to describe a priority audience.</p>
 </section>
-<section id="visualization-4-gun-deaths-by-gender-and-intent" class="level2">
-<h2 class="anchored" data-anchor-id="visualization-4-gun-deaths-by-gender-and-intent">Visualization 4 — Gun Deaths by Gender and Intent</h2>
+<section id="interpretation-2" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-2">Interpretation:</h3>
+<p>The age group chart adds important context. The gray bars represent total gun deaths within each age group, while the red sections show how many of those deaths were suicides. Suicide is a major contributor in every age range, especially for adults aged 20-39 and 40-59, where the red portion dominates the bar. Even in older groups, suicide represents a big chunk of deaths. This breakdown shows that suicide is not just a young-person issue or an old-person issue—it affects a wide range of adults and is a major source of gun mortality across most of the lifespan.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>gun_data <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">count</span>(sex, intent) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">drop_na</span>(sex) <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> n, <span class="at">fill =</span> intent)) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-7"><a href="#cb5-7"></a>    <span class="at">title =</span> <span class="st">"Gender Differences by Intent"</span>,</span>
-<span id="cb5-8"><a href="#cb5-8"></a>    <span class="at">x =</span> <span class="st">"Gender"</span>,</span>
-<span id="cb5-9"><a href="#cb5-9"></a>    <span class="at">y =</span> <span class="st">"Number of Deaths"</span>,</span>
-<span id="cb5-10"><a href="#cb5-10"></a>    <span class="at">fill =</span> <span class="st">"Intent"</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a>  ) <span class="sc">+</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a>  new_theme</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">count</span>(sex, intent) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> n, <span class="at">fill =</span> intent)) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Gun Deaths by Gender and Intent (2018)"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="at">x =</span> <span class="st">"Gender"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="at">y =</span> <span class="st">"Number of Deaths"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="at">fill =</span> <span class="st">"Intent"</span>) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb5-10"><a href="#cb5-10"></a>  <span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb5-11"><a href="#cb5-11"></a>    <span class="st">"Suicide"</span> <span class="ot">=</span> <span class="st">"red"</span>,</span>
+<span id="cb5-12"><a href="#cb5-12"></a>    <span class="st">"Homicide"</span> <span class="ot">=</span> <span class="st">"#6f7c52"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13"></a>    <span class="st">"Accidental"</span> <span class="ot">=</span> <span class="st">"#70898b"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14"></a>    <span class="st">"Undetermined"</span> <span class="ot">=</span> <span class="st">"#8e7f97"</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>    )</span>
+<span id="cb5-16"><a href="#cb5-16"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="polish_visualization_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Males account for most deaths overall, especially suicides. Females have fewer total deaths but a relatively higher share of homicides. That information helps the client tailor messages for each audience.</p>
 </section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>The refreshed graphics stay close to the original assignment but use a consistent minimalist theme to support conference slides. They show that suicides dominate the data, summer months are slightly higher, adults aged 20–59 face the greatest risk, and male suicide prevention should be a major talking point.</p>
+<section id="interpretation-3" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-3">Interpretation:</h3>
+<p>Gender patterns reveal another important side of the story. Men experience far more gun deaths than women. Most of those deaths among men are suicides, shown here in red. Women experience fewer gun deaths overall, but the distribution of causes differs: homicides make up a larger share for females, while suicides dominate for males. This suggests that suicide prevention efforts need to be especially targeted toward men, who are at the highest risk of dying by suicide with a firearm.</p>
 </section>
-<section id="book-exercises-28.3.1" class="level2">
-<h2 class="anchored" data-anchor-id="book-exercises-28.3.1">Book Exercises 28.3.1</h2>
-<p>I completed two short annotation exercises from the book section to practice labeling data.</p>
-<section id="exercise-1" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1">Exercise 1</h3>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>best_car <span class="ot">&lt;-</span> mpg <span class="sc">%&gt;%</span> <span class="fu">slice_max</span>(hwy, <span class="at">n =</span> <span class="dv">1</span>, <span class="at">with_ties =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">annotate</span>(</span>
-<span id="cb6-6"><a href="#cb6-6"></a>    <span class="st">"label"</span>,</span>
-<span id="cb6-7"><a href="#cb6-7"></a>    <span class="at">x =</span> best_car<span class="sc">$</span>displ,</span>
-<span id="cb6-8"><a href="#cb6-8"></a>    <span class="at">y =</span> best_car<span class="sc">$</span>hwy,</span>
-<span id="cb6-9"><a href="#cb6-9"></a>    <span class="at">label =</span> <span class="fu">paste</span>(best_car<span class="sc">$</span>manufacturer, best_car<span class="sc">$</span>model)</span>
-<span id="cb6-10"><a href="#cb6-10"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Highlighting the Best Highway MPG"</span>) <span class="sc">+</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a>  new_theme</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<p><img src="polish_visualization_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="exercise-2" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-2">Exercise 2</h3>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">annotate</span>(<span class="st">"rect"</span>, <span class="at">xmin =</span> <span class="dv">5</span>, <span class="at">xmax =</span> <span class="dv">7</span>, <span class="at">ymin =</span> <span class="dv">10</span>, <span class="at">ymax =</span> <span class="dv">20</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">6</span>, <span class="at">y =</span> <span class="dv">22</span>, <span class="at">label =</span> <span class="st">"Large engines</span><span class="sc">\n</span><span class="st">low MPG"</span>) <span class="sc">+</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Marking a Low-Efficiency Zone"</span>) <span class="sc">+</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>  new_theme</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<p><img src="polish_visualization_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
+<section id="suicide-is-the-leading-cause-of-gun-deaths-in-the-united-states.-1" class="level3">
+<h3 class="anchored" data-anchor-id="suicide-is-the-leading-cause-of-gun-deaths-in-the-united-states.-1">Suicide is the leading cause of gun deaths in the United States.</h3>
+<p>It shows up as the largest category overall, it stays high throughout the year, it accounts for a major share of deaths in nearly every age group, and it is the dominant cause among men.</p>
+<p>This means that any serious attempt to reduce gun deaths must go beyond crime-focused strategies and address mental health, access to crisis support, firearm storage practices, and suicide prevention at a national level.</p>
 
 
 </section>
