@@ -8,7 +8,7 @@ library(readxl)
 library(tidyverse)
 library(ggplot2)
 
-heights_raw <- read_excel("data/Height.xlsx", skip = 1)  # adjust skip as needed
+heights_raw <- read_excel("data/Height.xlsx", skip = 1)  
 
 heights_raw <- heights_raw %>%
   rename(code = 1, country = 2)
@@ -21,17 +21,17 @@ heights <- heights_raw %>%
   ) %>%
   filter(str_detect(year_decade, "^[0-9]+$")) %>%
   mutate(
-    height_cm = as.numeric(height_cm),       # make sure values are numeric
+    height_cm = as.numeric(height_cm),
     year_decade = as.numeric(year_decade),
     height_in = height_cm / 2.54
   ) %>%
-  filter(!is.na(height_cm))                  # remove rows with missing height
+  filter(!is.na(height_cm))
 
 ```
 
 ```{r}
 ggplot(heights, aes(x = year_decade, y = height_in, group = country)) +
-  geom_line(data = heights %>% filter(country != "Germany"), color = "grey80") + # all other countries muted
+  geom_line(data = heights %>% filter(country != "Germany"), color = "grey80") + 
   geom_line(data = heights %>% filter(country == "Germany"), color = "red", size = 1.2) + # Germany bold
   geom_point(data = heights %>% filter(country == "Germany"), color = "red", size = 2) +
   labs(

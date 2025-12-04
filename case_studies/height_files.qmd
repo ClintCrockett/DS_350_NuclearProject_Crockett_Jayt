@@ -8,113 +8,108 @@ pacman::p_load(readr, tidyverse, haven, foreign, pander)
 
 ```
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 bavaria_19th <- read_dta("data/germanconscr.dta")
 
-bls <- read_dta("data/germanprison.dta") %>%
-mutate(birth_year = 1950) # placeholder if needed
+bls <- read_dta("data/germanprison.dta") 
 
-soldiers <- read.dbf("data/temp/B6090.DBF", as.is = TRUE)
+soldiers <- read.dbf("../case_studies/data/B6090.DBF", as.is = TRUE)
 
-bls_height <- read_csv("https://raw.githubusercontent.com/hadley/r4ds/main/data/heights.csv") %>%
-mutate(birth_year = 1950) # mid-20th century
+Dart_Expert <- read_csv("../case_studies/data/Dart_Expert.csv")
+
+# bls_height <- read_csv("https://raw.githubusercontent.com/hadley/r4ds/main/data/heights.csv") %>%
+# mutate(birth_year = 1950) # mid-20th century
 
 wisconsin <- read_sav("data/main05022005.sav")
 ```
 
 ```{r}
-head(soldiers)
-str(soldiers)
-```
-
-```{r}
-soldiers_clean <- soldiers %>%
-mutate(
-birth_year = GEBJZ, # Column with birth year
-height.cm = CMETER,
-height.in = CMETER / 2.54,
-study = "18th Century German Soldiers"
-) %>%
-select(birth_year, height.in, height.cm, study)
-
+# head(soldiers)
+# str(soldiers)
 ```
 
 ```{r}
 bavaria_clean <- bavaria_19th %>%
 mutate(
-birth_year = bdec,
-height.cm = height,
-height.in = height / 2.54,
-study = "Bavarian Conscripts 19th Century"
+  birth_year = bdec,
+  height.cm = height,
+  height.in = height / 2.54,
+  study = "Bavarian Conscripts 19th Century"
 ) %>%
-select(birth_year, height.in, height.cm, study)
+  select(birth_year, height.cm, height.in, study)
 
 ```
 
 ```{r}
-bls_clean <- bls_height %>%
-filter(sex == "M") %>% # Keep only males
+bls_clean <- bls %>%
 mutate(
-height.cm = height,
-height.in = height / 2.54,
-study = "Bureau of Labor Statistics"
+  birth_year = bdec,
+  height.cm = height,
+  height.in = height / 2.54,
+  study = "Bureau of Labor Statistics"
 ) %>%
-select(birth_year, height.in, height.cm, study)
+  select(birth_year, height.cm, height.in, study)
 ```
 
 ```{r}
-#wisconsin_clean <- wisconsin %>%
-  #mutate(
-    #height.cm = CMETER,               # this is the actual column
-    #height.in = CMETER / 2.54,
-   # study = "Wisconsin Survey",
-    #birth_year = 1950                 # assume mid-20th century if unknown
-#  ) %>%
-#  select(birth_year, height.in, height.cm, study)
-
-
-library(dplyr)
-
-# wisconsin_clean <- wisconsin %>%
-#   rowwise() %>%
-#   mutate(height.cm = 
-# mean(c_across(RT1A1:RT1I3), na.rm = TRUE)) %>%
-#  ungroup()
-
-
-# Look at numeric columns and their ranges
-num_cols <- sapply(wisconsin, is.numeric)
-wisconsin_num <- wisconsin[, num_cols]
-
-# Check min and max for each numeric column
-ranges <- sapply(wisconsin_num, function(x) range(x, na.rm = TRUE))
-ranges_df <- as.data.frame(t(ranges))
-colnames(ranges_df) <- c("min", "max")
-ranges_df$variable <- rownames(ranges_df)
-ranges_df[order(ranges_df$min), ]
+soldiers_clean <- soldiers %>%
+mutate(
+  birth_year = GEBJZ, 
+  height.cm = CMETER,
+  height.in = CMETER / 2.54,
+  study = "18th Century German Soldiers"
+) %>%
+  select(birth_year, height.cm, height.in, study)
 
 ```
 
 ```{r}
-all_heights <- bind_rows(
-soldiers_clean,
-bavaria_clean,
-bls_clean,
-# wisconsin_clean
-)
 
+wisconsin_clean <- wisconsin %>%
+mutate(
+  birth_year = 18 + DOBY, 
+  height.cm = RT216F * 2.54,
+  height.in = RT216F,
+  study = "Wisconsin Survey"
+) %>% 
+  select(birth_year, height.cm, height.in, study)
 ```
 
 ```{r}
-ggplot(all_heights, aes(x = study, y = height.cm)) +
-geom_jitter(width = 0.2, alpha = 0.5) +
-geom_boxplot(alpha = 0.3, outlier.shape = NA) +
-labs(
-title = "Distribution of Heights Across Studies",
-x = "Study",
-y = "Height (cm)"
-) +
-theme_minimal() +
-theme(axis.text.x = element_text(angle = 45, hjust = 1))
+all_data <- bind_rows(
+  bavaria_clean,
+  bls_clean,
+  soldiers_clean,
+  wisconsin_clean
+) %>% 
+  filter(!is.na(birth_year)) %>%
+  filter(birth_year > 1700, height.in > 45, height.in < 85)
 
 ```
+
+```{r warning=FALSE}
+ggplot(all_data, aes(birth_year, height.in)) +
+  geom_point(alpha = 0.1) +
+  geom_smooth(method = "gam", formula = y ~ s(x, k = 3),   # chat gave me this to add in the line
+    se = FALSE,
+    color = "red",
+    linewidth = 1.2
+  ) +
+  labs(
+    title = "Trend in Male Height",
+    x = "Birth Year",
+    y = "Height (inches)"
+  ) +
+  theme_minimal(base_size = 14)
+
+  
+
+```
+
+### Interpretation and Conclusion
+
+To create my tidy dataset, I combined four separate historical height datasets—Bavarian conscripts, German soldiers, BLS prisoners, and the Wisconsin survey. Each source used different variable names and measurement units. I standardized everything into consistent columns for birth year, height in centimeters, height in inches, and a study label. After binding the datasets together, I removed rows with missing birth years and excluded impossible height values such as 0 inches, which indicated coding errors. I also filtered the data to include people born after 1700, resulting in a clean dataset focused on the primary historical window of interest. 
+
+Compared to the previous height project using the worldwide historical dataset, the story told here is very different. The global data showed a clear long-term increase in average human height over many decades and across many populations. However, the datasets in this assignment show almost no change. Instead of a smooth timeline, the birth years appear as isolated clusters—1850, 1860, 1870, and a few others—making the smoothed trend essentially flat. At first glance this seems to contradict the earlier finding, but the contradiction disappears once we recognize that these datasets cover only a narrow range of years and represent very specific subpopulations, not broad national averages. 
+
+Given this, I would respond to the claim that “humans are getting taller over time” by saying that the long-term trend is real, but my combined dataset here is not designed to show it. The global dataset demonstrates height increases over centuries, but the smaller, clustered datasets used in this task simply do not include the continuous historical coverage needed to reveal that pattern. My final conclusion is that humans have generally gotten taller over the long run, but based on the data in this assignment, we can only say that within the limited birth years represented here, height remained essentially unchanged.

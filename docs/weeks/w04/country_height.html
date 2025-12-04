@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="nav-link" href="../../project_page.html">Projects</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../case_studies/gapminder1.html">Case Study</a>
+    <a class="nav-link" href="../../case_studies.html">Case Study</a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../task_manager.html">Tasks</a>
@@ -189,7 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../index.html" class="sidebar-item-text sidebar-link">DS350 Nuclear Project</a>
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">Home Page</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -305,7 +305,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a>heights_raw <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/Height.xlsx"</span>, <span class="at">skip =</span> <span class="dv">1</span>)  <span class="co"># adjust skip as needed</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>heights_raw <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/Height.xlsx"</span>, <span class="at">skip =</span> <span class="dv">1</span>)  </span>
 <span id="cb3-4"><a href="#cb3-4"></a></span>
 <span id="cb3-5"><a href="#cb3-5"></a>heights_raw <span class="ot">&lt;-</span> heights_raw <span class="sc">%&gt;%</span></span>
 <span id="cb3-6"><a href="#cb3-6"></a>  <span class="fu">rename</span>(<span class="at">code =</span> <span class="dv">1</span>, <span class="at">country =</span> <span class="dv">2</span>)</span>
@@ -318,18 +318,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-13"><a href="#cb3-13"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb3-14"><a href="#cb3-14"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(year_decade, <span class="st">"^[0-9]+$"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb3-15"><a href="#cb3-15"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb3-16"><a href="#cb3-16"></a>    <span class="at">height_cm =</span> <span class="fu">as.numeric</span>(height_cm),       <span class="co"># make sure values are numeric</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>    <span class="at">height_cm =</span> <span class="fu">as.numeric</span>(height_cm),</span>
 <span id="cb3-17"><a href="#cb3-17"></a>    <span class="at">year_decade =</span> <span class="fu">as.numeric</span>(year_decade),</span>
 <span id="cb3-18"><a href="#cb3-18"></a>    <span class="at">height_in =</span> height_cm <span class="sc">/</span> <span class="fl">2.54</span></span>
 <span id="cb3-19"><a href="#cb3-19"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(height_cm))                  <span class="co"># remove rows with missing height</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-20"><a href="#cb3-20"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(height_cm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggplot</span>(heights, <span class="fu">aes</span>(<span class="at">x =</span> year_decade, <span class="at">y =</span> height_in, <span class="at">group =</span> country)) <span class="sc">+</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> heights <span class="sc">%&gt;%</span> <span class="fu">filter</span>(country <span class="sc">!=</span> <span class="st">"Germany"</span>), <span class="at">color =</span> <span class="st">"grey80"</span>) <span class="sc">+</span> <span class="co"># all other countries muted</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> heights <span class="sc">%&gt;%</span> <span class="fu">filter</span>(country <span class="sc">!=</span> <span class="st">"Germany"</span>), <span class="at">color =</span> <span class="st">"grey80"</span>) <span class="sc">+</span> </span>
 <span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> heights <span class="sc">%&gt;%</span> <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"Germany"</span>), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span> <span class="co"># Germany bold</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> heights <span class="sc">%&gt;%</span> <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"Germany"</span>), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb4-5"><a href="#cb4-5"></a>  <span class="fu">labs</span>(</span>
