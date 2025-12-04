@@ -7,6 +7,6 @@ format: html
 
 #### Completed assignments for that week
 
-<a class="btn btn-primary m-1" href="./w05/country_height.qmd">Country Height</a>
+<a class="btn btn-primary m-1" href="./w05/polish_visualization.qmd">Polish Visualization</a>
 
-<a class="btn btn-primary m-1" href="./w05/stock_task.qmd">Stock Task</a>
+<a class="btn btn-primary m-1" href="./w05/stock_task.qmd">Visualization for Presentation</a>

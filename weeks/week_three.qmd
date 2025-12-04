@@ -8,3 +8,5 @@ format: html
 #### Completed assignments for that week
 
 <a class="btn btn-primary m-1" href="./w03/gun_deaths.qmd">Gun Deaths</a>
+
+<a class="btn btn-primary m-1" href="./w03/wings_to_fly.qmd">Wings to Fly</a>

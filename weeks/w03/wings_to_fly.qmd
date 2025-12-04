@@ -37,7 +37,7 @@ So, if you want to minimize the chances of getting a “bad” delay before lunc
 
 
 
-Which origin airport is best to minimize my chances of a late arrival when I am using Delta Airlines?
+### Which origin airport is best to minimize my chances of a late arrival when I am using Delta Airlines?
 
 ```{r}
 delta_data <- flights_boss %>% 
