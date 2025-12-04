@@ -262,7 +262,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#interpretation-and-conclusion" id="toc-interpretation-and-conclusion" class="nav-link active" data-scroll-target="#interpretation-and-conclusion">Interpretation and Conclusion</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -399,8 +405,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="height_files_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<section id="interpretation-and-conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-and-conclusion">Interpretation and Conclusion</h3>
+<p>To create my tidy dataset, I combined four separate historical height datasets—Bavarian conscripts, German soldiers, BLS prisoners, and the Wisconsin survey. Each source used different variable names and measurement units. I standardized everything into consistent columns for birth year, height in centimeters, height in inches, and a study label. After binding the datasets together, I removed rows with missing birth years and excluded impossible height values such as 0 inches, which indicated coding errors. I also filtered the data to include people born after 1700, resulting in a clean dataset focused on the primary historical window of interest.</p>
+<p>Compared to the previous height project using the worldwide historical dataset, the story told here is very different. The global data showed a clear long-term increase in average human height over many decades and across many populations. However, the datasets in this assignment show almost no change. Instead of a smooth timeline, the birth years appear as isolated clusters—1850, 1860, 1870, and a few others—making the smoothed trend essentially flat. At first glance this seems to contradict the earlier finding, but the contradiction disappears once we recognize that these datasets cover only a narrow range of years and represent very specific subpopulations, not broad national averages.</p>
+<p>Given this, I would respond to the claim that “humans are getting taller over time” by saying that the long-term trend is real, but my combined dataset here is not designed to show it. The global dataset demonstrates height increases over centuries, but the smaller, clustered datasets used in this task simply do not include the continuous historical coverage needed to reveal that pattern. My final conclusion is that humans have generally gotten taller over the long run, but based on the data in this assignment, we can only say that within the limited birth years represented here, height remained essentially unchanged.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
