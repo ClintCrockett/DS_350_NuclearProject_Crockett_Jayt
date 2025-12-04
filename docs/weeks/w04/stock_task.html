@@ -332,24 +332,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb5-3"><a href="#cb5-3"></a>    <span class="at">month_end =</span> <span class="fu">factor</span>(</span>
 <span id="cb5-4"><a href="#cb5-4"></a>      month_end,</span>
-<span id="cb5-5"><a href="#cb5-5"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"January"</span>, <span class="st">"February"</span>, <span class="st">"March"</span>, <span class="st">"April"</span>, <span class="st">"May"</span>,</span>
-<span id="cb5-6"><a href="#cb5-6"></a>                 <span class="st">"June"</span>, <span class="st">"July"</span>, <span class="st">"August"</span>, <span class="st">"September"</span>,</span>
-<span id="cb5-7"><a href="#cb5-7"></a>                 <span class="st">"October"</span>, <span class="st">"November"</span>, <span class="st">"December"</span>)</span>
-<span id="cb5-8"><a href="#cb5-8"></a>    )</span>
-<span id="cb5-9"><a href="#cb5-9"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-10"><a href="#cb5-10"></a>  <span class="fu">filter</span>(variable <span class="sc">==</span> <span class="st">"DJIA"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-11"><a href="#cb5-11"></a>  <span class="fu">select</span>(month_end, year_end, value) <span class="sc">%&gt;%</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a>  <span class="fu">pivot_wider</span>(</span>
-<span id="cb5-13"><a href="#cb5-13"></a>    <span class="at">names_from =</span> year_end,</span>
-<span id="cb5-14"><a href="#cb5-14"></a>    <span class="at">values_from =</span> value</span>
-<span id="cb5-15"><a href="#cb5-15"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a>  <span class="fu">arrange</span>(month_end) <span class="sc">%&gt;%</span></span>
-<span id="cb5-17"><a href="#cb5-17"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(</span>
-<span id="cb5-18"><a href="#cb5-18"></a>    <span class="at">.cols =</span> <span class="sc">-</span>month_end,</span>
-<span id="cb5-19"><a href="#cb5-19"></a>    <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(.x), <span class="st">"-"</span>, .x)</span>
-<span id="cb5-20"><a href="#cb5-20"></a>  ))</span>
-<span id="cb5-21"><a href="#cb5-21"></a></span>
-<span id="cb5-22"><a href="#cb5-22"></a><span class="fu">pander</span>(stock_order)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a href="#cb5-5"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"January"</span>, <span class="st">"February"</span>, <span class="st">"March"</span>, <span class="st">"April"</span>, <span class="st">"May"</span>, <span class="st">"June"</span>, <span class="st">"July"</span>, <span class="st">"August"</span>, <span class="st">"September"</span>, <span class="st">"October"</span>, <span class="st">"November"</span>, <span class="st">"December"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6"></a>    )</span>
+<span id="cb5-7"><a href="#cb5-7"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">filter</span>(variable <span class="sc">==</span> <span class="st">"DJIA"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="fu">select</span>(month_end, year_end, value) <span class="sc">%&gt;%</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb5-11"><a href="#cb5-11"></a>    <span class="at">names_from =</span> year_end,</span>
+<span id="cb5-12"><a href="#cb5-12"></a>    <span class="at">values_from =</span> value</span>
+<span id="cb5-13"><a href="#cb5-13"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>  <span class="fu">arrange</span>(month_end) <span class="sc">%&gt;%</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(</span>
+<span id="cb5-16"><a href="#cb5-16"></a>    <span class="at">.cols =</span> <span class="sc">-</span>month_end,</span>
+<span id="cb5-17"><a href="#cb5-17"></a>    <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(.x), <span class="st">"-"</span>, .x)</span>
+<span id="cb5-18"><a href="#cb5-18"></a>  ))</span>
+<span id="cb5-19"><a href="#cb5-19"></a></span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="fu">pander</span>(stock_order)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped">
