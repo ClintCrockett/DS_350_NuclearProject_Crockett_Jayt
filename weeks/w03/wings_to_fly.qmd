@@ -3,3 +3,89 @@ title: "wings_to_fly"
 format: html
 ---
 
+## The Boss' Questions:
+
+### For each origin airport (JFK, EWR, LGA), which airline has the lowest 75th percentile of departure delay for flights scheduled to leave earlier than noon?
+
+```{r}
+pacman::p_load(nycflights13, ggplot2, pander, tidyverse)
+
+flights_boss <- flights %>% filter(origin %in% c("JFK", "EWR", "LGA"))
+```
+
+```{r}
+quantiles <- flights_boss %>% 
+  group_by(origin) %>% 
+  summarise(delay = quantile(dep_delay, 0.75, na.rm=TRUE))
+
+pander(quantiles)
+
+ggplot(quantiles, aes(origin, delay, fill = origin)) +
+  geom_col()+
+  labs(
+    title = "Airlines by Lowest 75th Percentile of Departure Delay",
+    y="Delay time in Minutes of Departure",
+    x="Airline"
+  )
+```
+
+### Interpretation 
+
+Overall, **LaGuardia (LGA)** has the lowest 75th percentile delay at **7 minutes**, meaning flights before noon at LGA tend to run smoother compared to JFK and EWR. JFK is next best at 10 minutes, while EWR is the worst of the three with 15 minutes.
+
+So, if you want to minimize the chances of getting a “bad” delay before lunch, **LGA is the strongest choice**.
+
+
+
+Which origin airport is best to minimize my chances of a late arrival when I am using Delta Airlines?
+
+```{r}
+delta_data <- flights_boss %>% 
+  filter(carrier == "DL") %>% 
+  group_by(origin) %>% 
+  summarise(mean = mean(arr_delay, na.rm=TRUE))
+
+pander(delta_data)
+
+ggplot(delta_data, aes(origin, mean, fill=origin)) +
+  geom_col() +
+  labs(
+    title = "Don't Wanna Be Late? \n Choose JFK",
+    y="Delay time in Minutes of Arrival",
+    x="Airline"
+  )
+```
+
+### Interpretation 
+
+Among the three NYC airports, **JFK performs the best for Delta arrivals**, with an average arrival time of **2.38 minutes early**. LGA averages about **4 minutes late**, and EWR is the worst performer at **almost 9 minutes late on average**.
+
+So, if I want to minimize the chances of arriving late on a Delta flight, **JFK is the best origin airport**.
+
+
+### Which destination airport is the worst airport for arrival delays? You decide on the metric for “worst.”
+
+```{r}
+worst_dest <- flights_boss %>% 
+  group_by(dest) %>% 
+  summarise(mean = mean(arr_delay, na.rm=TRUE)) %>% 
+  filter(mean > 20) %>% 
+  arrange(desc(mean))
+
+pander(worst_dest)
+
+ggplot(worst_dest, aes(dest, mean, fill=dest)) +
+  geom_col() +
+  coord_cartesian(ylim = c(20, 40)) +
+  labs(
+    title = "Worst Arrival Delays for each Destination",
+    y="Delay time in Minutes of Arrival",
+    x="Destination Airport"
+  ) 
+```
+
+### Interpretation 
+
+The worst-performing destination is **CAE (Columbia Metropolitan Airport)** with an average arrival delay of almost **42 minutes**, which is significantly higher than the others. TUL and OKC also stand out with delays above 30 minutes.
+
+So based on average delays, **CAE is the destination where you are most likely to arrive late**, by a pretty wide margin.

@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -89,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="../../project_page.html">Projects</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../case_studies/gapminder1.html">Case Study</a>
+    <a class="nav-link" href="../../case_studies.html">Case Study</a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../task_manager.html">Tasks</a>
@@ -126,7 +189,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../index.html" class="sidebar-item-text sidebar-link">DS350 Nuclear Project</a>
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">Home Page</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -199,7 +262,20 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-boss-questions" id="toc-the-boss-questions" class="nav-link active" data-scroll-target="#the-boss-questions">The Boss’ Questions:</a>
+  <ul class="collapse">
+  <li><a href="#for-each-origin-airport-jfk-ewr-lga-which-airline-has-the-lowest-75th-percentile-of-departure-delay-for-flights-scheduled-to-leave-earlier-than-noon" id="toc-for-each-origin-airport-jfk-ewr-lga-which-airline-has-the-lowest-75th-percentile-of-departure-delay-for-flights-scheduled-to-leave-earlier-than-noon" class="nav-link" data-scroll-target="#for-each-origin-airport-jfk-ewr-lga-which-airline-has-the-lowest-75th-percentile-of-departure-delay-for-flights-scheduled-to-leave-earlier-than-noon">For each origin airport (JFK, EWR, LGA), which airline has the lowest 75th percentile of departure delay for flights scheduled to leave earlier than noon?</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
+  <li><a href="#interpretation-1" id="toc-interpretation-1" class="nav-link" data-scroll-target="#interpretation-1">Interpretation</a></li>
+  <li><a href="#which-destination-airport-is-the-worst-airport-for-arrival-delays-you-decide-on-the-metric-for-worst." id="toc-which-destination-airport-is-the-worst-airport-for-arrival-delays-you-decide-on-the-metric-for-worst." class="nav-link" data-scroll-target="#which-destination-airport-is-the-worst-airport-for-arrival-delays-you-decide-on-the-metric-for-worst.">Which destination airport is the worst airport for arrival delays? You decide on the metric for “worst.”</a></li>
+  <li><a href="#interpretation-2" id="toc-interpretation-2" class="nav-link" data-scroll-target="#interpretation-2">Interpretation</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -220,8 +296,214 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="the-boss-questions" class="level2">
+<h2 class="anchored" data-anchor-id="the-boss-questions">The Boss’ Questions:</h2>
+<section id="for-each-origin-airport-jfk-ewr-lga-which-airline-has-the-lowest-75th-percentile-of-departure-delay-for-flights-scheduled-to-leave-earlier-than-noon" class="level3">
+<h3 class="anchored" data-anchor-id="for-each-origin-airport-jfk-ewr-lga-which-airline-has-the-lowest-75th-percentile-of-departure-delay-for-flights-scheduled-to-leave-earlier-than-noon">For each origin airport (JFK, EWR, LGA), which airline has the lowest 75th percentile of departure delay for flights scheduled to leave earlier than noon?</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(nycflights13, ggplot2, pander, tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>flights_boss <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> <span class="fu">filter</span>(origin <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"JFK"</span>, <span class="st">"EWR"</span>, <span class="st">"LGA"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>quantiles <span class="ot">&lt;-</span> flights_boss <span class="sc">%&gt;%</span> </span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">group_by</span>(origin) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">summarise</span>(<span class="at">delay =</span> <span class="fu">quantile</span>(dep_delay, <span class="fl">0.75</span>, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">pander</span>(quantiles)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">origin</th>
+<th style="text-align: center;">delay</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">EWR</td>
+<td style="text-align: center;">15</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">JFK</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">LGA</td>
+<td style="text-align: center;">7</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">ggplot</span>(quantiles, <span class="fu">aes</span>(origin, delay, <span class="at">fill =</span> origin)) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">geom_col</span>()<span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="at">title =</span> <span class="st">"Airlines by Lowest 75th Percentile of Departure Delay"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="at">y=</span><span class="st">"Delay time in Minutes of Departure"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="at">x=</span><span class="st">"Airline"</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="wings_to_fly_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
+<p>Overall, <strong>LaGuardia (LGA)</strong> has the lowest 75th percentile delay at <strong>7 minutes</strong>, meaning flights before noon at LGA tend to run smoother compared to JFK and EWR. JFK is next best at 10 minutes, while EWR is the worst of the three with 15 minutes.</p>
+<p>So, if you want to minimize the chances of getting a “bad” delay before lunch, <strong>LGA is the strongest choice</strong>.</p>
+<p>Which origin airport is best to minimize my chances of a late arrival when I am using Delta Airlines?</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>delta_data <span class="ot">&lt;-</span> flights_boss <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">filter</span>(carrier <span class="sc">==</span> <span class="st">"DL"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">group_by</span>(origin) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="fu">pander</span>(delta_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">origin</th>
+<th style="text-align: center;">mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">EWR</td>
+<td style="text-align: center;">8.78</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">JFK</td>
+<td style="text-align: center;">-2.379</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">LGA</td>
+<td style="text-align: center;">3.928</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">ggplot</span>(delta_data, <span class="fu">aes</span>(origin, mean, <span class="at">fill=</span>origin)) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">labs</span>(</span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="at">title =</span> <span class="st">"Don't Wanna Be Late? </span><span class="sc">\n</span><span class="st"> Choose JFK"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="at">y=</span><span class="st">"Delay time in Minutes of Arrival"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="at">x=</span><span class="st">"Airline"</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="wings_to_fly_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="interpretation-1" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-1">Interpretation</h3>
+<p>Among the three NYC airports, <strong>JFK performs the best for Delta arrivals</strong>, with an average arrival time of <strong>2.38 minutes early</strong>. LGA averages about <strong>4 minutes late</strong>, and EWR is the worst performer at <strong>almost 9 minutes late on average</strong>.</p>
+<p>So, if I want to minimize the chances of arriving late on a Delta flight, <strong>JFK is the best origin airport</strong>.</p>
+</section>
+<section id="which-destination-airport-is-the-worst-airport-for-arrival-delays-you-decide-on-the-metric-for-worst." class="level3">
+<h3 class="anchored" data-anchor-id="which-destination-airport-is-the-worst-airport-for-arrival-delays-you-decide-on-the-metric-for-worst.">Which destination airport is the worst airport for arrival delays? You decide on the metric for “worst.”</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>worst_dest <span class="ot">&lt;-</span> flights_boss <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">group_by</span>(dest) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">filter</span>(mean <span class="sc">&gt;</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mean))</span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="fu">pander</span>(worst_dest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">dest</th>
+<th style="text-align: center;">mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">CAE</td>
+<td style="text-align: center;">41.76</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">TUL</td>
+<td style="text-align: center;">33.66</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">OKC</td>
+<td style="text-align: center;">30.62</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">JAC</td>
+<td style="text-align: center;">28.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">TYS</td>
+<td style="text-align: center;">24.07</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">MSN</td>
+<td style="text-align: center;">20.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">RIC</td>
+<td style="text-align: center;">20.11</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(worst_dest, <span class="fu">aes</span>(dest, mean, <span class="at">fill=</span>dest)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">40</span>)) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="at">title =</span> <span class="st">"Worst Arrival Delays for each Destination"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="at">y=</span><span class="st">"Delay time in Minutes of Arrival"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7"></a>    <span class="at">x=</span><span class="st">"Destination Airport"</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="wings_to_fly_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="interpretation-2" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-2">Interpretation</h3>
+<p>The worst-performing destination is <strong>CAE (Columbia Metropolitan Airport)</strong> with an average arrival delay of almost <strong>42 minutes</strong>, which is significantly higher than the others. TUL and OKC also stand out with delays above 30 minutes.</p>
+<p>So based on average delays, <strong>CAE is the destination where you are most likely to arrive late</strong>, by a pretty wide margin.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -207,7 +207,7 @@
     "href": "weeks/week_four.html",
     "title": "project_page",
     "section": "",
-    "text": "Gun Deaths"
+    "text": "Country Height\nStock Task"
   },
   {
     "objectID": "weeks/week_eleven.html",
@@ -537,5 +537,12 @@
     "title": "savior_names",
     "section": "Analysis of Words Between Savior Names",
     "text": "Analysis of Words Between Savior Names\nThe histogram above shows the distribution of the number of words between mentions of Savior names in the Book of Mormon. Most Savior names occur fairly close together, indicating clusters of references in key chapters. There are occasional long stretches without a Savior name, which contribute to the long tail of the distribution. On average, there are 24.7962406 words between mentions, suggesting that readers encounter references to the Savior regularly throughout the text."
+  },
+  {
+    "objectID": "weeks/w03/wings_to_fly.html",
+    "href": "weeks/w03/wings_to_fly.html",
+    "title": "wings_to_fly",
+    "section": "",
+    "text": "Code\npacman::p_load(nycflights13, ggplot2, pander, tidyverse)\n\nflights_boss <- flights %>% filter(origin %in% c(\"JFK\", \"EWR\", \"LGA\"))\n\n\n\n\nCode\nquantiles <- flights_boss %>% \n  group_by(origin) %>% \n  summarise(delay = quantile(dep_delay, 0.75, na.rm=TRUE))\n\npander(quantiles)\n\n\n\n\n\n\n\n\n\norigin\ndelay\n\n\n\n\nEWR\n15\n\n\nJFK\n10\n\n\nLGA\n7\n\n\n\n\n\nCode\nggplot(quantiles, aes(origin, delay, fill = origin)) +\n  geom_col()+\n  labs(\n    title = \"Airlines by Lowest 75th Percentile of Departure Delay\",\n    y=\"Delay time in Minutes of Departure\",\n    x=\"Airline\"\n  )\n\n\n\n\n\n\n\n\nOverall, LaGuardia (LGA) has the lowest 75th percentile delay at 7 minutes, meaning flights before noon at LGA tend to run smoother compared to JFK and EWR. JFK is next best at 10 minutes, while EWR is the worst of the three with 15 minutes.\nSo, if you want to minimize the chances of getting a “bad” delay before lunch, LGA is the strongest choice.\nWhich origin airport is best to minimize my chances of a late arrival when I am using Delta Airlines?\n\n\nCode\ndelta_data <- flights_boss %>% \n  filter(carrier == \"DL\") %>% \n  group_by(origin) %>% \n  summarise(mean = mean(arr_delay, na.rm=TRUE))\n\npander(delta_data)\n\n\n\n\n\n\n\n\n\norigin\nmean\n\n\n\n\nEWR\n8.78\n\n\nJFK\n-2.379\n\n\nLGA\n3.928\n\n\n\n\n\nCode\nggplot(delta_data, aes(origin, mean, fill=origin)) +\n  geom_col() +\n  labs(\n    title = \"Don't Wanna Be Late? \\n Choose JFK\",\n    y=\"Delay time in Minutes of Arrival\",\n    x=\"Airline\"\n  )\n\n\n\n\n\n\n\n\nAmong the three NYC airports, JFK performs the best for Delta arrivals, with an average arrival time of 2.38 minutes early. LGA averages about 4 minutes late, and EWR is the worst performer at almost 9 minutes late on average.\nSo, if I want to minimize the chances of arriving late on a Delta flight, JFK is the best origin airport.\n\n\n\n\n\nCode\nworst_dest <- flights_boss %>% \n  group_by(dest) %>% \n  summarise(mean = mean(arr_delay, na.rm=TRUE)) %>% \n  filter(mean > 20) %>% \n  arrange(desc(mean))\n\npander(worst_dest)\n\n\n\n\n\n\n\n\n\ndest\nmean\n\n\n\n\nCAE\n41.76\n\n\nTUL\n33.66\n\n\nOKC\n30.62\n\n\nJAC\n28.1\n\n\nTYS\n24.07\n\n\nMSN\n20.2\n\n\nRIC\n20.11\n\n\n\n\n\nCode\nggplot(worst_dest, aes(dest, mean, fill=dest)) +\n  geom_col() +\n  coord_cartesian(ylim = c(20, 40)) +\n  labs(\n    title = \"Worst Arrival Delays for each Destination\",\n    y=\"Delay time in Minutes of Arrival\",\n    x=\"Destination Airport\"\n  ) \n\n\n\n\n\n\n\n\nThe worst-performing destination is CAE (Columbia Metropolitan Airport) with an average arrival delay of almost 42 minutes, which is significantly higher than the others. TUL and OKC also stand out with delays above 30 minutes.\nSo based on average delays, CAE is the destination where you are most likely to arrive late, by a pretty wide margin."
   }
 ]
