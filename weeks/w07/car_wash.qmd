@@ -3,3 +3,108 @@ title: "car_wash"
 format: html
 ---
 
+```{r warning=FALSE, message=FALSE}
+pacman::p_load(readr, tidyverse, pander, ggplot2, lubridate, riem)
+carwash <- read_csv("https://byuistats.github.io/M335/data/carwash.csv")
+```
+
+```{r}
+# Convert the time
+carwash_clean <- carwash %>%
+  mutate(
+    datetime_utc = ymd_hms(time, tz = "UTC"),
+    datetime_local = with_tz(datetime_utc, tzone = "America/Boise")
+  )
+
+```
+
+```{r}
+# Unusual data
+carwash_clean <- carwash_clean %>%
+  filter(amount > 1) 
+```
+
+```{r}
+# Grouping the time
+carwash_clean <- carwash_clean %>%
+  mutate(
+    hour = ceiling_date(datetime_local, unit = "hour")
+  )
+
+```
+
+```{r}
+# Aggregate into hours
+sales_hourly <- carwash_clean %>%
+  group_by(hour) %>%
+  summarise(
+    total_sales = sum(amount),
+    n_transactions = n()
+  )
+```
+
+```{r}
+# Weather
+start <- min(carwash_clean$datetime_local)
+end   <- max(carwash_clean$datetime_local)
+
+weather <- riem_measures(
+  station = "RXE",
+  date_start = as.Date(start),
+  date_end = as.Date(end)
+)
+```
+
+```{r}
+# Hourly variable
+weather_clean <- weather %>%
+  mutate(
+    hour = floor_date(ymd_hms(valid), unit = "hour")
+  ) %>%
+  select(hour, tmpf)
+
+```
+
+```{r}
+# Join
+carwash_weather <- sales_hourly %>%
+  left_join(weather_clean, by = "hour")
+```
+
+```{r warning=FALSE, message=FALSE}
+# Plots!
+
+
+ggplot(carwash_weather, aes(tmpf, total_sales, color = tmpf)) +
+  geom_point(size = 2) +
+  geom_smooth(se = TRUE, color = "#8a6240", linewidth = 2) +  
+  scale_color_viridis_c(option = "viridis") +   # <-- EXACT palette in your image
+  labs(
+    title = "Sales vs Temperature",
+    x = "Temperature (F)",
+    y = "Total Sales",
+    color = "Temp (F)"
+  ) +
+  theme_minimal(base_size = 14)
+
+```
+
+```{r}
+ggplot(carwash_weather, aes(hour, total_sales, color = tmpf)) +
+  geom_line() +
+  scale_color_viridis_c() +
+  labs(title = "Hourly Sales with Temperature Gradient")
+
+```
+
+From the “Sales vs Temperature” graph, the relationship forms a curve that looks almost like a **mustache**. Sales increase as temperatures rise from the 40s into the 60s, flatten out, then rise again near the 80s before declining when it gets very hot. This suggests two “sweet spots” where customers are most likely to wash their cars.
+
+One possible reason is comfort behavior:
+
+Around 60°F, the weather becomes **pleasant after cold days**, so people start doing outdoor tasks like car washing. There's no risk of it snowing and wasting money on a car wash!
+
+Around 80°F, it’s warm and sunny — ideal **“weekend chore”** weather — so sales rise again.
+
+The drop above 85–90°F could be because it’s too hot, and people avoid being outside for long. I get it, I never go outside after it 90°F
+
+Another factor is weather patterns not included in this dataset. Rainy or stormy hours would reduce sales dramatically, and extremely sunny/dry stretches might boost them. Since we don’t have precipitation data here, temperature alone gives us an incomplete but still meaningful picture. We'd **need more data** to know this for sure though.
