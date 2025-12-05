@@ -22,6 +22,8 @@ Here’s an overview …
 
 <a class="btn btn-primary m-1" href="./case_studies/ballgame.qmd">Take Me Out to the Ballgame</a>
 
+<a class="btn btn-primary m-1" href="./case_studies/stocks_tidyquant.qmd">Stocks Tidyquant</a>
+
 <a class="btn btn-primary m-1" href="./case_studies/leaflet_layers.qmd">Leaflet Layers</a>
 
 <a class="btn btn-primary m-1" href="./case_studies/savior_names.qmd">Distance Between Savior Names, Part 1</a>
