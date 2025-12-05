@@ -3,10 +3,10 @@ title: "project_page"
 format: html
 ---
 
-## Week One Assignments
+## Week Seven Assignments
 
 #### Completed assignments for that week
 
-<a class="btn btn-primary m-1" href="./w01/about_time.qmd">About Time</a>
+<a class="btn btn-primary m-1" href="./w07/about_time.qmd">About Time</a>
 
-<a class="btn btn-primary m-1" href="./w01/car_wash.qmd">Car Wash</a>
+<a class="btn btn-primary m-1" href="./w07/car_wash.qmd">Car Wash</a>

@@ -3,8 +3,10 @@ title: "project_page"
 format: html
 ---
 
-## Week One Assignments
+## Week Eight Assignments
 
 #### Completed assignments for that week
 
-<a class="btn btn-primary m-1" href="./w01/First_Quarto_File">First Task</a>
+<a class="btn btn-primary m-1" href="./w01/idaho_water.qmd">Idaho Water</a>
+
+<a class="btn btn-primary m-1" href="./w01/US_cities.qmd">US Cities</a>
