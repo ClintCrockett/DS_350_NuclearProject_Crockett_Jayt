@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><metadata>
+    <idinfo>
+        <citation>
+            <citeinfo>
+                <title>Wells</title>
+            </citeinfo>
+        </citation>
+        <descript>
+            <abstract>The Idaho Department of Water Resources (IDWR) has statutory authority for the state-wide administration of the rules governing well construction and the licensing of drillers in Idaho. Prior to drilling a well, the well owner or well driller must first obtain a drilling permit from IDWR. All wells must be constructed by a well driller with a valid license from IDWR. Examples of permittable wells include all water wells, monitoring wells, low temperature geothermal wells, geothermal wells, injection wells, and other artificial openings and excavations in the ground greater than 18 vertical feet below land surface.  Information about existing wells from our database of well logs includes well size and depth, geology, depth to water, water levels, flow rate and construction method. The database contains most of the well reports dating back to July 1987. Prior to that the records in the database are less complete.</abstract>
+            <purpose>Wells in Idaho subject to the rules governing well construction.</purpose>
+        </descript>
+        <keywords>
+            <theme>
+                <themekt>None</themekt>
+                <themekey>Idaho</themekey>
+                <themekey>wells</themekey>
+                <themekey>well construction</themekey>
+                <themekey>water resources</themekey>
+                <themekey>groundwater</themekey>
+                <themekey>well log</themekey>
+                <themekey>IDWR</themekey>
+                <themekey>well construction permit</themekey>
+            </theme>
+        </keywords>
+        <accconst>None</accconst>
+        <useconst>The Idaho Department of Water Resources is making this data available as a public service. The Idaho Department of Water Resources strives to ensure that all technical data and other information made available to the public is accurate, complete and in conformance with the Idaho Public Records Act. Neither the Department of Water Resources nor the State of Idaho, however, assumes any legal responsibility for the accuracy or completeness of the information contained on this site.Persons using information from this site for official purposes, or other purposes, for which accuracy and completeness are required, are hereby notified that they should first verify the information with the public records or other primary sources from which the information was obtained.</useconst>
+        <datacred>IDWR</datacred>
+    </idinfo>
+    <metainfo>
+        <metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+        <metstdv>FGDC-STD-001-1998</metstdv>
+        <mettc>local time</mettc>
+    </metainfo>
+</metadata>

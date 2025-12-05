@@ -3,7 +3,6 @@ title: "US_cities"
 format: html
 ---
 
-
 ```{r message=FALSE, warning=FALSE}
 pacman::p_load(tidyverse, sf, ggplot2, USAboundaries, ggrepel, grid)
 # install.packages("USAboundaries", repos = "https://ropensci.r-universe.dev", type = "source")
@@ -51,7 +50,6 @@ rank_colors <- c(
   "3" = "#ade8f4"
 )
 ```
-
 
 ```{r warning=FALSE, message=FALSE}
 top3 <- top3 %>%
@@ -111,7 +109,4 @@ ggp
 ggsave("us_cities2.png", plot = ggp, width = 15, height = 10, dpi = 300)
 ```
 
-
 ![The copied Picture](pictures/us_cities2.png)
-
-

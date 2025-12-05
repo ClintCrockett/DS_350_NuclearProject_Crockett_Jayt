@@ -3,3 +3,62 @@ title: "idaho_water"
 format: html
 ---
 
+```{r warning=FALSE, message=FALSE}
+pacman::p_load(sf, tidyverse, pander, ggplot2, lubrdate, riem, foreign)
+
+dam   <- st_read("data/dam/dam.shp", quiet = TRUE)
+shape <- st_read("data/shp/shp.shp", quiet = TRUE)
+water <- st_read("data/water/water.shp", quiet = TRUE)
+wells <- st_read("data/wells/wells.shp", quiet = TRUE)
+```
+
+```{r}
+wells_clean <- wells %>%
+  filter(Production > 5000)
+
+dams_clean <- dam %>%
+  filter(SurfaceAre > 50)
+
+water_clean <- water %>%
+  filter(FEAT_NAME %in% c("Snake River", "Henrys Fork"))
+
+idaho_crs <- 32611
+shape_proj <- st_transform(shape, idaho_crs)
+wells_proj <- st_transform(wells_clean, idaho_crs)
+dams_proj  <- st_transform(dams_clean,  idaho_crs)
+water_proj <- st_transform(water_clean, idaho_crs)
+
+```
+
+
+```{r warning=FALSE}
+ggmap <- ggplot() +
+  geom_sf(data = shape_proj, fill = "gray90", color = "gray60") +
+  geom_sf(data = water_proj, color = "blue", size = 0.9) +
+  geom_sf(data = dams_proj,  color = "red", size = 2) +
+  geom_sf(data = wells_proj, color = "darkgreen", size = 1) +
+  scale_color_manual(
+    name = "Map Features",
+    values = c(
+      "Rivers" = "blue",
+      "Dams"   = "red",
+      "Wells"  = "darkgreen"
+    )
+  ) +
+  theme_minimal() +
+  labs(
+    title = "Idaho Water Map",
+    subtitle = "Filtered wells, dams, and river segments",
+    caption = "Wells: Production > 5000 gallons | Dams: Surface Area > 50 acres"
+  )
+
+ggmap
+```
+
+
+```{r warning=FALSE}
+ggsave("idaho_water.png", plot = ggmap, width = 15, height = 10, dpi = 300)
+```
+
+![Heres Our Map](idaho_water.png)
+
