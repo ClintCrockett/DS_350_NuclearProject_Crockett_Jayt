@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -87,6 +150,9 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../project_page.html">Projects</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../case_studies.html">Case Study</a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../task_manager.html">Tasks</a>
@@ -222,6 +288,139 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, sf, ggplot2, USAboundaries, ggrepel, grid)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># install.packages("USAboundaries", repos = "https://ropensci.r-universe.dev", type = "source")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>states <span class="ot">&lt;-</span> <span class="fu">us_states</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span>state_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Alaska"</span>, <span class="st">"Hawaii"</span>, <span class="st">"Puerto Rico"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>idaho_counties <span class="ot">&lt;-</span> <span class="fu">us_counties</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">filter</span>(state_name <span class="sc">==</span> <span class="st">"Idaho"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>cities <span class="ot">&lt;-</span> <span class="fu">us_cities</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>cities48 <span class="ot">&lt;-</span> cities <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">filter</span>(state_name <span class="sc">%in%</span> states<span class="sc">$</span>state_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>top3 <span class="ot">&lt;-</span> cities48 <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">group_by</span>(state_name) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> population, <span class="at">n =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">st_coordinates</span>(top3)</span>
+<span id="cb7-2"><a href="#cb7-2"></a>top3<span class="sc">$</span>lng <span class="ot">&lt;-</span> coords[,<span class="dv">1</span>]</span>
+<span id="cb7-3"><a href="#cb7-3"></a>top3<span class="sc">$</span>lat <span class="ot">&lt;-</span> coords[,<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>rank_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"#003f88"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"#4ea8de"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"#ade8f4"</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>top3 <span class="ot">&lt;-</span> top3 <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">mutate</span>(<span class="at">pop_thousands =</span> population <span class="sc">/</span> <span class="dv">1000</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a>ggp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> states, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> idaho_counties, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">color =</span> <span class="st">"gray30"</span>, <span class="at">size =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb9-8"><a href="#cb9-8"></a>    <span class="at">data =</span> top3,</span>
+<span id="cb9-9"><a href="#cb9-9"></a>    <span class="fu">aes</span>(</span>
+<span id="cb9-10"><a href="#cb9-10"></a>      <span class="at">x =</span> lng,</span>
+<span id="cb9-11"><a href="#cb9-11"></a>      <span class="at">y =</span> lat,</span>
+<span id="cb9-12"><a href="#cb9-12"></a>      <span class="at">size =</span> pop_thousands,</span>
+<span id="cb9-13"><a href="#cb9-13"></a>      <span class="at">fill =</span> <span class="fu">as.factor</span>(rank)</span>
+<span id="cb9-14"><a href="#cb9-14"></a>    ),</span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="at">color =</span> <span class="st">"#003f88"</span>,</span>
+<span id="cb9-16"><a href="#cb9-16"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span>,</span>
+<span id="cb9-17"><a href="#cb9-17"></a>    <span class="at">shape =</span> <span class="dv">21</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> rank_colors) <span class="sc">+</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a>  <span class="fu">scale_size_continuous</span>(</span>
+<span id="cb9-21"><a href="#cb9-21"></a>    <span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">6</span>),</span>
+<span id="cb9-22"><a href="#cb9-22"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">4000</span>, <span class="dv">6000</span>, <span class="dv">8000</span>),</span>
+<span id="cb9-23"><a href="#cb9-23"></a>    <span class="at">name =</span> <span class="st">"Population</span><span class="sc">\n</span><span class="st">(1,000)"</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a>  <span class="fu">geom_label_repel</span>(</span>
+<span id="cb9-26"><a href="#cb9-26"></a>    <span class="at">data =</span> top3,</span>
+<span id="cb9-27"><a href="#cb9-27"></a>    <span class="fu">aes</span>(<span class="at">x =</span> lng, <span class="at">y =</span> lat, <span class="at">label =</span> city),</span>
+<span id="cb9-28"><a href="#cb9-28"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb9-29"><a href="#cb9-29"></a>    <span class="at">colour =</span> <span class="st">"#5e4fa2"</span>,</span>
+<span id="cb9-30"><a href="#cb9-30"></a>    <span class="at">fill =</span> <span class="st">"white"</span>,</span>
+<span id="cb9-31"><a href="#cb9-31"></a>    <span class="at">label.size =</span> <span class="fl">0.35</span>,</span>
+<span id="cb9-32"><a href="#cb9-32"></a>    <span class="at">label.r =</span> <span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">"lines"</span>),</span>
+<span id="cb9-33"><a href="#cb9-33"></a>    <span class="at">label.padding =</span> <span class="fu">unit</span>(<span class="fl">0.15</span>, <span class="st">"lines"</span>),</span>
+<span id="cb9-34"><a href="#cb9-34"></a>    <span class="at">box.padding =</span> <span class="fu">unit</span>(<span class="fl">0.25</span>, <span class="st">"lines"</span>),</span>
+<span id="cb9-35"><a href="#cb9-35"></a>    <span class="at">point.padding =</span> <span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">"lines"</span>),</span>
+<span id="cb9-36"><a href="#cb9-36"></a>    <span class="at">segment.color =</span> <span class="cn">NA</span>,</span>
+<span id="cb9-37"><a href="#cb9-37"></a>    <span class="at">label.color =</span> <span class="st">"#5e4fa2"</span></span>
+<span id="cb9-38"><a href="#cb9-38"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-39"><a href="#cb9-39"></a>  <span class="fu">guides</span>(</span>
+<span id="cb9-40"><a href="#cb9-40"></a>    <span class="at">fill =</span> <span class="st">"none"</span></span>
+<span id="cb9-41"><a href="#cb9-41"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-42"><a href="#cb9-42"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb9-43"><a href="#cb9-43"></a>  <span class="fu">theme</span>(</span>
+<span id="cb9-44"><a href="#cb9-44"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-45"><a href="#cb9-45"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-46"><a href="#cb9-46"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
+<span id="cb9-47"><a href="#cb9-47"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-48"><a href="#cb9-48"></a>    <span class="at">axis.text =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb9-49"><a href="#cb9-49"></a>  )</span>
+<span id="cb9-50"><a href="#cb9-50"></a></span>
+<span id="cb9-51"><a href="#cb9-51"></a>ggp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="US_cities_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">ggsave</span>(<span class="st">"us_cities2.png"</span>, <span class="at">plot =</span> ggp, <span class="at">width =</span> <span class="dv">15</span>, <span class="at">height =</span> <span class="dv">10</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pictures/us_cities2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">The copied Picture</figcaption><p></p>
+</figure>
+</div>
 
 
 

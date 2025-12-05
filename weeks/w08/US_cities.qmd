@@ -3,3 +3,115 @@ title: "US_cities"
 format: html
 ---
 
+
+```{r message=FALSE, warning=FALSE}
+pacman::p_load(tidyverse, sf, ggplot2, USAboundaries, ggrepel, grid)
+# install.packages("USAboundaries", repos = "https://ropensci.r-universe.dev", type = "source")
+
+```
+
+```{r message=FALSE, warning=FALSE}
+states <- us_states() %>%
+  filter(!state_name %in% c("Alaska", "Hawaii", "Puerto Rico"))
+
+```
+
+```{r message=FALSE, warning=FALSE}
+idaho_counties <- us_counties() %>%
+  filter(state_name == "Idaho")
+```
+
+```{r message=FALSE, warning=FALSE}
+cities <- us_cities()
+```
+
+```{r message=FALSE, warning=FALSE}
+cities48 <- cities %>%
+  filter(state_name %in% states$state_name)
+```
+
+```{r message=FALSE, warning=FALSE}
+top3 <- cities48 %>%
+  group_by(state_name) %>%
+  slice_max(order_by = population, n = 3) %>%
+  mutate(rank = row_number()) %>%
+  ungroup()
+```
+
+```{r message=FALSE, warning=FALSE}
+coords <- st_coordinates(top3)
+top3$lng <- coords[,1]
+top3$lat <- coords[,2]
+```
+
+```{r message=FALSE, warning=FALSE}
+rank_colors <- c(
+  "1" = "#003f88",
+  "2" = "#4ea8de",
+  "3" = "#ade8f4"
+)
+```
+
+
+```{r warning=FALSE, message=FALSE}
+top3 <- top3 %>%
+  mutate(pop_thousands = population / 1000)
+
+ggp <- ggplot() +
+  geom_sf(data = states, fill = NA, color = "black", size = 0.3) +
+  geom_sf(data = idaho_counties, fill = NA, color = "gray30", size = 0.4) +
+  geom_point(
+    data = top3,
+    aes(
+      x = lng,
+      y = lat,
+      size = pop_thousands,
+      fill = as.factor(rank)
+    ),
+    color = "#003f88",
+    alpha = 0.7,
+    shape = 21
+  ) +
+  scale_fill_manual(values = rank_colors) +
+  scale_size_continuous(
+    range = c(1, 6),
+    breaks = c(2000, 4000, 6000, 8000),
+    name = "Population\n(1,000)"
+  ) +
+  geom_label_repel(
+    data = top3,
+    aes(x = lng, y = lat, label = city),
+    size = 3,
+    colour = "#5e4fa2",
+    fill = "white",
+    label.size = 0.35,
+    label.r = unit(0.1, "lines"),
+    label.padding = unit(0.15, "lines"),
+    box.padding = unit(0.25, "lines"),
+    point.padding = unit(0.1, "lines"),
+    segment.color = NA,
+    label.color = "#5e4fa2"
+  ) +
+  guides(
+    fill = "none"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    legend.position = "right",
+    axis.title = element_blank(),
+    axis.text = element_blank()
+  )
+
+ggp
+```
+
+```{r warning=FALSE}
+ggsave("us_cities2.png", plot = ggp, width = 15, height = 10, dpi = 300)
+```
+
+
+![The copied Picture](pictures/us_cities2.png)
+
+
