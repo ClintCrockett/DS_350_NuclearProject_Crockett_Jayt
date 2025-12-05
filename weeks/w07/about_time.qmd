@@ -3,3 +3,96 @@ title: "about_time"
 format: html
 ---
 
+```{r warning=FALSE, message=FALSE}
+pacman::p_load(readr, tidyverse, pander, ggplot2, lubridate, riem)
+about_time <- read_csv("https://byuistats.github.io/M335/data/sales.csv")
+```
+
+```{r warning=FALSE, message=FALSE}
+clean_time <- about_time %>%
+  mutate(
+    datetime_utc   = ymd_hms(Time, tz = "UTC"),
+    datetime_local = with_tz(datetime_utc, "America/Boise")
+  ) %>% 
+  filter(Amount > 0)
+```
+
+```{r warning=FALSE, message=FALSE}
+clean_day <- clean_time %>%
+  mutate(day = date(datetime_local)) %>%
+  group_by(Name, day) %>%
+  summarise(
+    revenue = sum(Amount),
+    transactions = n(),
+    .groups = "drop"
+  )
+
+clean_weekly <- clean_time %>%
+  mutate(week = floor_date(datetime_local, "week")) %>%
+  group_by(Name, week) %>%
+  summarise(
+    revenue = sum(Amount),
+    transactions = n(),
+    .groups = "drop"
+  )
+
+clean_monthly <- clean_time %>%
+  mutate(month = floor_date(datetime_local, "month")) %>%
+  group_by(Name, month) %>%
+  summarise(
+    revenue = sum(Amount),
+    transactions = n(),
+    .groups = "drop"
+  )
+```
+
+```{r warning=FALSE, message=FALSE}
+ggplot(clean_day, aes(day, revenue, color = Name)) +
+  geom_line() +
+  labs(title = "Daily Revenue by Company", x = "Date", y = "Revenue") +
+  theme_minimal()
+```
+
+
+```{r warning=FALSE, message=FALSE}
+ggplot(clean_weekly, aes(week, revenue, color = Name)) +
+  geom_line(size = 1.1) +
+  labs(title = "Weekly Revenue by Company", x = "Week", y = "Revenue") +
+  theme_minimal()
+```
+
+```{r warning=FALSE, message=FALSE}
+ggplot(clean_monthly, aes(month, revenue, color = Name)) +
+  geom_line(size = 1.2) +
+  labs(title = "Monthly Revenue by Company", x = "Month", y = "Revenue") +
+  theme_minimal()
+```
+
+
+### Customer Traffic
+
+```{r warning=FALSE, message=FALSE}
+ggplot(clean_day, aes(day, transactions, color = Name)) +
+  geom_line(size = 1) +
+  labs(title = "Daily Customer Traffic", y = "# Transactions") +
+  theme_minimal()
+```
+
+
+### Hours of Operation
+
+```{r warning=FALSE, message=FALSE}
+hourly_sales <- clean_time %>%
+  mutate(hour = hour(datetime_local)) %>%
+  group_by(Name, hour) %>%
+  summarise(transactions = n(), .groups = "drop")
+
+ggplot(hourly_sales, aes(hour, transactions, color = Name)) +
+  geom_line(size = 1.1) +
+  scale_x_continuous(breaks = 0:23) +
+  labs(title = "Business Hours & Customer Activity", x = "Hour of Day") +
+  theme_minimal()
+```
+
+
+Even though LeBelle doesn't have the highest customer traffic, they're showing the clearest upward trend in revenue across the three months. Their growth is strong and consistent, with June and July both outperforming earlier months. Because they're expanding quickly and bringing in more money over time, I’d choose LeBelle for the loan and witht that they can get more traction and attention.
