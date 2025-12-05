@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -89,9 +152,6 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="../project_page.html">Projects</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../case_studies/gapminder1.html">Case Study</a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="../task_manager.html">Tasks</a>
   </li>  
 </ul>
@@ -126,7 +186,12 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">DS350 Nuclear Project</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Home Page</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../case_studies.html" class="sidebar-item-text sidebar-link">Case Study</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -199,7 +264,13 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link active" data-scroll-target="#interpretation">Interpretation</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -220,8 +291,152 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(Lahman, priceR, ggplot2, pander, tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># data(package = "Lahman")</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>baseball <span class="ot">&lt;-</span> CollegePlaying <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="fu">left_join</span>(Schools, <span class="at">by =</span> <span class="st">"schoolID"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    People <span class="sc">%&gt;%</span> </span>
+<span id="cb2-7"><a href="#cb2-7"></a>      <span class="fu">select</span>(playerID, nameFirst, nameLast), <span class="at">by =</span> <span class="st">"playerID"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-8"><a href="#cb2-8"></a>  <span class="fu">left_join</span>(Salaries, <span class="at">by =</span> <span class="st">"playerID"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a>ajdusted_baseball <span class="ot">&lt;-</span> baseball <span class="sc">%&gt;%</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">"UT"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-12"><a href="#cb2-12"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-13"><a href="#cb2-13"></a>    <span class="at">salary_2021 =</span> <span class="fu">adjust_for_inflation</span>(</span>
+<span id="cb2-14"><a href="#cb2-14"></a>      <span class="at">price =</span> salary,</span>
+<span id="cb2-15"><a href="#cb2-15"></a>      <span class="at">from_date =</span> yearID.y,</span>
+<span id="cb2-16"><a href="#cb2-16"></a>      <span class="at">country =</span> <span class="st">"US"</span>,</span>
+<span id="cb2-17"><a href="#cb2-17"></a>      <span class="at">to_date =</span> <span class="dv">2021</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>    )</span>
+<span id="cb2-19"><a href="#cb2-19"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Generating URL to request all 296 results
+Retrieving inflation data for US 
+Generating URL to request all 65 results</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>utah_players <span class="ot">&lt;-</span> ajdusted_baseball <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">left_join</span>(Batting <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(playerID) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3"></a>              <span class="fu">summarize</span>(<span class="at">batting_total =</span> <span class="fu">sum</span>(H, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), <span class="at">by =</span> <span class="st">"playerID"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">left_join</span>(Pitching <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(playerID) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-5"><a href="#cb4-5"></a>              <span class="fu">summarize</span>(<span class="at">pitching_total =</span> <span class="fu">sum</span>(SO, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), <span class="at">by =</span> <span class="st">"playerID"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">left_join</span>(Fielding <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(playerID) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-7"><a href="#cb4-7"></a>              <span class="fu">summarize</span>(<span class="at">fielding_total =</span> <span class="fu">sum</span>(PO <span class="sc">+</span> A, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), <span class="at">by =</span> <span class="st">"playerID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>school_stats <span class="ot">&lt;-</span> utah_players <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">group_by</span>(name_full) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="at">batting =</span> <span class="fu">mean</span>(batting_total, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="at">pitching =</span> <span class="fu">mean</span>(pitching_total, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="at">fielding =</span> <span class="fu">mean</span>(fielding_total, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-7"><a href="#cb5-7"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(batting, pitching, fielding),</span>
+<span id="cb5-9"><a href="#cb5-9"></a>               <span class="at">names_to =</span> <span class="st">"stat"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10"></a>               <span class="at">values_to =</span> <span class="st">"value"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">ggplot</span>(school_stats, <span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> name_full, <span class="at">fill =</span> stat)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"stack"</span>) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="at">title =</span> <span class="st">"Overall Batting, Pitching, and Fielding Strength by Utah College"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6"></a>    <span class="at">x =</span> <span class="st">"College"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7"></a>    <span class="at">y =</span> <span class="st">"Total Performance"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8"></a>    <span class="at">fill =</span> <span class="st">"Stat Type"</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb6-11"><a href="#cb6-11"></a>    <span class="at">batting =</span> <span class="st">"#2A6F97"</span>,</span>
+<span id="cb6-12"><a href="#cb6-12"></a>    <span class="at">pitching =</span> <span class="st">"#a2559c"</span>,</span>
+<span id="cb6-13"><a href="#cb6-13"></a>    <span class="at">fielding =</span> <span class="st">"#e56e5a"</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>  )) <span class="sc">+</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a>  <span class="fu">theme</span>(</span>
+<span id="cb6-16"><a href="#cb6-16"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
+<span id="cb6-17"><a href="#cb6-17"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="ballgame_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
+<p>When I looked at the average batting, pitching, and fielding stats for each Utah school, BYU clearly stood out. Even when you average the performance per player (so BYU isn’t getting credit just for having more MLB guys), the BYU players still come out ahead in basically every category. Some of the other schools have a few solid players, but overall BYU is producing the most well-rounded MLB athletes. It’s actually pretty cool to see how consistent that pattern is across all three stats.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>bubble_data <span class="ot">&lt;-</span> utah_players <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(salary_2021), salary_2021 <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span>     <span class="co"># keep players with salary data</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="at">total_performance =</span> batting_total <span class="sc">+</span> pitching_total <span class="sc">+</span> fielding_total</span>
+<span id="cb7-5"><a href="#cb7-5"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">group_by</span>(playerID, name_full) <span class="sc">%&gt;%</span>                      <span class="co"># one row per player</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="at">avg_total_perf =</span> <span class="fu">mean</span>(total_performance, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-9"><a href="#cb7-9"></a>    <span class="at">avg_salary_2021 =</span> <span class="fu">mean</span>(salary_2021, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-10"><a href="#cb7-10"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>school_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="st">"Brigham Young University"</span> <span class="ot">=</span> <span class="st">"#022e59"</span>,   <span class="co"># BYU blue</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="st">"College of Eastern Utah"</span> <span class="ot">=</span> <span class="st">"#DAA520"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="st">"Dixie State College of Utah"</span> <span class="ot">=</span> <span class="st">"#228B22"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="st">"Salt Lake Community College"</span> <span class="ot">=</span> <span class="st">"#38aabb"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6"></a>  <span class="st">"Snow College"</span> <span class="ot">=</span> <span class="st">"#87CEEB"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7"></a>  <span class="st">"Southern Utah University"</span> <span class="ot">=</span> <span class="st">"#e56e5a"</span>,</span>
+<span id="cb8-8"><a href="#cb8-8"></a>  <span class="st">"University of Utah"</span> <span class="ot">=</span> <span class="st">"#883039"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9"></a>  <span class="st">"Utah Valley State University"</span> <span class="ot">=</span> <span class="st">"#a2559c"</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>)</span>
+<span id="cb8-11"><a href="#cb8-11"></a></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="fu">ggplot</span>(bubble_data, <span class="fu">aes</span>(</span>
+<span id="cb8-13"><a href="#cb8-13"></a>  <span class="at">x =</span> name_full,</span>
+<span id="cb8-14"><a href="#cb8-14"></a>  <span class="at">y =</span> avg_total_perf,</span>
+<span id="cb8-15"><a href="#cb8-15"></a>  <span class="at">size =</span> avg_salary_2021,</span>
+<span id="cb8-16"><a href="#cb8-16"></a>  <span class="at">color =</span> name_full</span>
+<span id="cb8-17"><a href="#cb8-17"></a>)) <span class="sc">+</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.65</span>) <span class="sc">+</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>dollar) <span class="sc">+</span></span>
+<span id="cb8-20"><a href="#cb8-20"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-21"><a href="#cb8-21"></a>    <span class="at">title =</span> <span class="st">"MLB Player Performance vs Salary by Utah College"</span>,</span>
+<span id="cb8-22"><a href="#cb8-22"></a>    <span class="at">subtitle =</span> <span class="st">"Bubble size represents average career salary (2021 dollars)"</span>,</span>
+<span id="cb8-23"><a href="#cb8-23"></a>    <span class="at">x =</span> <span class="st">"College"</span>,</span>
+<span id="cb8-24"><a href="#cb8-24"></a>    <span class="at">y =</span> <span class="st">"Average MLB Player Performance</span><span class="sc">\n</span><span class="st">(Batting + Pitching + Fielding)"</span>,</span>
+<span id="cb8-25"><a href="#cb8-25"></a>    <span class="at">size =</span> <span class="st">"Avg Salary (2021 USD)"</span>,</span>
+<span id="cb8-26"><a href="#cb8-26"></a>    <span class="at">color =</span> <span class="st">"College"</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a>  ) <span class="sc">+</span> <span class="fu">scale_color_manual</span>(<span class="at">values =</span> school_colors) <span class="sc">+</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb8-29"><a href="#cb8-29"></a>  <span class="fu">theme</span>(</span>
+<span id="cb8-30"><a href="#cb8-30"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
+<span id="cb8-31"><a href="#cb8-31"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="ballgame_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The bubble chart tells a similar story but from a different angle. Schools with higher-performing players also tend to have higher average salaries, and BYU players are again clustered toward the top with some of the bigger salary bubbles. A lot of the smaller schools barely register because they’ve only had one or two MLB players, and those players didn’t stick around long. BYU not only sends more players to the pros, but their players typically perform better and end up earning more. So overall, both graphs point to the same conclusion, BYU is easily the strongest, MLB pipeline out of all the Utah colleges.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
