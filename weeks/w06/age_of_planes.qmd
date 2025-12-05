@@ -3,3 +3,79 @@ title: "age_of_planes"
 format: html
 ---
 
+
+```{r}
+pacman::p_load(nycflights13, ggplot2, pander, tidyverse)
+
+flights_planes <- flights %>%
+  left_join(planes, by = "tailnum") %>%
+  mutate(plane_age = 2013 - year.y) %>%
+  filter(!is.na(plane_age))
+
+
+```
+
+
+```{r warning=FALSE, message=FALSE}
+ggplot(flights_planes, aes(plane_age, dep_delay)) +
+  geom_point(alpha = 0.15, color = "#2A6F97") +
+  geom_smooth(color = "red", fill = "#2A6F9730") +
+  labs(
+    title = "Departure Delay vs Plane Age",
+    x = "Plane Age (years)",
+    y = "Departure Delay (minutes)"
+  ) +
+  theme_minimal(base_size = 14)
+
+```
+
+There is no strong relationship between plane age and departure delay. The trend line is nearly flat, and planes of all ages experience similar delay patterns. This suggests that departure delays are caused more by airport congestion, scheduling, or weather rather than the age of the airplane.
+
+
+
+```{r}
+flights_planes <- flights_planes %>%
+  mutate(
+    age_group = case_when(
+      plane_age <= 10 ~ "0–10",
+      plane_age <= 20 ~ "11–20",
+      plane_age <= 30 ~ "21–30",
+      TRUE ~ ">30"
+    )
+  )
+flights_planes <- flights_planes %>%
+  left_join(airlines, by = "carrier")
+
+```
+
+```{r}
+ggplot(flights_planes, aes(name, plane_age)) +
+  geom_boxplot(fill = "#2A6F97", color = "black", alpha = 0.5) +
+  coord_flip() +
+  labs(
+    title = "Distribution of Plane Age by Airline",
+    x = "Airline",
+    y = "Plane Age (years)"
+  ) +
+  theme_minimal(base_size = 14)
+
+```
+
+Different airlines operate fleets of different ages. Some carriers, such as Virgin America or JetBlue, have newer fleets, while others, like American and Delta, operate a wider range of aircraft ages, including some older models. This reflects differences in fleet renewal strategies and the variety of aircraft used by each airline. Even within a single airline, there is a mix of new and older planes.
+
+
+```{r warning=FALSE, message=FALSE}
+ggplot(flights_planes, aes(plane_age, arr_delay)) +
+  geom_point(alpha = 0.15, color = "#2A6F97") +
+  geom_smooth(color = "red", fill = "#2A6F9730") +
+  labs(
+    title = "Arrival Delay vs Plane Age",
+    x = "Plane Age (years)",
+    y = "Arrival Delay (minutes)"
+  ) +
+  theme_minimal(base_size = 14)
+
+```
+
+
+The arrival delay plot looks nearly identical to the departure delay plot. This makes sense because arrival delays are highly influenced by departure delays. The trend remains essentially flat, and planes of all ages experience similar delay patterns. There is no strong evidence that older planes arrive later or earlier than newer planes. This suggests that arrival delays are primarily driven by operational factors (airport congestion, weather, scheduling, departure delay) rather than aircraft age.
