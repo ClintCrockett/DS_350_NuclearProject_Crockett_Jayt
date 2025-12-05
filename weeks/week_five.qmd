@@ -9,4 +9,4 @@ format: html
 
 <a class="btn btn-primary m-1" href="./w05/polish_visualization.qmd">Polish Visualization</a>
 
-<a class="btn btn-primary m-1" href="./w05/stock_task.qmd">Visualization for Presentation</a>
+<a class="btn btn-primary m-1" href="./w05/visualization_for_presentation.qmd">Visualization for Presentation</a>

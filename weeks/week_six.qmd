@@ -7,4 +7,6 @@ format: html
 
 #### Completed assignments for that week
 
-<a class="btn btn-primary m-1" href="./w01/First_Quarto_File">First Task</a>
+<a class="btn btn-primary m-1" href="./w06/age_of_planes.qmd">Age of Planes</a>
+
+<a class="btn btn-primary m-1" href="./w06/write_github_issues.qmd">Write Github Issues</a>

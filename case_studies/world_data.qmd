@@ -3,3 +3,63 @@ title: "world_data"
 format: html
 ---
 
+```{r warning=FALSE, message=FALSE}
+pacman::p_load(readr, tidyverse, pander, ggrepel)
+
+obesity <- read_csv("../case_studies/data/obesity.csv")
+
+obesity <- obesity %>% 
+  rename(
+    weight = "Overweight or Obese (NCDRisC (2017))",
+    calorie = "Daily calorie supply per person",
+    population = "Population (historical)",
+    regions = "World regions according to OWID"
+  )
+# View(obesity)
+
+```
+
+
+```{r warning=FALSE}
+ggplot(obesity, aes(calorie, weight, color = regions)) +
+  geom_point(aes(size = population), alpha = 0.8) +
+  geom_text_repel(aes(label = Entity), size = 4, max.overlaps = 20) +
+  scale_size(range = c(2, 12), guide = "none") +
+  scale_color_manual(
+    values = c(
+      "North America" = "#a2559c",
+      "South America" = "#0b847e",
+      "Africa" = "#4c6a9d",
+      "Europe" = "#e56e5a",
+      "Asia" = "#38aabb",
+      "Oceania" = "#883039"
+    )
+  ) +
+  scale_x_continuous(
+    breaks = seq(1500, 4000, 500),
+    labels = function(x) paste(x, "kcal")
+  ) +
+  scale_y_continuous(
+    labels = scales::percent_format(scale = 1)
+  ) +
+    labs(
+    title = "Overweight or Obese",
+    x = "Caloric supply (kilocalories per day)",
+    y = "",
+    color = "Region"
+  ) +
+  theme_minimal(base_size = 13) 
+
+```
+
+
+### Reference Picture
+
+```{r message=FALSE}
+library(magick)
+
+img <- image_read("data/men_overweight_or_obese.jpeg")
+plot(img)
+
+```
+
