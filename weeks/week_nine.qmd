@@ -7,4 +7,6 @@ format: html
 
 #### Completed assignments for that week
 
-<a class="btn btn-primary m-1" href="./w01/First_Quarto_File">First Task</a>
+<a class="btn btn-primary m-1" href="./w09/data_search.qmd">Data Search</a>
+
+<a class="btn btn-primary m-1" href="./w09/maps_leaflets.qmd">Maps Leaflets</a>

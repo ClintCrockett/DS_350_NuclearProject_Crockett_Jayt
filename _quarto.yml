@@ -47,6 +47,8 @@ website:
         text: "About"
       - href: project_page.qmd
         text: "Projects"
+      - href: case_studies.qmd
+        text: "Case Study"
       - href: task_manager.qmd
         text: "Tasks"
     right:
