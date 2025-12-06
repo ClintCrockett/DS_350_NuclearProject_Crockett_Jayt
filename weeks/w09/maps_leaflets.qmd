@@ -11,35 +11,57 @@ hot_springs <- read_csv("hot_springs.csv")
 ```
 
 ```{r warning=FALSE, message=FALSE}
+expected <- c("Easy", "Easy-Moderate", "Moderate", "Moderate-Hard", "Hard", "Strenuous")
+
+unexpected <- setdiff(unique(hot_springs$difficulty), expected)
+
+if (length(unexpected) > 0) {
+  message("Unexpected difficulty values found: ", paste(unexpected, collapse = ", "))
+  }
+
 my_colors <- as.character(paletteer::paletteer_c("ggthemes::Blue-Green Sequential", 30))
 
 access_pal <- colorFactor(
   palette = my_colors,
   domain = hot_springs$access_type
-)
+  )
 
 leaflet(hot_springs) %>%
   addProviderTiles("Esri.WorldImagery", group = "Satellite") %>%
   addProviderTiles("OpenTopoMap", group = "Topo") %>%
   addProviderTiles("Stadia.StamenWatercolor", group = "Watercolor") %>%
-  
-  addCircleMarkers(lng = ~lng, lat = ~lat, radius = ~case_when(
-  difficulty %in% c("Easy") ~ 6,
-  difficulty %in% c("Easy-Moderate","Moderate") ~ 7, TRUE ~ 8), 
-  color = "white", weight = 1, fillColor = ~access_pal(access_type), fillOpacity = 0.9, popup = ~paste(
+
+addCircleMarkers(
+  lng = ~lng,
+  lat = ~lat,
+  radius = ~case_when(
+  difficulty == "Easy" ~ 6,
+  difficulty == "Easy-Moderate" ~ 7,
+  difficulty == "Moderate" ~ 8,
+  difficulty == "Moderate-Hard" ~ 9,
+  difficulty == "Hard" ~ 10,
+  difficulty == "Strenuous" ~ 12,
+  TRUE ~ 8
+  ),
+  color = "white",
+  weight = 1,
+  fillColor = ~access_pal(access_type),
+  fillOpacity = 0.9,
+  popup = ~paste(
   "<b>", name, "</b><br>",
   state, "<br>",
-  "Elevation:", elevation_ft, "ft<br>",
-  "Temp (approx):", temperature_F, "°F<br>",
-  "Access:", access_type, "<br>",
-  "Hike distance:", hike_distance_miles, "miles<br>",
-  "Difficulty:", difficulty, "<br>",
-  "<em>", notes, "</em>")
+  "Elevation: ", elevation_ft, " ft<br>",
+  "Temp (approx): ", temperature_F, " °F<br>",
+  "Access: ", access_type, "<br>",
+  "Hike distance: ", hike_distance_miles, " miles<br>",
+  "Difficulty: ", difficulty, "<br>",
+  "<em>", notes, "</em>"
+  )
   ) %>%
+  
   addLayersControl(
   baseGroups = c("Satellite", "Topo", "Watercolor"),
   options = layersControlOptions(collapsed = FALSE)
-)
+  )
 
 ```
-
