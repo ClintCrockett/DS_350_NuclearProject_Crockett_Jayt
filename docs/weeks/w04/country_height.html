@@ -152,6 +152,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="nav-link" href="../../project_page.html">Projects</a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../case_studies.html">Case Study</a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../task_manager.html">Tasks</a>
   </li>  
 </ul>
@@ -289,62 +292,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.2
-✔ ggplot2   4.0.0     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.1.0     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a>heights_raw <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/Height.xlsx"</span>, <span class="at">skip =</span> <span class="dv">1</span>)  </span>
-<span id="cb3-4"><a href="#cb3-4"></a></span>
-<span id="cb3-5"><a href="#cb3-5"></a>heights_raw <span class="ot">&lt;-</span> heights_raw <span class="sc">%&gt;%</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>  <span class="fu">rename</span>(<span class="at">code =</span> <span class="dv">1</span>, <span class="at">country =</span> <span class="dv">2</span>)</span>
-<span id="cb3-7"><a href="#cb3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8"></a>heights <span class="ot">&lt;-</span> heights_raw <span class="sc">%&gt;%</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb3-10"><a href="#cb3-10"></a>    <span class="at">cols =</span> <span class="sc">-</span><span class="fu">c</span>(code, country),</span>
-<span id="cb3-11"><a href="#cb3-11"></a>    <span class="at">names_to =</span> <span class="st">"year_decade"</span>,</span>
-<span id="cb3-12"><a href="#cb3-12"></a>    <span class="at">values_to =</span> <span class="st">"height_cm"</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(year_decade, <span class="st">"^[0-9]+$"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb3-16"><a href="#cb3-16"></a>    <span class="at">height_cm =</span> <span class="fu">as.numeric</span>(height_cm),</span>
-<span id="cb3-17"><a href="#cb3-17"></a>    <span class="at">year_decade =</span> <span class="fu">as.numeric</span>(year_decade),</span>
-<span id="cb3-18"><a href="#cb3-18"></a>    <span class="at">height_in =</span> height_cm <span class="sc">/</span> <span class="fl">2.54</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(height_cm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>heights_raw <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/Height.xlsx"</span>, <span class="at">skip =</span> <span class="dv">1</span>)  </span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>heights_raw <span class="ot">&lt;-</span> heights_raw <span class="sc">%&gt;%</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="fu">rename</span>(<span class="at">code =</span> <span class="dv">1</span>, <span class="at">country =</span> <span class="dv">2</span>)</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a>heights <span class="ot">&lt;-</span> heights_raw <span class="sc">%&gt;%</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb1-12"><a href="#cb1-12"></a>    <span class="at">cols =</span> <span class="sc">-</span><span class="fu">c</span>(code, country),</span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="at">names_to =</span> <span class="st">"year_decade"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="at">values_to =</span> <span class="st">"height_cm"</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(year_decade, <span class="st">"^[0-9]+$"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-18"><a href="#cb1-18"></a>    <span class="at">height_cm =</span> <span class="fu">as.numeric</span>(height_cm),</span>
+<span id="cb1-19"><a href="#cb1-19"></a>    <span class="at">year_decade =</span> <span class="fu">as.numeric</span>(year_decade),</span>
+<span id="cb1-20"><a href="#cb1-20"></a>    <span class="at">height_in =</span> height_cm <span class="sc">/</span> <span class="fl">2.54</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(height_cm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggplot</span>(heights, <span class="fu">aes</span>(<span class="at">x =</span> year_decade, <span class="at">y =</span> height_in, <span class="at">group =</span> country)) <span class="sc">+</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> heights <span class="sc">%&gt;%</span> <span class="fu">filter</span>(country <span class="sc">!=</span> <span class="st">"Germany"</span>), <span class="at">color =</span> <span class="st">"grey80"</span>) <span class="sc">+</span> </span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> heights <span class="sc">%&gt;%</span> <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"Germany"</span>), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span> <span class="co"># Germany bold</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> heights <span class="sc">%&gt;%</span> <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"Germany"</span>), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="fu">labs</span>(</span>
-<span id="cb4-6"><a href="#cb4-6"></a>    <span class="at">title =</span> <span class="st">"Average Heights Over Time by Country"</span>,</span>
-<span id="cb4-7"><a href="#cb4-7"></a>    <span class="at">x =</span> <span class="st">"Year / Decade"</span>,</span>
-<span id="cb4-8"><a href="#cb4-8"></a>    <span class="at">y =</span> <span class="st">"Height (inches)"</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a>  ) <span class="sc">+</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">ggplot</span>(heights, <span class="fu">aes</span>(<span class="at">x =</span> year_decade, <span class="at">y =</span> height_in, <span class="at">group =</span> country)) <span class="sc">+</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> heights <span class="sc">%&gt;%</span> <span class="fu">filter</span>(country <span class="sc">!=</span> <span class="st">"Germany"</span>), <span class="at">color =</span> <span class="st">"grey80"</span>) <span class="sc">+</span> </span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> heights <span class="sc">%&gt;%</span> <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"Germany"</span>), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span> <span class="co"># Germany bold</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> heights <span class="sc">%&gt;%</span> <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"Germany"</span>), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="at">title =</span> <span class="st">"Average Heights Over Time by Country"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="at">x =</span> <span class="st">"Year / Decade"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8"></a>    <span class="at">y =</span> <span class="st">"Height (inches)"</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb2-11"><a href="#cb2-11"></a>  <span class="fu">theme</span>(</span>
+<span id="cb2-12"><a href="#cb2-12"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>, <span class="at">family =</span> <span class="st">"serif"</span>, <span class="at">face =</span> <span class="st">"bold"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-ℹ Please use `linewidth` instead.</code></pre>
-</div>
 <div class="cell-output-display">
 <p><img src="country_height_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>

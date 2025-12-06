@@ -3,7 +3,7 @@ title: "country_height"
 format: html
 ---
 
-```{r}
+```{r warning=FALSE,message=FALSE}
 library(readxl)
 library(tidyverse)
 library(ggplot2)
