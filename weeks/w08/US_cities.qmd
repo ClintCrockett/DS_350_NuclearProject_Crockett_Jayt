@@ -52,6 +52,10 @@ rank_colors <- c(
 ```
 
 ```{r warning=FALSE, message=FALSE}
+#| fig-width: 12
+#| fig-height: 10
+
+
 top3 <- top3 %>%
   mutate(pop_thousands = population / 1000)
 

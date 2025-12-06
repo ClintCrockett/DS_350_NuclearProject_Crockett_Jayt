@@ -1,0 +1,68 @@
+---
+title: "Counting Words"
+format:
+  html:
+    code-fold: true
+    code-line-numbers: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(rio)
+
+scriptures <- rio::import("https://github.com/beandog/lds-scriptures/raw/master/csv/lds-scriptures.csv")
+
+
+scriptures <- scriptures %>%
+  mutate(
+    word_count = str_count(scripture_text, "\\S+")
+  )
+
+avg_lengths <- scriptures %>%
+  filter(volume_title %in% c("New Testament", "Book of Mormon")) %>%
+  group_by(volume_title) %>%
+  summarise(avg_words = mean(word_count))
+
+
+
+avg_lengths
+
+
+```
+
+```{r}
+jesus_counts <- scriptures %>%
+  filter(volume_title %in% c("New Testament", "Book of Mormon")) %>%
+  mutate(
+    jesus_count = str_count(scripture_text,
+                            regex("\\bJesus\\b", ignore_case = TRUE))
+  ) %>%
+  group_by(volume_title) %>%
+  summarise(total_jesus = sum(jesus_count))
+
+jesus_counts
+
+
+```
+
+```{r}
+bom <- scriptures %>%
+  filter(volume_title == "Book of Mormon")
+
+ggplot(bom, aes(x = book_title, y = word_count)) +
+  geom_violin(trim = FALSE) +
+  geom_boxplot(width = 0.1, outlier.size = 0.5) +
+  coord_flip() +
+  labs(
+    title = "Distribution of Words per Verse for Each Book in the Book of Mormon",
+    x = "Book",
+    y = "Words per Verse"
+  ) +
+  theme_minimal()
+
+
+```
