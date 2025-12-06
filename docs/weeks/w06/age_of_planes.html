@@ -152,6 +152,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="nav-link" href="../../project_page.html">Projects</a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../case_studies.html">Case Study</a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../task_manager.html">Tasks</a>
   </li>  
 </ul>
@@ -290,79 +293,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(nycflights13, ggplot2, pander, tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>flights_planes <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>  <span class="fu">left_join</span>(planes, <span class="at">by =</span> <span class="st">"tailnum"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="fu">mutate</span>(<span class="at">plane_age =</span> <span class="dv">2013</span> <span class="sc">-</span> year.y) <span class="sc">%&gt;%</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(plane_age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a>planes_clean <span class="ot">&lt;-</span> planes <span class="sc">%&gt;%</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">rename</span>(<span class="at">plane_year =</span> year)</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a>flights_planes <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="fu">left_join</span>(planes_clean, <span class="at">by =</span> <span class="st">"tailnum"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-9"><a href="#cb1-9"></a>    <span class="at">plane_age =</span> year <span class="sc">-</span> plane_year</span>
+<span id="cb1-10"><a href="#cb1-10"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">ggplot</span>(flights_planes, <span class="fu">aes</span>(plane_age, dep_delay)) <span class="sc">+</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.15</span>, <span class="at">color =</span> <span class="st">"#2A6F97"</span>) <span class="sc">+</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">fill =</span> <span class="st">"#2A6F9730"</span>) <span class="sc">+</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="fu">labs</span>(</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    <span class="at">title =</span> <span class="st">"Departure Delay vs Plane Age"</span>,</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    <span class="at">x =</span> <span class="st">"Plane Age (years)"</span>,</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="at">y =</span> <span class="st">"Departure Delay (minutes)"</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>  ) <span class="sc">+</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>missing_count <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(flights_planes<span class="sc">$</span>plane_year))</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">pander</span>(missing_count, <span class="at">caption =</span> <span class="st">"Number of flights missing manufacturing year"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="age_of_planes_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<p><em>57912</em></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>flights_planes <span class="ot">&lt;-</span> flights_planes <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(plane_age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Over 57,000 flights were missing plane manufacturing years, meaning more than half the dataset could not be used to calculate plane age. After removing those rows, the analysis shows that plane age has little to no relationship with either departure or arrival delays. The trend lines remain flat across all ages, suggesting operational factors (airport congestion, scheduling, weather) play a much larger role in delays than aircraft age.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggplot</span>(flights_planes, <span class="fu">aes</span>(plane_age, dep_delay)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.15</span>, <span class="at">color =</span> <span class="st">"#2A6F97"</span>) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">fill =</span> <span class="st">"#2A6F9730"</span>) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">labs</span>(</span>
+<span id="cb4-5"><a href="#cb4-5"></a>    <span class="at">title =</span> <span class="st">"Departure Delay vs Plane Age"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="at">x =</span> <span class="st">"Plane Age (years)"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7"></a>    <span class="at">y =</span> <span class="st">"Departure Delay (minutes)"</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="age_of_planes_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>There is no strong relationship between plane age and departure delay. The trend line is nearly flat, and planes of all ages experience similar delay patterns. This suggests that departure delays are caused more by airport congestion, scheduling, or weather rather than the age of the airplane.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>flights_planes <span class="ot">&lt;-</span> flights_planes <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb3-3"><a href="#cb3-3"></a>    <span class="at">age_group =</span> <span class="fu">case_when</span>(</span>
-<span id="cb3-4"><a href="#cb3-4"></a>      plane_age <span class="sc">&lt;=</span> <span class="dv">10</span> <span class="sc">~</span> <span class="st">"0–10"</span>,</span>
-<span id="cb3-5"><a href="#cb3-5"></a>      plane_age <span class="sc">&lt;=</span> <span class="dv">20</span> <span class="sc">~</span> <span class="st">"11–20"</span>,</span>
-<span id="cb3-6"><a href="#cb3-6"></a>      plane_age <span class="sc">&lt;=</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">"21–30"</span>,</span>
-<span id="cb3-7"><a href="#cb3-7"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"&gt;30"</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a>    )</span>
-<span id="cb3-9"><a href="#cb3-9"></a>  )</span>
-<span id="cb3-10"><a href="#cb3-10"></a>flights_planes <span class="ot">&lt;-</span> flights_planes <span class="sc">%&gt;%</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a>  <span class="fu">left_join</span>(airlines, <span class="at">by =</span> <span class="st">"carrier"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>flights_planes <span class="ot">&lt;-</span> flights_planes <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="at">age_group =</span> <span class="fu">case_when</span>(</span>
+<span id="cb5-4"><a href="#cb5-4"></a>      plane_age <span class="sc">&lt;=</span> <span class="dv">10</span> <span class="sc">~</span> <span class="st">"0–10"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5"></a>      plane_age <span class="sc">&lt;=</span> <span class="dv">20</span> <span class="sc">~</span> <span class="st">"11–20"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6"></a>      plane_age <span class="sc">&lt;=</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">"21–30"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"&gt;30"</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>    )</span>
+<span id="cb5-9"><a href="#cb5-9"></a>  )</span>
+<span id="cb5-10"><a href="#cb5-10"></a>flights_planes <span class="ot">&lt;-</span> flights_planes <span class="sc">%&gt;%</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>  <span class="fu">left_join</span>(airlines, <span class="at">by =</span> <span class="st">"carrier"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggplot</span>(flights_planes, <span class="fu">aes</span>(name, plane_age)) <span class="sc">+</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"#2A6F97"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">labs</span>(</span>
-<span id="cb4-5"><a href="#cb4-5"></a>    <span class="at">title =</span> <span class="st">"Distribution of Plane Age by Airline"</span>,</span>
-<span id="cb4-6"><a href="#cb4-6"></a>    <span class="at">x =</span> <span class="st">"Airline"</span>,</span>
-<span id="cb4-7"><a href="#cb4-7"></a>    <span class="at">y =</span> <span class="st">"Plane Age (years)"</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a>  ) <span class="sc">+</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">ggplot</span>(flights_planes, <span class="fu">aes</span>(name, plane_age)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"#2A6F97"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="at">title =</span> <span class="st">"Distribution of Plane Age by Airline"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6"></a>    <span class="at">x =</span> <span class="st">"Airline"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7"></a>    <span class="at">y =</span> <span class="st">"Plane Age (years)"</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="age_of_planes_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="age_of_planes_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Different airlines operate fleets of different ages. Some carriers, such as Virgin America or JetBlue, have newer fleets, while others, like American and Delta, operate a wider range of aircraft ages, including some older models. This reflects differences in fleet renewal strategies and the variety of aircraft used by each airline. Even within a single airline, there is a mix of new and older planes.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">ggplot</span>(flights_planes, <span class="fu">aes</span>(plane_age, arr_delay)) <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.15</span>, <span class="at">color =</span> <span class="st">"#2A6F97"</span>) <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">fill =</span> <span class="st">"#2A6F9730"</span>) <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-5"><a href="#cb5-5"></a>    <span class="at">title =</span> <span class="st">"Arrival Delay vs Plane Age"</span>,</span>
-<span id="cb5-6"><a href="#cb5-6"></a>    <span class="at">x =</span> <span class="st">"Plane Age (years)"</span>,</span>
-<span id="cb5-7"><a href="#cb5-7"></a>    <span class="at">y =</span> <span class="st">"Arrival Delay (minutes)"</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>  ) <span class="sc">+</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(flights_planes, <span class="fu">aes</span>(plane_age, arr_delay)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.15</span>, <span class="at">color =</span> <span class="st">"#2A6F97"</span>) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">fill =</span> <span class="st">"#2A6F9730"</span>) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="at">title =</span> <span class="st">"Arrival Delay vs Plane Age"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="at">x =</span> <span class="st">"Plane Age (years)"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7"></a>    <span class="at">y =</span> <span class="st">"Arrival Delay (minutes)"</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="age_of_planes_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="age_of_planes_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>The arrival delay plot looks nearly identical to the departure delay plot. This makes sense because arrival delays are highly influenced by departure delays. The trend remains essentially flat, and planes of all ages experience similar delay patterns. There is no strong evidence that older planes arrive later or earlier than newer planes. This suggests that arrival delays are primarily driven by operational factors (airport congestion, weather, scheduling, departure delay) rather than aircraft age.</p>
