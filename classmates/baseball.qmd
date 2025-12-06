@@ -1,0 +1,126 @@
+---
+title: "baseball"
+format: 
+  html:
+    code-fold: true
+    fig-dpi: 300
+---
+
+```{r}
+#| message: false
+#| warning: false
+library(tidyverse)
+library(Lahman)
+library(ggrepel)
+
+```
+
+```{r}
+#| message: false
+#| warning: false
+
+#Gathering Data
+
+players <- Salaries %>%
+  mutate(salary = salary/1000) %>% 
+  left_join(People, by="playerID") %>% 
+  select(playerID, nameFirst, nameLast, salary, yearID)
+
+college <- CollegePlaying %>% 
+  group_by(playerID) %>% 
+  summarise(schoolID = last(schoolID, order_by = yearID)) %>% 
+  left_join(Schools, by = "schoolID") %>% 
+  select(playerID, schoolID, name_full, state)
+
+full <- players %>% 
+  left_join(college, by = "playerID") %>%
+  filter(state == "UT") %>%
+  group_by(playerID) %>% 
+  mutate(year = rank(as.numeric(yearID))-1) %>% 
+  ungroup()
+
+
+grouped_full <- full%>% 
+  group_by(name_full, year) %>% 
+  summarise(
+    salary = mean(salary),
+    player_cnt = n()
+  )
+
+top2 <- grouped_full %>% 
+  mutate(salary = salary/1000) %>% 
+  filter(name_full %in% c("Brigham Young University", "Dixie State College of Utah"))
+
+
+  
+
+```
+
+When it comes to Professional Baseball, only two Utah colleges have been truly successful in delivering players: Dixie State and BYU. Below is a graph showing how the two compare to each other
+
+```{r}
+#| message: false
+#| warning: false
+ggplot(top2, aes(year, salary, color=name_full)) +
+  geom_line(linewidth = 1) +
+  theme_minimal()+
+  geom_text_repel(data = top2 %>% filter(year %% 4 == 0), aes(label = player_cnt), nudge_x = -.3, nudge_y = .4)+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(size =23),
+    plot.subtitle = element_text(color = "grey30", size = 12),
+    panel.grid = element_blank(),
+    panel.grid.major.y = element_line(linetype = "dashed", linewidth = .75, color = "grey80"),
+    axis.line.x.bottom = element_line(linewidth = 1, color = "grey80"),
+    axis.title = element_text(color = "grey25"),
+    axis.text = element_text(color = "grey40")
+  )+
+  labs(
+    title = "BYU vs Dixie State - Baseball Careers",
+    subtitle = "avg salary and count of players",
+    y = "", x = "Years Played"
+  ) +
+  scale_x_continuous(
+    breaks = seq(0, 17, 2)
+  ) +
+  scale_y_continuous(
+    breaks = c(1, 3, 5),
+    labels = scales::label_dollar(prefix = "$", suffix = "M")
+  )+
+  scale_color_manual(values = c("#0072CE", "#C21B32"))
+```
+
+One could say, "look! Dixie has the highest paid baseball players on average!". They would be right, but they would have to ignore the amount of players that came from that college. Dixie has had two players, one of which had had a career that didn't even last 4 years. Sure that other player was paid more on average then the average of the BYU players, but BYU has had 8 alumni play professionally, dropping down to 5 when Dixie only had 1. BYU players come very close to performing similarly with those from Dixie, but have a 4 to 1 chance of making it to the big leagues, and staying.
+
+<br>
+
+To be complete, I have included a similar graph showing the players from other colleges, all of whom only had 1-2 players compete professionally.
+
+```{r}
+ggplot(grouped_full %>% filter(year <= 3), aes(year, salary, color=name_full)) +
+  geom_line(linewidth = 1) +
+  geom_point()+
+  theme_minimal()+
+  geom_text_repel(aes(label = player_cnt))+
+  theme(
+    legend.position = "none",
+    plot.title = element_text(size =23),
+    plot.subtitle = element_text(color = "grey40"),
+    panel.grid = element_blank(),
+    panel.grid.major.y = element_line(linetype = "dashed", linewidth = .75, color = "grey80"),
+    axis.line.x.bottom = element_line(linewidth = 1, color = "grey80"),
+    axis.title = element_text(color = "grey25"),
+    axis.text = element_text(color = "grey40")
+  )+
+  coord_cartesian(xlim = c(-.25,1.25), ylim = c(100,500))+
+  scale_y_continuous(
+    breaks = c(200, 400),
+    labels = scales::label_dollar(prefix = "$", suffix = "K")
+  )+
+  labs(
+    title = "Utah Colleges - Baseball Careers",
+    subtitle = "avg salary and count of players",
+    y = "Salary", x = "Years Played"
+  )
+
+```

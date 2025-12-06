@@ -32,14 +32,18 @@ heights <- heights_raw %>%
 ```{r}
 ggplot(heights, aes(x = year_decade, y = height_in, group = country)) +
   geom_line(data = heights %>% filter(country != "Germany"), color = "grey80") + 
-  geom_line(data = heights %>% filter(country == "Germany"), color = "red", size = 1.2) + # Germany bold
+  geom_line(data = heights %>% filter(country == "Germany"), color = "red", linewidth = 1.2) + # Germany bold
   geom_point(data = heights %>% filter(country == "Germany"), color = "red", size = 2) +
   labs(
     title = "Average Heights Over Time by Country",
     x = "Year / Decade",
     y = "Height (inches)"
   ) +
-  theme_minimal()
+  theme_minimal() + 
+  theme(
+    plot.title = element_text(size = 18, family = "serif", face = "bold")
+  )
+
 
 ```
 
