@@ -3,6 +3,7 @@ title: "string_task"
 format: html
 ---
 
+
 Question 1 (Use the `readr::read_lines()` function to read in each: [string—randomletters.txt](https://byuistats.github.io/M335/data/randomletters.txt) and [randomletters_wnumbers.txt.](https://byuistats.github.io/M335/data/randomletters_wnumbers.txt))
 
 ```{r}
@@ -48,6 +49,3 @@ longest_vowel_sequence <- vowel_sequences[which.max(nchar(vowel_sequences))]
 longest_vowel_sequence
 ```
 
-```{r}
-
-```

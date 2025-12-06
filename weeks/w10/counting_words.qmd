@@ -1,5 +1,5 @@
 ---
-title: "counting_words_task"
+title: "counting_words"
 format: html
 ---
 
@@ -75,5 +75,3 @@ ggplot(bom, aes(x = fct_reorder(book_title, num_words, .fun = median), y = num_w
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ```
-
-\

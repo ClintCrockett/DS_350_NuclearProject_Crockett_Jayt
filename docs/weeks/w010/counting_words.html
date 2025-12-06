@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>DS350_website_template - savior_names</title>
+<title>DS350_website_template - counting_words</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="nav-link" href="../../project_page.html">Projects</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../case_studies/gapminder1.html">Case Study</a>
+    <a class="nav-link" href="../../case_studies.html">Case Study</a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../task_manager.html">Tasks</a>
@@ -174,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">savior_names</h1>
+      <h1 class="quarto-secondary-nav-title">counting_words</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -189,7 +189,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../index.html" class="sidebar-item-text sidebar-link">DS350 Nuclear Project</a>
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">Home Page</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../case_studies.html" class="sidebar-item-text sidebar-link">Case Study</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -266,7 +271,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#analysis-of-words-between-savior-names" id="toc-analysis-of-words-between-savior-names" class="nav-link active" data-scroll-target="#analysis-of-words-between-savior-names">Analysis of Words Between Savior Names</a></li>
+  <li><a href="#scripture-data" id="toc-scripture-data" class="nav-link active" data-scroll-target="#scripture-data">Scripture data</a>
+  <ul class="collapse">
+  <li><a href="#average-verse-length" id="toc-average-verse-length" class="nav-link" data-scroll-target="#average-verse-length">Average Verse Length</a></li>
+  <li><a href="#counting-jesus" id="toc-counting-jesus" class="nav-link" data-scroll-target="#counting-jesus">Counting Jesus</a></li>
+  <li><a href="#count-words" id="toc-count-words" class="nav-link" data-scroll-target="#count-words">Count Words</a></li>
+  <li><a href="#visualize" id="toc-visualize" class="nav-link" data-scroll-target="#visualize">Visualize</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -275,7 +286,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">savior_names</h1>
+<h1 class="title d-none d-lg-block">counting_words</h1>
 </div>
 
 
@@ -289,92 +300,164 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
+<section id="scripture-data" class="level1">
+<h1>Scripture data</h1>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(readr, tidyverse, stringr, stringi, rio, pander, ggplot2, dplyr)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(readr, tidyverse, stringr, stringi, rio, pander, ggplot2)</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>savior_names <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"https://byuistats.github.io/M335/data/BoM_SaviorNames.rds"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">glimpse</span>(savior_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a>scriptures <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://github.com/beandog/lds-scriptures/raw/master/csv/lds-scriptures.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 112
-Columns: 6
-$ Book          &lt;chr&gt; "Ether", "Mosiah", "Mormon", "3 Nephi", "Mosiah", "Mosia…
-$ chapter_verse &lt;chr&gt; "4:7", "3:8", "9:29", "10:10", "7:19", "15:4", "7:27", "…
-$ name          &lt;chr&gt; "the Father of the heavens and of the earth, and all thi…
-$ reference     &lt;chr&gt; "Ether 4:7", "Mosiah 3:8", "Mormon 9:29", "3 Nephi 10:10…
-$ nchar         &lt;int&gt; 75, 40, 39, 37, 36, 34, 29, 29, 28, 28, 28, 27, 27, 26, …
-$ words         &lt;int&gt; 16, 7, 8, 6, 7, 6, 6, 6, 6, 6, 5, 4, 5, 5, 5, 4, 5, 5, 5…</code></pre>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 41995 Columns: 19
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (13): volume_title, book_title, volume_long_title, book_long_title, volu...
+dbl  (6): volume_id, book_id, chapter_id, verse_id, chapter_number, verse_nu...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
+</div>
+<div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>scriptures <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://github.com/beandog/lds-scriptures/raw/master/csv/lds-scriptures.csv"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a>bom_nt <span class="ot">&lt;-</span> scriptures <span class="sc">%&gt;%</span> </span>
-<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">filter</span>(volume_title <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"New Testament"</span>, <span class="st">"Book of Mormon"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-5"><a href="#cb3-5"></a>  <span class="fu">mutate</span>(<span class="at">num_words =</span> <span class="fu">str_count</span>(scripture_text, <span class="st">" "</span>) <span class="sc">+</span> <span class="dv">1</span>)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>bom_nt <span class="ot">&lt;-</span> scriptures <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">filter</span>(volume_title <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"New Testament"</span>, <span class="st">"Book of Mormon"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="at">num_words =</span> <span class="fu">str_count</span>(scripture_text, <span class="st">" "</span>) <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>  )</span>
 <span id="cb3-6"><a href="#cb3-6"></a></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co"># Only Book of Mormon verses</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a>bom_text <span class="ot">&lt;-</span> bom_nt <span class="sc">%&gt;%</span> <span class="fu">filter</span>(volume_title <span class="sc">==</span> <span class="st">"Book of Mormon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Combine Savior names into one regex pattern</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>savior_pattern <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">b("</span>, <span class="fu">paste</span>(savior_names<span class="sc">$</span>name, <span class="at">collapse =</span> <span class="st">"|"</span>), <span class="st">")</span><span class="sc">\\</span><span class="st">b"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Function to count words between Savior names in a single verse</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>words_between_savior <span class="ot">&lt;-</span> <span class="cf">function</span>(text) {</span>
-<span id="cb5-3"><a href="#cb5-3"></a>  pieces <span class="ot">&lt;-</span> <span class="fu">str_split</span>(text, savior_pattern, <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">sapply</span>(pieces, <span class="cf">function</span>(x) <span class="fu">str_count</span>(x, <span class="st">"</span><span class="sc">\\</span><span class="st">S+"</span>))  <span class="co"># count words in each piece</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>}</span>
-<span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co"># Apply to all verses</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>bom_words_between <span class="ot">&lt;-</span> bom_text <span class="sc">%&gt;%</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>  <span class="fu">mutate</span>(<span class="at">words_between =</span> <span class="fu">lapply</span>(scripture_text, words_between_savior)) <span class="sc">%&gt;%</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a>  <span class="fu">select</span>(book_title, words_between) <span class="sc">%&gt;%</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a>  <span class="fu">unnest</span>(words_between)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>avg_words_between <span class="ot">&lt;-</span> <span class="fu">mean</span>(bom_words_between<span class="sc">$</span>words_between, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a>avg_words_between</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="fu">glimpse</span>(bom_nt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 24.79624</code></pre>
+<pre><code>Rows: 14,561
+Columns: 20
+$ volume_id          &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, …
+$ book_id            &lt;dbl&gt; 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40,…
+$ chapter_id         &lt;dbl&gt; 930, 930, 930, 930, 930, 930, 930, 930, 930, 930, 9…
+$ verse_id           &lt;dbl&gt; 23146, 23147, 23148, 23149, 23150, 23151, 23152, 23…
+$ volume_title       &lt;chr&gt; "New Testament", "New Testament", "New Testament", …
+$ book_title         &lt;chr&gt; "Matthew", "Matthew", "Matthew", "Matthew", "Matthe…
+$ volume_long_title  &lt;chr&gt; "The New Testament", "The New Testament", "The New …
+$ book_long_title    &lt;chr&gt; "The Gospel According to St Matthew", "The Gospel A…
+$ volume_subtitle    &lt;chr&gt; "Of our Lord and Saviour Jesus Christ", "Of our Lor…
+$ book_subtitle      &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+$ volume_short_title &lt;chr&gt; "NT", "NT", "NT", "NT", "NT", "NT", "NT", "NT", "NT…
+$ book_short_title   &lt;chr&gt; "Matt.", "Matt.", "Matt.", "Matt.", "Matt.", "Matt.…
+$ volume_lds_url     &lt;chr&gt; "nt", "nt", "nt", "nt", "nt", "nt", "nt", "nt", "nt…
+$ book_lds_url       &lt;chr&gt; "matt", "matt", "matt", "matt", "matt", "matt", "ma…
+$ chapter_number     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ verse_number       &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, …
+$ scripture_text     &lt;chr&gt; "The book of the generation of Jesus Christ, the so…
+$ verse_title        &lt;chr&gt; "Matthew 1:1", "Matthew 1:2", "Matthew 1:3", "Matth…
+$ verse_short_title  &lt;chr&gt; "Matt. 1:1", "Matt. 1:2", "Matt. 1:3", "Matt. 1:4",…
+$ num_words          &lt;dbl&gt; 16, 14, 16, 12, 16, 21, 12, 12, 12, 12, 16, 14, 12,…</code></pre>
 </div>
 </div>
+<section id="average-verse-length" class="level3">
+<h3 class="anchored" data-anchor-id="average-verse-length">Average Verse Length</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb8-2"><a href="#cb8-2"></a></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="fu">ggplot</span>(bom_words_between, <span class="fu">aes</span>(<span class="at">x =</span> words_between)) <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">"lightgreen"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-6"><a href="#cb8-6"></a>    <span class="at">title =</span> <span class="st">"Distribution of Words Between Savior Names in the Book of Mormon"</span>,</span>
-<span id="cb8-7"><a href="#cb8-7"></a>    <span class="at">x =</span> <span class="st">"Number of Words Between Savior Names"</span>,</span>
-<span id="cb8-8"><a href="#cb8-8"></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Average verse length</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>avg_verse_length <span class="ot">&lt;-</span> bom_nt <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">group_by</span>(volume_title) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">summarise</span>(<span class="at">avg_words =</span> <span class="fu">mean</span>(num_words, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="fu">pander</span>(avg_verse_length) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="savior_names_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">volume_title</th>
+<th style="text-align: center;">avg_words</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Book of Mormon</td>
+<td style="text-align: center;">40.42</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">New Testament</td>
+<td style="text-align: center;">22.67</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-<section id="analysis-of-words-between-savior-names" class="level2">
-<h2 class="anchored" data-anchor-id="analysis-of-words-between-savior-names">Analysis of Words Between Savior Names</h2>
-<p>The histogram above shows the distribution of the number of words between mentions of Savior names in the Book of Mormon. Most Savior names occur fairly close together, indicating clusters of references in key chapters. There are occasional long stretches without a Savior name, which contribute to the long tail of the distribution. On average, there are 24.7962406 words between mentions, suggesting that readers encounter references to the Savior regularly throughout the text.</p>
+</section>
+<section id="counting-jesus" class="level3">
+<h3 class="anchored" data-anchor-id="counting-jesus">Counting Jesus</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Count "Jesus" mentions per volume</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>jesus_count <span class="ot">&lt;-</span> bom_nt <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">mutate</span>(<span class="at">jesus_mentions =</span> <span class="fu">str_count</span>(scripture_text, <span class="fu">regex</span>(<span class="st">"Jesus"</span>, <span class="at">ignore_case =</span> <span class="cn">TRUE</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">group_by</span>(volume_title) <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">summarise</span>(<span class="at">total_mentions =</span> <span class="fu">sum</span>(jesus_mentions, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a>jesus_count</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  volume_title   total_mentions
+  &lt;chr&gt;                   &lt;int&gt;
+1 Book of Mormon            184
+2 New Testament             984</code></pre>
+</div>
+</div>
+</section>
+<section id="count-words" class="level3">
+<h3 class="anchored" data-anchor-id="count-words">Count Words</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>bom <span class="ot">&lt;-</span> bom_nt <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">filter</span>(volume_title <span class="sc">==</span> <span class="st">"Book of Mormon"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># Optional glimpse of word counts per verse</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>bom <span class="sc">%&gt;%</span> <span class="fu">select</span>(book_title, num_words) <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 6,604
+Columns: 2
+$ book_title &lt;chr&gt; "1 Nephi", "1 Nephi", "1 Nephi", "1 Nephi", "1 Nephi", "1 N…
+$ num_words  &lt;dbl&gt; 68, 25, 27, 56, 28, 46, 33, 46, 30, 20, 35, 18, 47, 78, 43,…</code></pre>
+</div>
+</div>
+</section>
+<section id="visualize" class="level3">
+<h3 class="anchored" data-anchor-id="visualize">Visualize</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Visualize</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">ggplot</span>(bom, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(book_title, num_words, <span class="at">.fun =</span> median), <span class="at">y =</span> num_words)) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"skyblue"</span>) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-5"><a href="#cb10-5"></a>    <span class="at">title =</span> <span class="st">"Distribution of Verse Lengths in the Book of Mormon"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6"></a>    <span class="at">x =</span> <span class="st">"Book"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7"></a>    <span class="at">y =</span> <span class="st">"Number of Words per Verse"</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="counting_words_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
