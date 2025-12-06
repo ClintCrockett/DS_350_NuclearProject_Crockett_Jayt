@@ -7,6 +7,6 @@ format: html
 
 #### Completed assignments for that week
 
-<a class="btn btn-primary m-1" href="./w08/idaho_water.qmd">Idaho Water</a>
-
 <a class="btn btn-primary m-1" href="./w08/US_cities.qmd">US Cities</a>
+
+<a class="btn btn-primary m-1" href="./w08/idaho_water.qmd">Idaho Water</a>
