@@ -3,112 +3,43 @@ title: "maps_leaflets"
 format: html
 ---
 
-```{r message=FALSE, warning=FALSE}
-pacman::p_load(tidyverse, sf, ggplot2, USAboundaries, ggrepel, grid, leaflet)
-# install.packages("USAboundaries", repos = "https://ropensci.r-universe.dev", type = "source")
+```{r warning=FALSE, message=FALSE}
+pacman::p_load(tidyverse, leaflet, readr, ggthemes, paletteer)
+
+hot_springs <- read_csv("hot_springs.csv")
 
 ```
 
-```{r message=FALSE, warning=FALSE}
-states <- us_states() %>%
-  filter(!state_name %in% c("Alaska", "Hawaii", "Puerto Rico"))
+```{r warning=FALSE, message=FALSE}
+my_colors <- as.character(paletteer::paletteer_c("ggthemes::Blue-Green Sequential", 30))
 
-```
-
-```{r message=FALSE, warning=FALSE}
-idaho_counties <- us_counties() %>%
-  filter(state_name == "Idaho")
-```
-
-```{r message=FALSE, warning=FALSE}
-cities <- us_cities()
-```
-
-```{r message=FALSE, warning=FALSE}
-cities48 <- cities %>%
-  filter(state_name %in% states$state_name)
-```
-
-```{r message=FALSE, warning=FALSE}
-top3 <- cities48 %>%
-  group_by(state_name) %>%
-  slice_max(order_by = population, n = 3) %>%
-  mutate(rank = row_number()) %>%
-  ungroup()
-```
-
-```{r message=FALSE, warning=FALSE}
-coords <- st_coordinates(top3)
-top3$lng <- coords[,1]
-top3$lat <- coords[,2]
-```
-
-```{r message=FALSE, warning=FALSE}
-top3 <- top3 %>%
-  mutate(pop_thousands = population / 1000)
-
-rank_pal <- colorFactor(
-  palette = c(
-    "1" = "#003f88",
-    "2" = "#4ea8de",
-    "3" = "#ade8f4"
-  ),
-  domain = top3$rank
+access_pal <- colorFactor(
+  palette = my_colors,
+  domain = hot_springs$access_type
 )
-```
 
-```{r}
-ggp <- leaflet() %>% 
+leaflet(hot_springs) %>%
   addProviderTiles("Esri.WorldImagery", group = "Satellite") %>%
   addProviderTiles("OpenTopoMap", group = "Topo") %>%
   addProviderTiles("Stadia.StamenWatercolor", group = "Watercolor") %>%
-  addProviderTiles("USGS.USTopo", group = "USGS Topo") %>%
-    addLayersControl(
-    baseGroups = c("Satellite", "Topo", "Watercolor", "USGS Topo"),
-    overlayGroups = c("States", "Idaho Counties", "Top Cities"),
-    options = layersControlOptions(collapsed = FALSE)
-  ) %>% 
-  addPolygons(
-    data = states,
-    group = "States",
-    color = "black",
-    weight = 1,
-    fill = FALSE
+  
+  addCircleMarkers(lng = ~lng, lat = ~lat, radius = ~case_when(
+  difficulty %in% c("Easy") ~ 6,
+  difficulty %in% c("Easy-Moderate","Moderate") ~ 7, TRUE ~ 8), 
+  color = "white", weight = 1, fillColor = ~access_pal(access_type), fillOpacity = 0.9, popup = ~paste(
+  "<b>", name, "</b><br>",
+  state, "<br>",
+  "Elevation:", elevation_ft, "ft<br>",
+  "Temp (approx):", temperature_F, "°F<br>",
+  "Access:", access_type, "<br>",
+  "Hike distance:", hike_distance_miles, "miles<br>",
+  "Difficulty:", difficulty, "<br>",
+  "<em>", notes, "</em>")
   ) %>%
-  addPolygons(
-    data = idaho_counties,
-    group = "Idaho Counties",
-    color = "gray30",
-    weight = 1.2,
-    fill = FALSE
-  ) %>%
-  addCircleMarkers(
-    data = top3,
-    group = "Top Cities",
-    lng = ~lng, lat = ~lat,
-    radius = ~scales::rescale(population, to = c(5,20)),
-    fillColor = ~rank_pal(rank),
-    fillOpacity = 0.8,
-    color = "#003f88", weight = 1,
-    popup = ~paste(
-      "<b>", city, ",", state_name, "</b><br>",
-      "Rank:", rank, "<br>",
-      "Population:", format(population, big.mark = ",")
-    )
-  ) %>%
-  addLegend(
-    position = "bottomright",
-    pal = rank_pal,
-    values = top3$rank,
-    title = "City Rank in State"
-  )
-
-ggp
-```
-```{r warning=FALSE}
-# ggsave("us_cities2.png", plot = ggp, width = 15, height = 10, dpi = 300)
-
-# ![The copied Picture](pictures/us_cities2.png)
+  addLayersControl(
+  baseGroups = c("Satellite", "Topo", "Watercolor"),
+  options = layersControlOptions(collapsed = FALSE)
+)
 
 ```
 

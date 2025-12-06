@@ -263,7 +263,7 @@
     "href": "weeks/week_eight.html",
     "title": "project_page",
     "section": "",
-    "text": "Idaho Water\nUS Cities"
+    "text": "US Cities\nIdaho Water"
   },
   {
     "objectID": "weeks/week_one.html",
@@ -612,6 +612,13 @@
     "objectID": "weeks/w09/maps_leaflets.html",
     "href": "weeks/w09/maps_leaflets.html",
     "title": "maps_leaflets",
+    "section": "",
+    "text": "Code\nmy_colors <- as.character(paletteer::paletteer_c(\"ggthemes::Blue-Green Sequential\", 30))\n\naccess_pal <- colorFactor(\n  palette = my_colors,\n  domain = hot_springs$access_type\n)\n\nleaflet(hot_springs) %>%\n  addProviderTiles(\"Esri.WorldImagery\", group = \"Satellite\") %>%\n  addProviderTiles(\"OpenTopoMap\", group = \"Topo\") %>%\n  addProviderTiles(\"Stadia.StamenWatercolor\", group = \"Watercolor\") %>%\n  \n  addCircleMarkers(lng = ~lng, lat = ~lat, radius = ~case_when(\n  difficulty %in% c(\"Easy\") ~ 6,\n  difficulty %in% c(\"Easy-Moderate\",\"Moderate\") ~ 7, TRUE ~ 8), \n  color = \"white\", weight = 1, fillColor = ~access_pal(access_type), fillOpacity = 0.9, popup = ~paste(\n  \"<b>\", name, \"</b><br>\",\n  state, \"<br>\",\n  \"Elevation:\", elevation_ft, \"ft<br>\",\n  \"Temp (approx):\", temperature_F, \"°F<br>\",\n  \"Access:\", access_type, \"<br>\",\n  \"Hike distance:\", hike_distance_miles, \"miles<br>\",\n  \"Difficulty:\", difficulty, \"<br>\",\n  \"<em>\", notes, \"</em>\")\n  ) %>%\n  addLayersControl(\n  baseGroups = c(\"Satellite\", \"Topo\", \"Watercolor\"),\n  options = layersControlOptions(collapsed = FALSE)\n)"
+  },
+  {
+    "objectID": "case_studies/leaflet_layers.html",
+    "href": "case_studies/leaflet_layers.html",
+    "title": "leaflet_layers",
     "section": "",
     "text": "Code\nstates <- us_states() %>%\n  filter(!state_name %in% c(\"Alaska\", \"Hawaii\", \"Puerto Rico\"))\n\n\n\n\nCode\nidaho_counties <- us_counties() %>%\n  filter(state_name == \"Idaho\")\n\n\n\n\nCode\ncities <- us_cities()\n\n\n\n\nCode\ncities48 <- cities %>%\n  filter(state_name %in% states$state_name)\n\n\n\n\nCode\ntop3 <- cities48 %>%\n  group_by(state_name) %>%\n  slice_max(order_by = population, n = 3) %>%\n  mutate(rank = row_number()) %>%\n  ungroup()\n\n\n\n\nCode\ncoords <- st_coordinates(top3)\ntop3$lng <- coords[,1]\ntop3$lat <- coords[,2]\n\n\n\n\nCode\ntop3 <- top3 %>%\n  mutate(pop_thousands = population / 1000)\n\nrank_pal <- colorFactor(\n  palette = c(\n    \"1\" = \"#003f88\",\n    \"2\" = \"#4ea8de\",\n    \"3\" = \"#ade8f4\"\n  ),\n  domain = top3$rank\n)\n\n\n\n\nCode\nggp <- leaflet() %>% \n  addProviderTiles(\"Esri.WorldImagery\", group = \"Satellite\") %>%\n  addProviderTiles(\"OpenTopoMap\", group = \"Topo\") %>%\n  addProviderTiles(\"Stadia.StamenWatercolor\", group = \"Watercolor\") %>%\n  addProviderTiles(\"USGS.USTopo\", group = \"USGS Topo\") %>%\n    addLayersControl(\n    baseGroups = c(\"Satellite\", \"Topo\", \"Watercolor\", \"USGS Topo\"),\n    overlayGroups = c(\"States\", \"Idaho Counties\", \"Top Cities\"),\n    options = layersControlOptions(collapsed = FALSE)\n  ) %>% \n  addPolygons(\n    data = states,\n    group = \"States\",\n    color = \"black\",\n    weight = 1,\n    fill = FALSE\n  ) %>%\n  addPolygons(\n    data = idaho_counties,\n    group = \"Idaho Counties\",\n    color = \"gray30\",\n    weight = 1.2,\n    fill = FALSE\n  ) %>%\n  addCircleMarkers(\n    data = top3,\n    group = \"Top Cities\",\n    lng = ~lng, lat = ~lat,\n    radius = ~scales::rescale(population, to = c(5,20)),\n    fillColor = ~rank_pal(rank),\n    fillOpacity = 0.8,\n    color = \"#003f88\", weight = 1,\n    popup = ~paste(\n      \"<b>\", city, \",\", state_name, \"</b><br>\",\n      \"Rank:\", rank, \"<br>\",\n      \"Population:\", format(population, big.mark = \",\")\n    )\n  ) %>%\n  addLegend(\n    position = \"bottomright\",\n    pal = rank_pal,\n    values = top3$rank,\n    title = \"City Rank in State\"\n  )\n\nggp\n\n\n\n\n\n\n\n\nCode\n# ggsave(\"us_cities2.png\", plot = ggp, width = 15, height = 10, dpi = 300)\n\n# ![The copied Picture](pictures/us_cities2.png)"
   }
