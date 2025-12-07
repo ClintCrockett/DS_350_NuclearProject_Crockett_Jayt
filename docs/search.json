@@ -670,5 +670,33 @@
     "title": "Counting Words",
     "section": "",
     "text": "Code\njesus_counts <- scriptures %>%\n  filter(volume_title %in% c(\"New Testament\", \"Book of Mormon\")) %>%\n  mutate(\n    jesus_count = str_count(scripture_text,\n                            regex(\"\\\\bJesus\\\\b\", ignore_case = TRUE))\n  ) %>%\n  group_by(volume_title) %>%\n  summarise(total_jesus = sum(jesus_count))\n\njesus_counts\n\n\n# A tibble: 2 × 2\n  volume_title   total_jesus\n  <chr>                <int>\n1 Book of Mormon         184\n2 New Testament          984\n\n\n\n\nCode\nbom <- scriptures %>%\n  filter(volume_title == \"Book of Mormon\")\n\nggplot(bom, aes(x = book_title, y = word_count)) +\n  geom_violin(trim = FALSE) +\n  geom_boxplot(width = 0.1, outlier.size = 0.5) +\n  coord_flip() +\n  labs(\n    title = \"Distribution of Words per Verse for Each Book in the Book of Mormon\",\n    x = \"Book\",\n    y = \"Words per Verse\"\n  ) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "weeks/w09/data_search.html",
+    "href": "weeks/w09/data_search.html",
+    "title": "data_search",
+    "section": "",
+    "text": "Code\npacman::p_load(tidyverse, tidyquant, lubridate)"
+  },
+  {
+    "objectID": "weeks/w09/data_search.html#price-history-check-for-gaps-or-anomalies",
+    "href": "weeks/w09/data_search.html#price-history-check-for-gaps-or-anomalies",
+    "title": "data_search",
+    "section": "1. Price History (Check for gaps or anomalies)",
+    "text": "1. Price History (Check for gaps or anomalies)\n\n\nCode\nreturns_daily %>%\nggplot(aes(date, adjusted, color = symbol)) +\ngeom_line() +\nlabs(\ntitle = \"Adjusted Closing Prices for JPM, GS, and SPY\",\nx = \"Date\",\ny = \"Adjusted Price (USD)\"\n) +\ntheme_minimal()\n\n\n\n\n\nThe price data for JPM, GS, and SPY looks clean and realistic. The trends follow known market events (like the 2020 COVID dip), and there are no gaps, flat spots, or strange jumps. This shows the dataset is complete and consistent across the entire time period."
+  },
+  {
+    "objectID": "weeks/w09/data_search.html#distribution-of-daily-returns-check-volatility-outliers",
+    "href": "weeks/w09/data_search.html#distribution-of-daily-returns-check-volatility-outliers",
+    "title": "data_search",
+    "section": "2. Distribution of Daily Returns (Check volatility + outliers)",
+    "text": "2. Distribution of Daily Returns (Check volatility + outliers)\n\n\nCode\nreturns_daily %>%\nfilter(!is.na(ret_daily)) %>%\nggplot(aes(ret_daily, fill = symbol)) +\ngeom_histogram(bins = 80, alpha = 0.6, position = \"identity\") +\nlabs(\ntitle = \"Distribution of Daily Log Returns\",\nx = \"Daily log return\",\ny = \"Count\"\n) +\ntheme_minimal()\n\n\n\n\n\nThe return distributions look normal for financial assets—centered around zero with SPY being the least volatile and JPM/GS showing wider spread. There are no extreme outliers or unusual patterns, which confirms that the return calculations and underlying prices are valid."
+  },
+  {
+    "objectID": "weeks/w09/data_search.html#missing-values-by-year-check-data-gaps",
+    "href": "weeks/w09/data_search.html#missing-values-by-year-check-data-gaps",
+    "title": "data_search",
+    "section": "3. Missing Values by Year (Check data gaps)",
+    "text": "3. Missing Values by Year (Check data gaps)\n\n\nCode\nreturns_daily %>%\n  mutate(is_missing = is.na(ret_daily)) %>%\n  ggplot(aes(date, symbol, fill = is_missing)) +\n  geom_tile(height = 0.6, width = 20) +   # <-- bigger tiles\n  scale_fill_manual(values = c(\"FALSE\" = \"white\", \"TRUE\" = \"red\")) +\n  labs(\n    title = \"Missing Return Values Over Time\",\n    x = \"Date\",\n    y = \"Symbol\"\n  ) +\n  theme_minimal()\n\n\n\n\n\nOnly one missing return appears for each symbol, and it’s the first day (expected because returns need a previous price). After that, there are zero missing values. This confirms that the dataset has no gaps and is reliable for time-series analysis. So YAY this dataset will be ready to use for my final!"
   }
 ]
