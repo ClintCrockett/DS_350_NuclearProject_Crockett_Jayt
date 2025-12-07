@@ -3,8 +3,10 @@ title: "project_page"
 format: html
 ---
 
-## Week One Assignments
+## Week Twelve Assignments
 
 #### Completed assignments for that week
 
-<a class="btn btn-primary m-1" href="./w01/First_Quarto_File">First Task</a>
+<a class="btn btn-primary m-1" href="./w12/chipotle_functions.qmd">Chipotle Functions</a>
+
+<a class="btn btn-primary m-1" href="./w12/chipotle_purrr.qmd">Chipotle Purrr</a>

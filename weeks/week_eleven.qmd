@@ -3,8 +3,24 @@ title: "project_page"
 format: html
 ---
 
-## Week One Assignments
+## Week Eleven Assignments
 
 #### Completed assignments for that week
 
-<a class="btn btn-primary m-1" href="./w01/First_Quarto_File">First Task</a>
+It looks like Partial Task: Write GitHub Issues (round 2) is closed or does not have a submit assignment area. I will add the second url that I fixed and the urls to the people I gave issue feedback for.
+
+Responses:
+
+-   `<a class="btn btn-primary m-1" href="`{=html}<https://clintcrockett.github.io/DS_350_NuclearProject_Crockett_Jayt/weeks/w08/US_cities.html>`">`{=html}Us Cities</a>[\
+    \
+    ](https://clintcrockett.github.io/DS_350_NuclearProject_Crockett_Jayt/weeks/w08/US_cities.html)
+
+-   `<a class="btn btn-primary m-1" href="`{=html}<https://clintcrockett.github.io/DS_350_NuclearProject_Crockett_Jayt/weeks/w09/maps_leaflets.html>`">`{=html}Maps Leaflets</a>[\
+    \
+    ](https://clintcrockett.github.io/DS_350_NuclearProject_Crockett_Jayt/weeks/w09/maps_leaflets.html)
+
+Issues: 
+
+Joseph Earl's Issues: https://github.com/byui-math-dept/DS350_F25_Earl_Jose/issues/4
+
+Reese Coberly's Issues: https://github.com/byui-math-dept/DS350_F25_Coberly_Reec/issues/3

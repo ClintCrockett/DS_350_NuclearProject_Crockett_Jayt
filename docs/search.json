@@ -214,7 +214,7 @@
     "href": "weeks/week_eleven.html",
     "title": "project_page",
     "section": "",
-    "text": "First Task"
+    "text": "It looks like Partial Task: Write GitHub Issues (round 2) is closed or does not have a submit assignment area. I will add the second url that I fixed and the urls to the people I gave issue feedback for.\nResponses:\n\nhttps://clintcrockett.github.io/DS_350_NuclearProject_Crockett_Jayt/weeks/w08/US_cities.html\">Us Cities\n\n\nhttps://clintcrockett.github.io/DS_350_NuclearProject_Crockett_Jayt/weeks/w09/maps_leaflets.html\">Maps Leaflets\n\n\n\nIssues: \nJoseph Earl’s Issues: https://github.com/byui-math-dept/DS350_F25_Earl_Jose/issues/4\nReese Coberly’s Issues: https://github.com/byui-math-dept/DS350_F25_Coberly_Reec/issues/3"
   },
   {
     "objectID": "weeks/week_two.html",
@@ -249,7 +249,7 @@
     "href": "weeks/week_twelve.html",
     "title": "project_page",
     "section": "",
-    "text": "First Task"
+    "text": "Chipotle Functions\nChipotle Purrr"
   },
   {
     "objectID": "weeks/week_nine.html",
@@ -698,5 +698,19 @@
     "title": "data_search",
     "section": "3. Missing Values by Year (Check data gaps)",
     "text": "3. Missing Values by Year (Check data gaps)\n\n\nCode\nreturns_daily %>%\n  mutate(is_missing = is.na(ret_daily)) %>%\n  ggplot(aes(date, symbol, fill = is_missing)) +\n  geom_tile(height = 0.6, width = 20) +   # <-- bigger tiles\n  scale_fill_manual(values = c(\"FALSE\" = \"white\", \"TRUE\" = \"red\")) +\n  labs(\n    title = \"Missing Return Values Over Time\",\n    x = \"Date\",\n    y = \"Symbol\"\n  ) +\n  theme_minimal()\n\n\n\n\n\nOnly one missing return appears for each symbol, and it’s the first day (expected because returns need a previous price). After that, there are zero missing values. This confirms that the dataset has no gaps and is reliable for time-series analysis. So YAY this dataset will be ready to use for my final!"
+  },
+  {
+    "objectID": "weeks/w12/chipotle_functions.html",
+    "href": "weeks/w12/chipotle_functions.html",
+    "title": "chipotle_functions",
+    "section": "",
+    "text": "Code\nparse_popularity <- function(x) {\n  # Replace curly quotes if present\n  clean <- x %>% \n    str_replace_all(\"“\", \"\\\"\") %>% \n    str_replace_all(\"”\", \"\\\"\")\n  \n  # Extract \"Day\":Number pairs\n  pairs <- str_extract_all(clean, \"\\\"(.*?)\\\":\\\\d+\")[[1]]\n  \n  # Split into day and number\n  tibble(\n    day = str_extract(pairs, \"(?<=\\\").+?(?=\\\")\"),\n    visits = as.numeric(str_extract(pairs, \"\\\\d+$\"))\n  )\n}\n\n\n\n\nCode\nmost_popular_day <- function(x) {\n  df <- parse_popularity(x)\n  \n  max_visits <- max(df$visits)\n  \n  df %>% \n    filter(visits == max_visits) %>% \n    pull(day) %>% \n    paste(collapse = \", \")\n}\n\n\n\n\nCode\ntest1 <- \"{“Monday”:39,“Tuesday”:67,“Wednesday”:420,“Thursday”:1,“Friday”:36,“Saturday”:65,“Sunday”:87}\"\n\npander(parse_popularity(test1))\n\n\n\n\n\n\n\n\n\nday\nvisits\n\n\n\n\nMonday\n39\n\n\nTuesday\n67\n\n\nWednesday\n420\n\n\nThursday\n1\n\n\nFriday\n36\n\n\nSaturday\n65\n\n\nSunday\n87\n\n\n\n\n\nCode\npander(most_popular_day(test1))\n\n\nWednesday\n\n\n\n\nCode\ntest2 <- \"{“Monday”:104,“Tuesday”:6,“Wednesday”:121314,“Thursday”:11,“Friday”:34,“Saturday”:65,“Sunday”:200}\"\n\npander(parse_popularity(test2))\n\n\n\n\n\n\n\n\n\nday\nvisits\n\n\n\n\nMonday\n104\n\n\nTuesday\n6\n\n\nWednesday\n121314\n\n\nThursday\n11\n\n\nFriday\n34\n\n\nSaturday\n65\n\n\nSunday\n200\n\n\n\n\n\nCode\npander(most_popular_day(test2))\n\n\nWednesday\n\n\n\n\nCode\ntest3 <- \"{“Monday”:1,“Tuesday”:1,“Wednesday”:1,“Thursday”:0,“Friday”:0,“Saturday”:0,“Sunday”:0}\"\n\npander(parse_popularity(test3))\n\n\n\n\n\n\n\n\n\nday\nvisits\n\n\n\n\nMonday\n1\n\n\nTuesday\n1\n\n\nWednesday\n1\n\n\nThursday\n0\n\n\nFriday\n0\n\n\nSaturday\n0\n\n\nSunday\n0\n\n\n\n\n\nCode\npander(most_popular_day(test3))\n\n\nMonday, Tuesday, Wednesday"
+  },
+  {
+    "objectID": "weeks/w12/chipotle_purrr.html",
+    "href": "weeks/w12/chipotle_purrr.html",
+    "title": "chipotle_purrr",
+    "section": "",
+    "text": "Code\npopularity_day <- function(x) {\n\n  clean <- x %>%\n    str_replace_all('“', '\"') %>%\n    str_replace_all('”', '\"')\n\n  popularity <- jsonlite::fromJSON(clean) %>%\n    enframe(name = \"day\", value = \"visits\") %>%\n    mutate(visits = unlist(visits)) %>% \n    as_tibble()\n\n  return(popularity)\n}\n\n\n\n\nCode\nmost_popular_day <- function(x) {\n\n  popularity <- popularity_day(x)\n\n  popularity %>%\n    filter(visits == max(visits)) %>%\n    pull(day) %>%\n    paste(collapse = \", \")\n}\n\n\n\n\nCode\ntest1 <- \"{“Monday”:39,“Tuesday”:67,“Wednesday”:420,“Thursday”:1,“Friday”:36,“Saturday”:65,“Sunday”:87}\"\n\nkable(popularity_day(test1), caption = \"Test Case 1.1 - Parsed Output\")\n\n\n\nTest Case 1.1 - Parsed Output\n\n\nday\nvisits\n\n\n\n\nMonday\n39\n\n\nTuesday\n67\n\n\nWednesday\n420\n\n\nThursday\n1\n\n\nFriday\n36\n\n\nSaturday\n65\n\n\nSunday\n87\n\n\n\n\n\nCode\nkable(most_popular_day(test1), caption = \"Test Case 1.2 - Parsed Output\")\n\n\n\nTest Case 1.2 - Parsed Output\n\n\nx\n\n\n\n\nWednesday\n\n\n\n\n\n\n\nCode\ntest2 <- \"{“Monday”:104,“Tuesday”:6,“Wednesday”:121314,“Thursday”:11,“Friday”:34,“Saturday”:65,“Sunday”:200}\"\n\nkable(popularity_day(test2), caption = \"Test Case 2.1 - Parsed Output\")\n\n\n\nTest Case 2.1 - Parsed Output\n\n\nday\nvisits\n\n\n\n\nMonday\n104\n\n\nTuesday\n6\n\n\nWednesday\n121314\n\n\nThursday\n11\n\n\nFriday\n34\n\n\nSaturday\n65\n\n\nSunday\n200\n\n\n\n\n\nCode\nkable(most_popular_day(test2), caption = \"Test Case 2.2 - Parsed Output\")\n\n\n\nTest Case 2.2 - Parsed Output\n\n\nx\n\n\n\n\nWednesday\n\n\n\n\n\n\n\nCode\ntest3 <- \"{“Monday”:1,“Tuesday”:1,“Wednesday”:1,“Thursday”:0,“Friday”:0,“Saturday”:0,“Sunday”:0}\"\n\nkable(popularity_day(test3), caption = \"Test Case 3.1 - Parsed Output\")\n\n\n\nTest Case 3.1 - Parsed Output\n\n\nday\nvisits\n\n\n\n\nMonday\n1\n\n\nTuesday\n1\n\n\nWednesday\n1\n\n\nThursday\n0\n\n\nFriday\n0\n\n\nSaturday\n0\n\n\nSunday\n0\n\n\n\n\n\nCode\nkable(most_popular_day(test3), caption = \"Test Case 3.2 - Parsed Output\")\n\n\n\nTest Case 3.2 - Parsed Output\n\n\nx\n\n\n\n\nMonday, Tuesday, Wednesday"
   }
 ]
