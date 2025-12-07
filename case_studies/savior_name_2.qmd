@@ -3,3 +3,53 @@ title: "savior_name_2"
 format: html
 ---
 
+```{r message=FALSE, warning=FALSE}
+pacman::p_load(tidyverse, stringr, purrr, readr)
+
+savior_names <- read_rds("https://byuistats.github.io/M335/data/BoM_SaviorNames.rds")
+
+scriptures <- read_csv("https://github.com/beandog/lds-scriptures/raw/master/csv/lds-scriptures.csv")
+
+bom_text <- scriptures %>%
+  filter(volume_title == "Book of Mormon")
+
+```
+
+```{r}
+savior_pattern <- paste0("\\b(", paste(savior_names$name, collapse = "|"), ")\\b")
+
+```
+
+```{r}
+# Collapse all verses into one string per book
+bom_books <- bom_text %>%
+  group_by(book_title) %>%
+  summarise(full_text = paste(scripture_text, collapse = " "), .groups = "drop")
+
+# Function to compute word distances
+distance_between <- function(text) {
+  pieces <- str_split(text, savior_pattern, simplify = TRUE)
+  str_count(pieces, "\\S+")
+}
+
+# Apply to each book + unnest
+bom_distances <- bom_books %>%
+  mutate(distances = map(full_text, distance_between)) %>%
+  select(book_title, distances) %>%
+  unnest(distances)
+```
+
+```{r}
+ggplot(bom_distances, aes(x = distances)) +
+  geom_histogram(binwidth = 20, fill = "lightblue", color = "#172b5c") +
+  facet_wrap(~ book_title, scales = "free_y") +
+  labs(
+    title = "Words Between Savior Name Mentions by Book",
+    x = "Words Between Mentions",
+    y = "Count"
+  ) +
+  theme_minimal()
+
+```
+
+This plot shows how often each book in the Book of Mormon mentions the Savior by looking at the number of words between each reference. Books like 3 Nephi, Mosiah, and Alma have much shorter gaps, meaning Savior names appear very frequently. Meanwhile, shorter books like Jarom, Omni, and Words of Mormon have much bigger gaps and fewer total references. Comparing these distributions makes it clear which books focus most heavily on the Savior and how that emphasis changes across the Book of Mormon.
