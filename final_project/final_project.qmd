@@ -63,7 +63,7 @@ Example of how the data was obtained (not the full code; just explanation level)
 
 #### Data Preparation & Wrangling
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 pacman::p_load(tidyverse, tidyquant, lubridate, plotly)
 
 # Selected tickers
@@ -189,7 +189,7 @@ This graph compares the long-term price performance of **JPMorgan (JPM)** and
 long-term returns.
 
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 jpm_gs_prices <- prices %>%
   filter(symbol %in% c("JPM", "GS"))
 
@@ -226,7 +226,7 @@ This chart shows which firm is more volatile by comparing **30-day rolling
 standard deviation of daily returns**.
 
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 vol_jpm_gs <- returns %>%
   filter(symbol %in% c("JPM", "GS")) %>%
   group_by(symbol) %>%
@@ -262,7 +262,7 @@ Events shown:
 - COVID Crash (March 2020)
 - Fed Rate Hike Cycle (2022)
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 events_jpm_gs <- prices %>%
   filter(symbol %in% c("JPM", "GS"))
 
@@ -306,7 +306,7 @@ This plot compares **JPM**, **GS**, and the **S&P 500 (SPY)** to determine
 how each bank performs relative to the overall market.
 
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 benchmark <- prices %>%
   filter(symbol %in% c("JPM", "GS", "SPY")) %>%
   select(date, symbol, adjusted) %>%
