@@ -317,7 +317,8 @@ benchmark <- prices %>%
   GS_above  = ifelse(GS  >= SPY, GS,  NA),
   GS_below  = ifelse(GS  <  SPY, GS,  NA)
   )
-  benchmark_plot <- ggplot(benchmark, aes(x = date)) +
+
+benchmark_plot <- ggplot(benchmark, aes(x = date)) +
   geom_line(aes(y = SPY), color = "#85c89f", linewidth = 1) +
   geom_line(aes(y = JPM_above), color = "#044578", linewidth = 1) +
   geom_line(aes(y = JPM_below), color = "red", linewidth = 1) +
