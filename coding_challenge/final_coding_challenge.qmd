@@ -1,0 +1,70 @@
+---
+title: "final_coding_challenge"
+format: html
+---
+
+```{r}
+pacman::p_load(readr, ggplot2, tidyverse)
+best_brands2 <- read_csv("../coding_challenge/best_brands2.csv")
+```
+
+```{r}
+best_brands <- best_brands2 %>%
+  pivot_longer(
+    cols = starts_with("1/1/"),
+    names_to = "year",
+    values_to = "amount"
+  ) %>%
+  mutate(
+    year = lubridate::mdy(year) %>% year()
+  )
+
+best_brands_19 <- best_brands %>% 
+  filter(year == 2019) %>% 
+  slice_max(order_by = amount, n = 12) %>% 
+  drop_na(amount)
+```
+
+
+```{r}
+ggplot(best_brands_19, aes(amount, reorder(name, amount), fill = category)) +
+  geom_col() +
+  geom_text(
+    aes(label = paste(name, "\n", scales::comma(amount))),
+    hjust = 1.09,                       
+    size  = 2,
+  ) +
+  scale_fill_manual(values = c(
+  "Technology" = "#f7bb80",
+  "Beverages"  = "#96afca",
+  "Automotive" = "#9cc796",
+  "Restaurants" = "#d0afc7",
+  "Media" = "#f5df92",
+  "Business Services" = "#ed9a9b"
+)) +
+  labs(
+    title = "Best Global Brands",
+    subtitle = "Value in $M; color indicates sector. Data: Interbrand",
+    x = "",
+    y = ""
+  ) +
+  scale_x_continuous(position = "top") +
+  theme_minimal() + 
+  theme(
+    panel.grid = element_blank(),
+    axis.text.y  = element_blank(),
+    legend.position = "none"
+  ) +
+  annotate("text",
+           x = max(best_brands_19$amount) * 1.02,
+           y = -1,
+           label = "2019",
+           size = 12,
+           fontface = "bold") + # I got this from chat
+ 
+  geom_vline(xintercept = seq(0, 200000, by = 50000), color = "white")
+
+
+```
+
+

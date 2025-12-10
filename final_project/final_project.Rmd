@@ -1,0 +1,356 @@
+---
+title: "final_project"
+output: html_document
+---
+
+## Project Overview -
+
+I chose to analyze [**JPMorgan Chase (JPM)**]{style="color:#044578;"} and [Goldman Sachs (GS)]{style="color:#6f94c1;"} because these firms are two of the most influential financial institutions in the United States. Their performance reflects broader market behavior, investor sentiment, and economic conditions.
+
+This topic also aligns directly with **my career interest** in *financial analytics and investment banking*, especially since I am actively pursuing internships at JPMorgan and Goldman Sachs. I wanted to build a project that not only demonstrates technical skill but also shows I can think like a financial analyst, using data to answer real business questions.
+
+
+
+### Detail Review Below {.tabset .tabset-fade .tabset-pills}
+
+### Objective
+
+#### Objective of the Project
+The goal of this project is to evaluate the **performance, volatility, and risk profile** of JPMorgan and Goldman Sachs over time. By building a clean, visualization-driven analysis, I aimed to understand how these firms behave in different economic environments and how they compare to each other and to the broader U.S. stock market.
+
+This analysis also helps answer practical questions investors and analysts care about, such as:
+
+-   Which firm provides stronger long-term returns?
+
+-   Which firm is more volatile?
+
+-   How do major market events impact each institution?
+
+-   How do these banks compare to the S&P 500 benchmark?
+
+### Data Sources
+
+#### Sources
+I used publicly available financial data pulled directly from Yahoo Finance through the R package tidyquant.
+
+This provided:
+
+-   Daily adjusted closing prices
+
+-   Returns
+
+-   Trading volume
+
+-   Date-indexed historical data from 2015 to the present
+
+Packages used to retrieve and manage the data include:
+
+-   tidyquant (data retrieval + return calculations)
+
+-   tidyverse (data wrangling)
+
+-   lubridate (time handling)
+
+Example of how the data was obtained (not the full code; just explanation level):
+
+-   Ticker symbols "JPM", "GS", and "SPY" (S&P 500 benchmark) were queried.
+
+-   Data was pulled into a single consistent format.
+
+-   Daily returns were computed using tidyquant’s built-in financial functions.
+
+### Data Preparation & Wrangling
+
+#### Data Preparation & Wrangling
+
+```{r}
+pacman::p_load(tidyverse, tidyquant, lubridate, plotly)
+
+# Selected tickers
+tickers <- c("JPM", "GS", "SPY")
+
+# Pull daily prices since 2015
+prices <- tq_get(tickers,
+  get = "stock.prices",
+  from = "2015-01-01",
+  to = Sys.Date()
+)
+
+# head(prices)
+
+returns <- prices %>%
+  group_by(symbol) %>%
+  tq_transmute(
+  select = adjusted,
+  mutate_fun = periodReturn,
+  period = "daily",
+  type = "log",
+  col_rename = "daily_return"
+)
+
+# head(returns)
+
+returns_wide <- returns %>%
+  select(date, symbol, daily_return) %>%
+  pivot_wider(names_from = symbol, values_from = daily_return
+)
+
+# head(returns_wide)
+
+```
+
+Before visualizing the data, I performed several wrangling steps:
+
+1.  Combined the data from multiple tickers
+
+All three tickers (JPM, GS, SPY) were loaded into one unified dataset with columns for:
+
+-   date
+
+-   ticker
+
+-   adjusted closing price
+
+This made it easy to calculate comparative metrics.
+
+2.  Calculated daily returns
+
+Using tidyquant, I computed:
+
+-   Daily percentage returns
+
+-   Rolling volatility windows
+
+-   Sharpe ratios (risk-adjusted returns)
+
+3.  Created consistent time periods
+
+All datasets were aligned so the dates matched across firms. This ensures that comparisons are accurate and not affected by missing or unmatched dates.
+
+4.  Prepared variables for future graphs
+
+Even though we haven't graphed yet, the wrangled data now supports:
+
+-   Trend lines
+
+-   Volatility curves
+
+-   Benchmark overlays
+
+-   Event-based highlights (COVID crash, rate hikes, etc.)
+
+
+### Questions
+
+#### Key Analytical Questions This Project Will Answer
+
+This project is structured around five core questions:
+
+1.  Long-Term Performance
+
+How have JPMorgan and Goldman Sachs grown over the past 10 years? What patterns, drawdowns, or recovery periods do we see?
+
+2.  Volatility
+
+Which firm experiences more market fluctuation? How does daily return variability compare?
+
+3.  Risk-Adjusted Returns
+
+Using the Sharpe Ratio, which company provides better returns relative to its level of risk?
+
+4.  Impact of Major Economic Events
+
+How did events like:
+
+the COVID-19 crash
+
+Federal Reserve interest-rate hikes
+
+recession periods affect JPM and GS differently?
+
+5.  Benchmark Comparison
+
+How do these two major banks compare to the broader U.S. market (S&P 500)? Do they outperform or lag behind?
+
+
+## Visuals {.tabset .tabset-fade .tabset-pills}
+
+### Long-Term Performance
+
+This graph shows how **JPMorgan (JPM)** and **Goldman Sachs (GS)** have performed over the past 10 years compared to the **S&P 500 (SPY)** benchmark.
+
+
+### Long Term Returns 
+
+#### Long-Term Returns: JPM vs GS
+
+This graph compares the long-term price performance of **JPMorgan (JPM)** and 
+**Goldman Sachs (GS)** over time to determine which firm delivers stronger 
+long-term returns.
+
+
+```{r}
+jpm_gs_prices <- prices %>%
+  filter(symbol %in% c("JPM", "GS"))
+
+mountain_plot <- jpm_gs_prices %>%
+  ggplot(aes(x = date, y = adjusted, fill = symbol)) +
+  geom_area(alpha = 0.8, position = "identity") +
+  geom_line(aes(color = symbol), linewidth = 0.8) +
+  scale_fill_manual(values = c("JPM" = "#044578", "GS" = "#6f94c1")) +
+  scale_color_manual(values = c("JPM" = "#044578", "GS" = "#6f94c1")) +
+  labs(
+  title = "Long-Term Growth Over Time (Mountain Fill)",
+  x = "Date",
+  y = "Adjusted Close Price",
+  fill = "Company",
+  color = "Company"
+  ) +
+  theme_minimal()
+
+mountain_plot
+
+
+```
+
+
+
+
+
+
+### Volatility 
+
+#### Volatility Comparison: JPM vs GS
+
+This chart shows which firm is more volatile by comparing **30-day rolling 
+standard deviation of daily returns**.
+
+
+```{r}
+vol_jpm_gs <- returns %>%
+  filter(symbol %in% c("JPM", "GS")) %>%
+  group_by(symbol) %>%
+  mutate(rolling_vol = rollapply(daily_return, width = 30, FUN = sd,
+  fill = NA, align = "right"))
+
+vol_base <- vol_jpm_gs %>%
+  ggplot(aes(x = date, y = rolling_vol, color = symbol)) +
+  geom_line(linewidth = 0.9) +
+  scale_color_manual(values = c("JPM" = "#044578", "GS" = "#6f94c1")) +
+  labs(
+  title = "Interactive Volatility (Hover + Click to Isolate)",
+  subtitle = "Double Click on a Line",
+  x = "Date",
+  y = "Rolling 30-Day Volatility"
+  ) +
+  theme_minimal()
+
+ggplotly(vol_base)
+
+
+
+```
+
+
+
+### Impacts 
+
+#### Impact of Major Market Events on JPM and GS
+
+This visualization highlights how **major market events** affected each company.
+Events shown:
+- COVID Crash (March 2020)
+- Fed Rate Hike Cycle (2022)
+
+```{r}
+events_jpm_gs <- prices %>%
+  filter(symbol %in% c("JPM", "GS"))
+
+events_base <- events_jpm_gs %>%
+  ggplot(aes(x = date, y = adjusted, color = symbol)) +
+  geom_line(linewidth = 1) +
+  geom_vline(xintercept = as.Date("2020-03-16"),
+  color = "red", linetype = "dashed", linewidth = 0.8) +
+  geom_vline(xintercept = as.Date("2022-03-16"),
+  color = "purple", linetype = "dashed", linewidth = 0.8) +
+  annotate("text",
+  x = as.Date("2020-03-16"),
+  y = max(events_jpm_gs$adjusted) * 1.02,
+  label = "COVID Crash",
+  color = "red", size = 4) +
+  annotate("text",
+  x = as.Date("2022-03-16"),
+  y = max(events_jpm_gs$adjusted) * 1.02,
+  label = "Fed Hikes Begin",
+  color = "purple", size = 4) +
+  scale_color_manual(values = c("JPM" = "#044578", "GS" = "#6f94c1")) +
+  labs(
+  title = "Interactive Market Impact Plot",
+  subtitle = "Click and Drag Like a Screenshot to Zoom-In",
+  x = "Date",
+  y = "Adjusted Price"
+  ) +
+  theme_minimal()
+
+ggplotly(events_base)
+
+
+```
+
+
+### S&P 500 Comparison
+
+#### Comparison to Market Benchmark (S&P 500)
+
+This plot compares **JPM**, **GS**, and the **S&P 500 (SPY)** to determine 
+how each bank performs relative to the overall market.
+
+
+```{r}
+
+# Prepare data
+
+benchmark <- prices %>%
+filter(symbol %in% c("JPM", "GS", "SPY")) %>%
+select(date, symbol, adjusted) %>%
+pivot_wider(names_from = symbol, values_from = adjusted) %>%
+mutate(
+JPM_above = ifelse(JPM >= SPY, JPM, NA),
+JPM_below = ifelse(JPM <  SPY, JPM, NA),
+GS_above  = ifelse(GS  >= SPY, GS,  NA),
+GS_below  = ifelse(GS  <  SPY, GS,  NA)
+)
+
+# Plot
+
+benchmark_plot <- ggplot(benchmark, aes(x = date)) +
+
+# SPY baseline
+
+geom_line(aes(y = SPY), color = "#85c89f", linewidth = 1) +
+
+# JPM lines
+
+geom_line(aes(y = JPM_above), color = "#044578", linewidth = 1) +  # JPM blue
+geom_line(aes(y = JPM_below), color = "red", linewidth = 1) +       # JPM underperformance red
+
+# GS lines (lighter red)
+
+geom_line(aes(y = GS_above), color = "#6f94c1", linewidth = 1) +     # GS blue
+geom_line(aes(y = GS_below), color = "#ff7f7f", linewidth = 1) +     # GS light red
+
+labs(
+title = "Performance Relative to S&P 500 (Red = Underperformance)",
+subtitle = "Red Lines Were Not Above the Market Benchmark (S&P 500)",
+x = "Date",
+y = "Adjusted Close Price"
+) +
+theme_minimal()
+
+benchmark_plot
+
+
+
+```
+
+
